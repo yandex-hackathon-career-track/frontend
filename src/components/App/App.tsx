@@ -27,11 +27,11 @@ function App() {
         <Routes>
           <Route path="/signin" element={<ProtectOfRoute Element={Login} />} />
           <Route path="/signup" element={<ProtectOfRoute Element={Registration} />} />
-          <Route path="/" element={<AddHeader />}>
-            <Route path="/profile" element={<ProtectOfRoute Element={Profile} onlyLoggedIn />} />
-            <Route path="/vacancy" element={<ProtectOfRoute Element={Vacancy} onlyLoggedIn />} />
-            <Route path="/favorite-candidates" element={<ProtectOfRoute Element={FavoriteCandidates} onlyLoggedIn />} />
-            <Route path="/candidates" element={<ProtectOfRoute Element={AllCandidates} onlyLoggedIn />} />
+          <Route path="/" element={<ProtectOfRoute Element={AddHeader} onlyLoggedIn />}>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/vacancy" element={<Vacancy />} />
+            <Route path="/favorite-candidates" element={<FavoriteCandidates />} />
+            <Route path="/candidates" element={<AllCandidates />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
