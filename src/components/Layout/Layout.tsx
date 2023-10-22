@@ -4,7 +4,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <CssBaseline />
-      <Container sx={{ maxWidth: { xl: 1280 } }}>
+      <Container sx={{ maxWidth: { xl: 1280 },  }}>
         <main className="content">{children}</main>
       </Container>
     </>

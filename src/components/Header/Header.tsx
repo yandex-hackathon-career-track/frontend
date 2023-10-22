@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom'; // Импортируем
 
 const Header: FC = () => {
   return (
-    <AppBar position="fixed">
+    <AppBar position="static">
       <Toolbar style={{ display: 'flex', gap: '20px', justifyContent: 'end' }}>
         <Typography variant="h6">
           <Link component={RouterLink} to="/candidates" color="inherit" underline="none">
@@ -12,12 +12,12 @@ const Header: FC = () => {
           </Link>
         </Typography>
         <Typography variant="h6">
-          <Link component={RouterLink} to="/saved-candidates" color="inherit" underline="none">
+          <Link component={RouterLink} to="/favorite-candidates" color="inherit" underline="none">
             сохраненные кандидаты
           </Link>
         </Typography>
         <Typography variant="h6">
-          <Link component={RouterLink} to="/jobs" color="inherit" underline="none">
+          <Link component={RouterLink} to="/vacancy" color="inherit" underline="none">
             вакансии
           </Link>
         </Typography>

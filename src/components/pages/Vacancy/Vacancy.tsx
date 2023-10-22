@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-const PageWithJobs: FC = () => {
+const Vacancy: FC = () => {
   return <div>вакансии</div>;
 };
 
-export default PageWithJobs;
+export default Vacancy;

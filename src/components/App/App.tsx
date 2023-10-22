@@ -6,9 +6,11 @@ import Header from '../Header/Header';
 import ProtectOfRoute from '../ProtectOfRoute/ProtectOfRoute';
 import NotFound from '../pages/NotFound/NotFound';
 import Profile from '../pages/Profile/Profile';
-import PageWithAuth from '../pages/PageWithAuth/PageWithAuth';
-import PageWithJobs from '../pages/PageWithJobs/PageWithJobs';
-import PageWithCandidates from '../pages/PageWithCandidates/PageWithCandidates';
+import Login from '../pages/Login/Login';
+import Registration from '../pages/Registration/Registration';
+import Vacancy from '../pages/Vacancy/Vacancy';
+import FavoriteCandidates from '../pages/FavoriteCandidates/FavoriteCandidates';
+import AllCandidates from '../pages/AllCandidates/AllCandidates';
 
 function App() {
   const AddHeader = React.memo(() => (
@@ -23,13 +25,13 @@ function App() {
     <>
       <Layout>
         <Routes>
-          <Route path="/signin" element={<ProtectOfRoute Element={PageWithAuth} />} />
-          <Route path="/signup" element={<ProtectOfRoute Element={PageWithAuth} />} />
+          <Route path="/signin" element={<ProtectOfRoute Element={Login} />} />
+          <Route path="/signup" element={<ProtectOfRoute Element={Registration} />} />
           <Route path="/" element={<AddHeader />}>
             <Route path="/profile" element={<ProtectOfRoute Element={Profile} onlyLoggedIn />} />
-            <Route path="/jobs" element={<ProtectOfRoute Element={PageWithJobs} onlyLoggedIn />} />
-            <Route path="/saved-candidates" element={<ProtectOfRoute Element={PageWithCandidates} onlyLoggedIn />} />
-            <Route path="/candidates" element={<ProtectOfRoute Element={PageWithCandidates} onlyLoggedIn />} />
+            <Route path="/vacancy" element={<ProtectOfRoute Element={Vacancy} onlyLoggedIn />} />
+            <Route path="/favorite-candidates" element={<ProtectOfRoute Element={FavoriteCandidates} onlyLoggedIn />} />
+            <Route path="/candidates" element={<ProtectOfRoute Element={AllCandidates} onlyLoggedIn />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
