@@ -14,7 +14,7 @@ export default function ProtectOfRoute<T>({ Element, onlyLoggedIn, data }: IProt
   return (onlyLoggedIn ? loggedIn : !loggedIn) ? (
     <Element {...(data as T & JSX.IntrinsicAttributes)} />
   ) : (
-    <Navigate to={onlyLoggedIn ? '/signin' : '/candidates'} replace />
+    <Navigate to={onlyLoggedIn ? '/signin' : '/'} replace />
   );
 }
 

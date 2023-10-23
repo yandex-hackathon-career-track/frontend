@@ -3,14 +3,15 @@ import React from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import Header from '../Header/Header';
 import ProtectOfRoute from '../ProtectOfRoute/ProtectOfRoute';
-import NotFound from '../pages/NotFound/NotFound';
-import Profile from '../pages/Profile/Profile';
-import Login from '../pages/Login/Login';
-import Registration from '../pages/Registration/Registration';
-import Vacancy from '../pages/Vacancy/Vacancy';
-import FavoriteCandidates from '../pages/FavoriteCandidates/FavoriteCandidates';
-import AllCandidates from '../pages/AllCandidates/AllCandidates';
+import NotFound from '../pagesOfRouting/NotFound/NotFound';
+import Profile from '../pagesOfRouting/Profile/Profile';
+import Login from '../pagesOfRouting/Login/Login';
+import Registration from '../pagesOfRouting/Registration/Registration';
+import Vacancy from '../pagesOfRouting/Vacancy/Vacancy';
+import FavoriteCandidates from '../pagesOfRouting/FavoriteCandidates/FavoriteCandidates';
+import AllCandidates from '../pagesOfRouting/AllCandidates/AllCandidates';
 import { CssBaseline } from '@mui/material';
+import Main from '../pagesOfRouting/Main/Main';
 
 function App() {
   const AddHeader = React.memo(() => (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/favorite-candidates" element={<FavoriteCandidates />} />
           <Route path="/candidates" element={<AllCandidates />} />
         </Route>
+        <Route index element={<ProtectOfRoute Element={Main} onlyLoggedIn />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
