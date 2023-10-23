@@ -1,8 +1,12 @@
 :root {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 auto; */
+  padding: 0;
   height: 100vh;
 }
 
+#root {
+  background-color: cadetblue;
+}
