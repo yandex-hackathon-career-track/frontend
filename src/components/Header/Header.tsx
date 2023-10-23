@@ -1,31 +1,58 @@
 import { FC } from 'react';
-import { AppBar, Toolbar, Typography, Link } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom'; // Импортируем Link из React Router
+import { AppBar, Toolbar, Button, IconButton } from '@mui/material';
+import HeaderLinkElement from '../HeaderLinkElement.tsx/HeaderLinkElement';
+import icon from '../../media/personal-info.svg';
 
 const Header: FC = () => {
   return (
-    <AppBar position="static">
-      <Toolbar style={{ display: 'flex', gap: '20px', justifyContent: 'end' }}>
-        <Typography variant="h6">
-          <Link component={RouterLink} to="/candidates" color="inherit" underline="none">
-            все кандидаты
-          </Link>
-        </Typography>
-        <Typography variant="h6">
-          <Link component={RouterLink} to="/favorite-candidates" color="inherit" underline="none">
-            сохраненные кандидаты
-          </Link>
-        </Typography>
-        <Typography variant="h6">
-          <Link component={RouterLink} to="/vacancy" color="inherit" underline="none">
-            вакансии
-          </Link>
-        </Typography>
-        <Typography variant="h6">
-          <Link component={RouterLink} to="/profile" color="inherit" underline="none">
-            профиль
-          </Link>
-        </Typography>
+    <AppBar position="static" style={{ maxWidth: '256px', minHeight: '100vh', backgroundColor: '#1A1B22' }}>
+      <Toolbar
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'start',
+          gap: '16px',
+          justifyContent: 'space-between',
+
+          height: 'calc(100vh - 60px)',
+          padding: '24px 32px 50px',
+        }}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
+          <HeaderLinkElement text="Мои вакансии" path="/vacancy" />
+          <HeaderLinkElement text="Cпециалисты" path="/candidates" />
+          <HeaderLinkElement text="Избранные резюме" path="/favorite-candidates" />
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
+          <Button
+            variant="outlined"
+            fullWidth
+            style={{ minHeight: 50, fontSize: 16, textTransform: 'none', borderColor: '#fff', color: '#fff' }}
+            sx={{ mb: 3 }}
+          >
+            Создать вакансию
+          </Button>
+          <>
+            <HeaderLinkElement text="Компания" path="/profile">
+              {/* TODO нужен эффект при наведении */}
+              <IconButton
+                style={{
+                  backgroundImage: `url(${icon})`,
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat',
+
+                  width: 24,
+                  height: 24,
+
+                  padding: 0,
+                }}
+              />{' '}
+            </HeaderLinkElement>
+          </>
+          <HeaderLinkElement text="Выйти" />
+        </div>
       </Toolbar>
     </AppBar>
   );
