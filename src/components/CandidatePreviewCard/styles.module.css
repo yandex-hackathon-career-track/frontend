@@ -1,0 +1,13 @@
+.card {
+  display: flex;
+  justify-content: space-between;
+  max-width: 535px;
+  background-color: '#F9FAFB';
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 16px 24px 0;
+}

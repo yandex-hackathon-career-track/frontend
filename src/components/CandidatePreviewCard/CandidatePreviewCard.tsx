@@ -3,6 +3,7 @@ import { Card, CardHeader, CardContent, CardActions, Box, Typography, IconButton
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import styles from './styles.module.css';
 
 interface ICandidatePreviewCard {
   name?: string;
@@ -24,7 +25,7 @@ const CandidatePreviewCard: FC<ICandidatePreviewCard> = ({
   isFavorite,
 }) => {
   return (
-    <Card sx={{ maxWidth: 535, display: 'flex', justifyContent: 'space-between', backgroundColor: '#F9FAFB' }}>
+    <Card className={styles.card}>
       <Box>
         <CardHeader title={name} subheader={position} sx={{ paddingBottom: 1 }} />
         <CardContent sx={{ paddingTop: 0 }}>
@@ -42,23 +43,14 @@ const CandidatePreviewCard: FC<ICandidatePreviewCard> = ({
           </List>
         </CardContent>
       </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          paddingTop: 2,
-          paddingRight: 2,
-          paddingBottom: 3,
-        }}
-      >
+      <Box className={styles.box}>
         <Box display={'flex'} sx={isAvailable ? { color: '#5A9BFF' } : { color: '#B5B5B7' }}>
           <FiberManualRecordIcon fontSize="small" sx={{ width: 15 }} />
           <Typography variant="body2" sx={{ marginLeft: 1 }}>
             В поиске
           </Typography>
         </Box>
-        <CardActions disableSpacing sx={{ alignItems: 'flex-start', justifyContent: 'flex-end' }}>
+        <CardActions disableSpacing sx={{ alignItems: 'flex-start', justifyContent: 'flex-end', padding: 0 }}>
           <IconButton aria-label="add to favorites" sx={{ padding: 0, color: '#1D6BF3' }}>
             {isFavorite ? <BookmarkIcon /> : <BookmarkBorderIcon />}
           </IconButton>
