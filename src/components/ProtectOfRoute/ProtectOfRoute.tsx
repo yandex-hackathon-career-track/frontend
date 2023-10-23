@@ -9,7 +9,7 @@ interface IProtectOfRoute<T> {
 
 export default function ProtectOfRoute<T>({ Element, onlyLoggedIn, data }: IProtectOfRoute<T>) {
   // TODO заменить на redux
-  const loggedIn = true;
+  const loggedIn = false;
 
   return (onlyLoggedIn ? loggedIn : !loggedIn) ? (
     <Element {...(data as T & JSX.IntrinsicAttributes)} />
