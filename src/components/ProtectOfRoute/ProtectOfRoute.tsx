@@ -8,17 +8,12 @@ interface IProtectOfRoute<T> {
 }
 
 export default function ProtectOfRoute<T>({ Element, onlyLoggedIn, data }: IProtectOfRoute<T>) {
-  // TODO заменить на redux
+  // TODO заменить на redux || coockie
   const loggedIn = false;
 
   return (onlyLoggedIn ? loggedIn : !loggedIn) ? (
     <Element {...(data as T & JSX.IntrinsicAttributes)} />
   ) : (
-    <Navigate to={onlyLoggedIn ? '/signin' : '/'} replace />
+    <Navigate to={onlyLoggedIn ? '/login' : '/'} replace />
   );
 }
-
-ProtectOfRoute.defaultProps = {
-  onlyLoggedIn: false,
-  data: undefined,
-};
