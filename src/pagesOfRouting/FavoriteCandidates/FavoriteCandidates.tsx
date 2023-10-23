@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import PageWithCandidates from '../../PageWithCandidates/PageWithCandidates';
+import PageWithCandidates from '../../components/PageWithCandidates/PageWithCandidates';
 
 const FavoriteCandidates: FC = () => {
   return <PageWithCandidates />;

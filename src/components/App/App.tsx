@@ -3,15 +3,15 @@ import React from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import Header from '../Header/Header';
 import ProtectOfRoute from '../ProtectOfRoute/ProtectOfRoute';
-import NotFound from '../pagesOfRouting/NotFound/NotFound';
-import Profile from '../pagesOfRouting/Profile/Profile';
-import Login from '../pagesOfRouting/Login/Login';
-import Registration from '../pagesOfRouting/Registration/Registration';
-import Vacancy from '../pagesOfRouting/Vacancy/Vacancy';
-import FavoriteCandidates from '../pagesOfRouting/FavoriteCandidates/FavoriteCandidates';
-import AllCandidates from '../pagesOfRouting/AllCandidates/AllCandidates';
+import NotFound from '../../pagesOfRouting/NotFound/NotFound';
+import Profile from '../../pagesOfRouting/Profile/Profile';
+import Login from '../../pagesOfRouting/Login/Login';
+import Registration from '../../pagesOfRouting/Registration/Registration';
+import Vacancy from '../../pagesOfRouting/Vacancy/Vacancy';
+import FavoriteCandidates from '../../pagesOfRouting/FavoriteCandidates/FavoriteCandidates';
+import AllCandidates from '../../pagesOfRouting/AllCandidates/AllCandidates';
 import { CssBaseline } from '@mui/material';
-import Main from '../pagesOfRouting/Main/Main';
+import Main from '../../pagesOfRouting/Main/Main';
 
 function App() {
   const AddHeader = React.memo(() => (
