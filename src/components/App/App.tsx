@@ -1,4 +1,3 @@
-import './App.css';
 import React from 'react';
 import { Login, Register, Vacancy, Profile, Candidates, Favorite, NotFound, Main } from '../../pages/index';
 import { Outlet, Route, Routes } from 'react-router-dom';

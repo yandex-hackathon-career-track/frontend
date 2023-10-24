@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ILoginForm } from '../../pages/Login/Login';
+import { IAuthForm, TCreateUser } from '../types/types';
 
 export const practicumApi = createApi({
   reducerPath: 'practicumApi',
@@ -8,26 +8,32 @@ export const practicumApi = createApi({
   }),
   tagTypes: ['User'],
   endpoints: (builder) => ({
-    getUser: builder.query<string, ILoginForm>({
+    getUser: builder.query<string, IAuthForm>({
       query: (user) => ({
         url: '/v1/users/me/',
         params: {
-          login: user.login,
+          email: user.email,
           password: user.password,
         },
       }),
     }),
+    tokenVerify: builder.mutation({
+      query: () => ({
+        url: '/v1/auth/jwt/verify/',
+        method: 'POST',
+      }),
+    }),
     // Прокидываем в хук RTK данные из формы и при ОК - и полученном ответе записываем данные в стор
-    registerUser: builder.mutation<string, ILoginForm>({
+    registerUser: builder.mutation<TCreateUser, IAuthForm>({
       query: (user) => ({
         url: '/v1/users/',
         method: 'POST',
         params: {
-          login: user.login,
+          email: user.email,
           password: user.password,
         },
       }),
-      transformResponse: (data: string) => {
+      transformResponse: (data: TCreateUser) => {
         // Записываем в куки accessToken + refreshToken
         // Возвращаем в компонент данные с сервака (зависит от контракта): логин/пароль и пишем в стор
         return data;
@@ -42,14 +48,19 @@ export const practicumApi = createApi({
           refreshToken: refToken,
         },
       }),
+      transformResponse: (data: string) => {
+        // Перезаписываем в куки accessToken + refreshToken
+        // Возвращаем в компонент данные с сервака (зависит от контракта): логин/пароль и пишем в стор
+        return data;
+      },
     }),
     // Авторизация пользователя. Вместо первого аргумента в последствии поменяем на тип возвращаемых данных
-    authUser: builder.mutation<string, ILoginForm>({
+    authUser: builder.mutation<string, IAuthForm>({
       query: (user) => ({
         url: '/v1/auth/jwt/create/',
         method: 'POST',
         params: {
-          login: user.login,
+          email: user.email,
           password: user.password,
         },
       }),
@@ -61,4 +72,4 @@ export const practicumApi = createApi({
   }),
 });
 
-export const { useGetUserQuery, useRegisterUserMutation, useAuthUserMutation } = practicumApi;
+export const { useGetUserQuery, useRegisterUserMutation, useAuthUserMutation, useTokenVerifyMutation } = practicumApi;
