@@ -3,9 +3,12 @@ import { AppBar, Toolbar, Button, IconButton } from '@mui/material';
 import HeaderLinkElement from '../HeaderLinkElement.tsx/HeaderLinkElement';
 import icon from '../../media/personal-info.svg';
 
-const Header: FC = () => {
+const SideNavBar: FC = () => {
   return (
-    <AppBar position="static" style={{ maxWidth: '256px', minHeight: '100vh', backgroundColor: '#1A1B22' }}>
+    <AppBar
+      position="static"
+      style={{ maxWidth: '256px', minHeight: 'calc(100vh - 60px)', backgroundColor: '#1A1B22' }}
+    >
       <Toolbar
         style={{
           display: 'flex',
@@ -20,7 +23,8 @@ const Header: FC = () => {
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
           <HeaderLinkElement text="Мои вакансии" path="/vacancy" />
-          <HeaderLinkElement text="Cпециалисты" path="/candidates" />
+          <HeaderLinkElement text="Поиск специалистов" path="/candidates" />
+          <HeaderLinkElement text="Отклики" path="#" />
           <HeaderLinkElement text="Избранные резюме" path="/favorite-candidates" />
         </div>
 
@@ -35,7 +39,6 @@ const Header: FC = () => {
           </Button>
           <>
             <HeaderLinkElement text="Компания" path="/profile">
-              {/* TODO нужен эффект при наведении */}
               <IconButton
                 style={{
                   backgroundImage: `url(${icon})`,
@@ -58,4 +61,4 @@ const Header: FC = () => {
   );
 };
 
-export default Header;
+export default SideNavBar;

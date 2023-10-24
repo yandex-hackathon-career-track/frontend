@@ -3,19 +3,25 @@ import { Typography, Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 interface IHeaderLinkElement {
-  path?: string;
   text: string;
+  path?: string;
   children?: ReactNode;
 }
 
-const HeaderLinkElement: React.FC<IHeaderLinkElement> = ({ path = '/', text, children }) => {
+const HeaderLinkElement: React.FC<IHeaderLinkElement> = ({ path = '#', text, children }) => {
   return (
-    <Typography variant="subtitle2" fontSize={16} lineHeight={'normal'}>
+    <Link
+      component={RouterLink}
+      to={path}
+      color="inherit"
+      underline="hover"
+      style={{ display: 'flex', columnGap: '13px', alignItems: 'center' }}
+    >
       {children}
-      <Link component={RouterLink} to={path} color="inherit" underline="hover">
+      <Typography variant="subtitle2" fontSize={16} lineHeight={'normal'}>
         {text}
-      </Link>
-    </Typography>
+      </Typography>
+    </Link>
   );
 };
 

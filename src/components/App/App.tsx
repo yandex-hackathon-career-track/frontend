@@ -1,7 +1,6 @@
 import './App.css';
-import React from 'react';
-import { Outlet, Route, Routes } from 'react-router-dom';
-import Header from '../Header/Header';
+import { Route, Routes } from 'react-router-dom';
+
 import ProtectOfRoute from '../ProtectOfRoute/ProtectOfRoute';
 import NotFound from '../../pagesOfRouting/NotFound/NotFound';
 import Profile from '../../pagesOfRouting/Profile/Profile';
@@ -11,24 +10,10 @@ import Vacancy from '../../pagesOfRouting/Vacancy/Vacancy';
 import FavoriteCandidates from '../../pagesOfRouting/FavoriteCandidates/FavoriteCandidates';
 import AllCandidates from '../../pagesOfRouting/AllCandidates/AllCandidates';
 import { CssBaseline } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
+import Main from '../../pagesOfRouting/Main/Main';
+import AddHeader from '../AddHeader/AddHeader';
 
 function App() {
-  const AddHeader = React.memo(() => (
-    <Grid container>
-      <Grid xs={12}>
-        <div style={{ backgroundColor: '#1A1B22', height: 60 }} />
-      </Grid>
-      <Grid xs={3}>
-        <Header />
-      </Grid>
-      <Grid xs={9}>
-        <Outlet />
-      </Grid>
-    </Grid>
-  ));
-  AddHeader.displayName = 'AddHeader';
-
   return (
     <>
       <CssBaseline />
@@ -40,8 +25,8 @@ function App() {
           <Route path="/vacancy" element={<Vacancy />} />
           <Route path="/favorite-candidates" element={<FavoriteCandidates />} />
           <Route path="/candidates" element={<AllCandidates />} />
-          <Route index element={<ProtectOfRoute Element={AllCandidates} onlyLoggedIn />} />
         </Route>
+        <Route index element={<ProtectOfRoute Element={Main} onlyLoggedIn />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
