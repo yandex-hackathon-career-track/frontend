@@ -1,0 +1,20 @@
+.header {
+  background-color: #1a1b22;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 15px 50px;
+}
+
+.icon {
+  background-image: url(../../media/notification.svg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  width: 24px;
+  height: 24px;
+
+  padding: 0;
+}

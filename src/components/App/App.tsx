@@ -1,19 +1,12 @@
 import React from 'react';
 import { Login, Register, Vacancy, Profile, Candidates, Favorite, NotFound, Main } from '../../pages/index';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { CssBaseline } from '@mui/material';
 import Header from '../Header/Header';
 import ProtectOfRoute from '../ProtectOfRoute/ProtectOfRoute';
-import { CssBaseline } from '@mui/material';
+import AddHeader from '../AddHeader/AddHeader';
 
 function App() {
-  const AddHeader = React.memo(() => (
-    <>
-      <Header />
-      <Outlet />
-    </>
-  ));
-  AddHeader.displayName = 'AddHeader';
-
   return (
     <>
       <CssBaseline />
