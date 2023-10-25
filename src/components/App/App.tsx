@@ -1,8 +1,6 @@
-import React from 'react';
 import { Login, Register, Vacancy, Profile, Candidates, Favorite, NotFound, Main } from '../../pages/index';
 import { Route, Routes } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
-import Header from '../Header/Header';
 import ProtectOfRoute from '../ProtectOfRoute/ProtectOfRoute';
 import AddHeader from '../AddHeader/AddHeader';
 
