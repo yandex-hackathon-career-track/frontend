@@ -1,7 +1,9 @@
 .card {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   max-width: 535px;
+  padding: 20px 24px;
   background-color: #F9FAFB;
 }
 
