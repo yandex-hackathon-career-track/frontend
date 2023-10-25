@@ -16,6 +16,7 @@ const HeaderLinkElement: React.FC<IHeaderLinkElement> = ({ path = '#', text, chi
       color="inherit"
       underline="hover"
       style={{ display: 'flex', columnGap: '13px', alignItems: 'center' }}
+      sx={{ p: '0 12px' }}
     >
       {children}
       <Typography variant="subtitle2" fontSize={16} lineHeight={'normal'}>

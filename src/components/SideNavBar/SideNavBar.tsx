@@ -1,7 +1,12 @@
 import { FC } from 'react';
-import { AppBar, Toolbar, Button, IconButton } from '@mui/material';
+import { AppBar, Toolbar, Button, Divider } from '@mui/material';
 import HeaderLinkElement from '../HeaderLinkElement.tsx/HeaderLinkElement';
-import icon from '../../media/personal-info.svg';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 
 const SideNavBar: FC = () => {
   return (
@@ -18,43 +23,46 @@ const SideNavBar: FC = () => {
           justifyContent: 'space-between',
 
           height: 'calc(100vh - 60px)',
-          padding: '24px 32px 50px',
+          padding: '36px 12px',
         }}
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
-          <HeaderLinkElement text="Мои вакансии" path="/vacancy" />
-          <HeaderLinkElement text="Поиск специалистов" path="/candidates" />
-          <HeaderLinkElement text="Отклики" path="#" />
-          <HeaderLinkElement text="Избранные резюме" path="/favorite-candidates" />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
+          <HeaderLinkElement text="Мои вакансии" path="/vacancy">
+            <WorkOutlineOutlinedIcon />
+          </HeaderLinkElement>
+          <Divider style={{ borderColor: 'rgba(121, 121, 129, 0.5)', borderWidth: '2px' }} />
+          <HeaderLinkElement text="Поиск специалистов" path="/candidates">
+            <SearchOutlinedIcon />
+          </HeaderLinkElement>
+          <Divider style={{ borderColor: 'rgba(121, 121, 129, 0.5)', borderWidth: '2px' }} />
+          <HeaderLinkElement text="Избранные резюме" path="/favorite-candidates">
+            <BookmarkBorderOutlinedIcon />
+          </HeaderLinkElement>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
           <Button
             variant="outlined"
-            fullWidth
-            style={{ minHeight: 50, fontSize: 16, textTransform: 'none', borderColor: '#fff', color: '#fff' }}
-            sx={{ mb: 3 }}
+            style={{
+              minHeight: 50,
+              fontSize: 16,
+              textTransform: 'none',
+              borderColor: '#fff',
+              color: '#fff',
+            }}
+            sx={{ m: '0 12px 40px' }}
           >
             Создать вакансию
           </Button>
-          <>
-            <HeaderLinkElement text="Компания" path="/profile">
-              <IconButton
-                style={{
-                  backgroundImage: `url(${icon})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-
-                  width: 24,
-                  height: 24,
-
-                  padding: 0,
-                }}
-              />{' '}
-            </HeaderLinkElement>
-          </>
-          <HeaderLinkElement text="Выйти" />
+          <HeaderLinkElement text="Компания" path="/profile">
+            <PersonOutlineOutlinedIcon />
+          </HeaderLinkElement>
+          <HeaderLinkElement text="Поддержка" path="#">
+            <SendOutlinedIcon />
+          </HeaderLinkElement>
+          <HeaderLinkElement text="Выйти">
+            <LogoutOutlinedIcon />
+          </HeaderLinkElement>
         </div>
       </Toolbar>
     </AppBar>
@@ -62,3 +70,19 @@ const SideNavBar: FC = () => {
 };
 
 export default SideNavBar;
+
+{
+  /* <IconButton
+    style={{
+      backgroundImage: `url(${icon})`,
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+
+      width: 24,
+      height: 24,
+
+      padding: 0,
+    }}
+  /> */
+}
