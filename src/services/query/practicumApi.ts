@@ -4,7 +4,7 @@ import { IAuthForm, TCreateUser } from '../types/types';
 export const practicumApi = createApi({
   reducerPath: 'practicumApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://editor.swagger.io/api',
+    baseUrl: 'http://130.193.38.88/api',
   }),
   tagTypes: ['User'],
   endpoints: (builder) => ({
