@@ -6,5 +6,6 @@ import { Main } from './Main/Main';
 import { Profile } from './Profile/Profile';
 import { Vacancy } from './Vacancy/Vacancy';
 import { Candidates } from './Candidates/Candidates';
+import { ChangePassword } from './ChangePassword/ChangePassword';
 
-export { Register, Login, Favorite, NotFound, Main, Profile, Vacancy, Candidates };
+export { Register, Login, Favorite, NotFound, Main, Profile, Vacancy, Candidates, ChangePassword };

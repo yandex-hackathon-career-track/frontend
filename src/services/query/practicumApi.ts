@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IAuthForm, TCreateUser } from '../types/types';
+import { IChangePassword } from '../../pages/ChangePassword/ChangePassword';
 
 export const practicumApi = createApi({
   reducerPath: 'practicumApi',
@@ -9,13 +10,12 @@ export const practicumApi = createApi({
   tagTypes: ['User'],
   endpoints: (builder) => ({
     getUser: builder.query<string, IAuthForm>({
-      query: (user) => ({
+      query: () => ({
         url: '/v1/users/me/',
-        params: {
-          email: user.email,
-          password: user.password,
-        },
       }),
+      transformResponse: (data: string) => {
+        return data;
+      },
     }),
     tokenVerify: builder.mutation({
       query: () => ({
@@ -28,7 +28,7 @@ export const practicumApi = createApi({
       query: (user) => ({
         url: '/v1/users/',
         method: 'POST',
-        params: {
+        body: {
           email: user.email,
           password: user.password,
         },
@@ -44,8 +44,8 @@ export const practicumApi = createApi({
       query: (refToken) => ({
         url: '/v1/auth/jwt/refresh/',
         method: 'POST',
-        params: {
-          refreshToken: refToken,
+        body: {
+          refresh: refToken,
         },
       }),
       transformResponse: (data: string) => {
@@ -59,7 +59,7 @@ export const practicumApi = createApi({
       query: (user) => ({
         url: '/v1/auth/jwt/create/',
         method: 'POST',
-        params: {
+        body: {
           email: user.email,
           password: user.password,
         },
@@ -69,7 +69,22 @@ export const practicumApi = createApi({
         return data;
       },
     }),
+    changePassword: builder.mutation<string, IChangePassword>({
+      query: (data) => ({
+        url: '/v1/users/reset_password/',
+        method: 'POST',
+        body: {
+          email: data,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetUserQuery, useRegisterUserMutation, useAuthUserMutation, useTokenVerifyMutation } = practicumApi;
+export const {
+  useGetUserQuery,
+  useRegisterUserMutation,
+  useAuthUserMutation,
+  useTokenVerifyMutation,
+  useChangePasswordMutation,
+} = practicumApi;
