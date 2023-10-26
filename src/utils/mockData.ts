@@ -20,6 +20,8 @@ export const profiles = [
     graduated: 'октябрь 2020',
     experience: '3 года',
     stack: ['Figma', 'Adobe', 'Illustrator', 'CSS'],
+    city: 'Москва',
+    jobFormat: ['офис', 'удаленка', 'полный день'],
   },
   {
     name: 'Александр Александров',
@@ -30,6 +32,8 @@ export const profiles = [
     graduated: 'октябрь 2020',
     experience: '3 года',
     stack: ['Figma', 'Adobe', 'Illustrator', 'CSS'],
+    city: 'Вильнюс',
+    jobFormat: ['удаленка', 'релокейт'],
   },
   {
     name: 'Александр Александров',
@@ -40,6 +44,8 @@ export const profiles = [
     graduated: 'октябрь 2020',
     experience: '3 года',
     stack: ['Figma', 'Adobe', 'Illustrator', 'CSS'],
+    city: 'Прага',
+    jobFormat: ['удаленка', 'релокейт', 'полный день'],
   },
   {
     name: 'Александр Александров',
@@ -50,6 +56,8 @@ export const profiles = [
     graduated: 'октябрь 2020',
     experience: '3 года',
     stack: ['Figma', 'Adobe', 'Illustrator', 'CSS'],
+    city: 'Минск',
+    jobFormat: ['офис', 'удаленка', 'релокейт', 'полный день'],
   },
   {
     name: 'Александр Александров',
@@ -60,5 +68,7 @@ export const profiles = [
     graduated: 'октябрь 2020',
     experience: '3 года',
     stack: ['Figma', 'Adobe', 'Illustrator', 'CSS'],
+    city: 'Саратов',
+    jobFormat: ['офис', 'полный день'],
   },
 ];
