@@ -6,3 +6,8 @@ export interface IAuthForm {
 export type TCreateUser = {
   id: string;
 } & IAuthForm;
+
+export interface ITokensResponce {
+  access: string;
+  refresh: string;
+}

@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IAuthForm, TCreateUser } from '../types/types';
-import { IChangePassword } from '../../pages/ChangePassword/ChangePassword';
+import { IAuthForm, ITokensResponce, TCreateUser } from '../types/types';
+import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
+import { IConfirmPassword } from '../../pages/ConfirmPassword/ConfirmPassword';
 
 export const practicumApi = createApi({
   reducerPath: 'practicumApi',
@@ -9,21 +10,23 @@ export const practicumApi = createApi({
   }),
   tagTypes: ['User'],
   endpoints: (builder) => ({
-    getUser: builder.query<string, IAuthForm>({
+    getUser: builder.query<string, unknown>({
       query: () => ({
         url: '/v1/users/me/',
+        method: 'GET',
       }),
-      transformResponse: (data: string) => {
-        return data;
-      },
     }),
+    // После проверки делаем запрос на рефреш токена. Вопрос как сделать (???)
     tokenVerify: builder.mutation({
       query: () => ({
         url: '/v1/auth/jwt/verify/',
         method: 'POST',
+        body: {
+          token: getCookie('access'),
+        },
       }),
     }),
-    // Прокидываем в хук RTK данные из формы и при ОК - и полученном ответе записываем данные в стор
+    // OK
     registerUser: builder.mutation<TCreateUser, IAuthForm>({
       query: (user) => ({
         url: '/v1/users/',
@@ -33,29 +36,24 @@ export const practicumApi = createApi({
           password: user.password,
         },
       }),
-      transformResponse: (data: TCreateUser) => {
-        // Записываем в куки accessToken + refreshToken
-        // Возвращаем в компонент данные с сервака (зависит от контракта): логин/пароль и пишем в стор
-        return data;
-      },
     }),
-    // При ответе бэка, что accessToken просрочен, делаем запрос на обновление токена
-    refreshToken: builder.mutation<string, string>({
-      query: (refToken) => ({
+    // ?
+    refreshToken: builder.mutation<string, unknown>({
+      query: () => ({
         url: '/v1/auth/jwt/refresh/',
         method: 'POST',
         body: {
-          refresh: refToken,
+          refresh: getCookie('refresh'),
         },
       }),
       transformResponse: (data: string) => {
-        // Перезаписываем в куки accessToken + refreshToken
-        // Возвращаем в компонент данные с сервака (зависит от контракта): логин/пароль и пишем в стор
+        deleteCookie('refresh');
+        setCookie('access', data);
         return data;
       },
     }),
-    // Авторизация пользователя. Вместо первого аргумента в последствии поменяем на тип возвращаемых данных
-    authUser: builder.mutation<string, IAuthForm>({
+    // OK
+    authUser: builder.mutation<ITokensResponce, IAuthForm>({
       query: (user) => ({
         url: '/v1/auth/jwt/create/',
         method: 'POST',
@@ -64,12 +62,14 @@ export const practicumApi = createApi({
           password: user.password,
         },
       }),
-      // Так же проставим типизацию data позднее
-      transformResponse: (data: string) => {
+      transformResponse: (data: ITokensResponce) => {
+        setCookie('access', data.access);
+        setCookie('refresh', data.refresh);
         return data;
       },
     }),
-    changePassword: builder.mutation<string, IChangePassword>({
+    // 500
+    resetPassword: builder.mutation<string, string>({
       query: (data) => ({
         url: '/v1/users/reset_password/',
         method: 'POST',
@@ -78,13 +78,26 @@ export const practicumApi = createApi({
         },
       }),
     }),
+    resetPasswordConfirm: builder.mutation<unknown, IConfirmPassword>({
+      query: (data) => ({
+        url: '/v1/users/reset_password/',
+        method: 'POST',
+        body: {
+          uid: data.uid,
+          token: getCookie('access'),
+          new_password: data.new_password,
+        },
+      }),
+    }),
   }),
 });
 
 export const {
   useGetUserQuery,
+  useRefreshTokenMutation,
   useRegisterUserMutation,
   useAuthUserMutation,
   useTokenVerifyMutation,
-  useChangePasswordMutation,
+  useResetPasswordMutation,
+  useResetPasswordConfirmMutation,
 } = practicumApi;

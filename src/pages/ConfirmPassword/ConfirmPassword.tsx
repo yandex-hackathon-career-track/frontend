@@ -1,59 +1,57 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
+import { FC, useCallback } from 'react';
+import styles from './confirmPassword.module.css';
 import Container from '@mui/material/Container/Container';
-import styles from './register.module.css';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FC, useCallback, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { Button, TextField, Typography, Link, Box } from '@mui/material';
+import { Box, Button, Link, TextField, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import { Controller } from 'react-hook-form';
-import { useRegisterUserMutation } from '../../services/query/practicumApi';
 import { Wrapper } from '../../components/Wrapper/Wrapper';
-import { IAuthForm } from '../../services/types/types';
-import { defaultShema } from '../../validates/yup';
+import { useResetPasswordConfirmMutation } from '../../services/query/practicumApi';
+import { confirmPassShema } from '../../validates/yup';
 
-export const Register: FC = () => {
-  const navigate = useNavigate();
+export interface IConfirmPassword {
+  uid: string;
+  new_password: string;
+}
+
+export const ConfirmPassword: FC = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<IAuthForm>({
-    resolver: yupResolver(defaultShema),
+  } = useForm<IConfirmPassword>({
+    resolver: yupResolver(confirmPassShema),
     mode: 'onChange',
   });
-  const [registerUser, { isLoading, isSuccess }] = useRegisterUserMutation();
+  const [resetPasswordConfirm, { isLoading }] = useResetPasswordConfirmMutation();
 
-  const onRegister: SubmitHandler<IAuthForm> = useCallback(
+  const onChangePassword: SubmitHandler<IConfirmPassword> = useCallback(
     async (data) => {
-      await registerUser(data);
+      await resetPasswordConfirm(data);
     },
-    [registerUser],
+    [resetPasswordConfirm],
   );
-
-  useEffect(() => {
-    if (isSuccess) navigate('/login');
-  }, [isSuccess, navigate]);
 
   return (
     <Wrapper>
       <Typography component="h1" color={'#fff'} fontSize={'32px'} sx={{ mb: '20px', textAlign: 'center' }}>
-        Регистрация
+        Новый пароль
       </Typography>
-      <Box component="form" className={styles.form} onSubmit={handleSubmit(onRegister)}>
+      <Box component="form" className={styles.form} onSubmit={handleSubmit(onChangePassword)}>
         <Controller
           control={control}
-          name="email"
+          name="uid"
           render={({ field }) => (
             <TextField
-              error={!!errors.email}
-              label="E-mail"
-              type="text"
+              error={!!errors.uid}
               disabled={isLoading}
+              label="ID из письма"
               variant="filled"
               color="primary"
+              helperText={errors.uid && errors.uid.message}
               autoFocus={true}
-              helperText={errors.email && errors.email.message}
               fullWidth
               inputProps={{ style: { padding: '25px 12px 8px', minHeight: '50px', boxSizing: 'border-box' } }}
               InputProps={{
@@ -65,16 +63,15 @@ export const Register: FC = () => {
         />
         <Controller
           control={control}
-          name="password"
+          name="new_password"
           render={({ field }) => (
             <TextField
-              error={!!errors.password}
-              label="Пароль"
-              type="password"
+              error={!!errors.uid}
               disabled={isLoading}
+              label="Роль"
               variant="filled"
               color="primary"
-              helperText={errors.password && errors.password.message}
+              helperText={errors.new_password && errors.new_password.message}
               fullWidth
               inputProps={{ style: { padding: '25px 12px 8px', minHeight: '50px', boxSizing: 'border-box' } }}
               InputProps={{
@@ -84,12 +81,19 @@ export const Register: FC = () => {
             />
           )}
         />
-        <Button type="submit" variant="contained" color="primary" fullWidth className={styles.button}>
-          Зарегистрироваться
+        <Button
+          type="submit"
+          disabled={isLoading}
+          variant="contained"
+          color="primary"
+          fullWidth
+          className={styles.button}
+        >
+          Сохранить
         </Button>
       </Box>
       <Container className={styles.info}>
-        <Typography style={{ color: '#fff', fontSize: '14px' }}>Уже зарегистрированы?</Typography>
+        <Typography style={{ color: '#fff', fontSize: '14px' }}>Вспомнили пароль?</Typography>
         <Link component={RouterLink} to={'/login'} color="primary" underline="hover" style={{ fontSize: '14px' }}>
           Войти
         </Link>

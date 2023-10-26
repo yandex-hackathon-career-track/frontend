@@ -1,41 +1,48 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { FC } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import styles from './changePassword.module.css';
-import * as yup from 'yup';
 import Container from '@mui/material/Container/Container';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Box, Button, Link, TextField, Typography } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Controller } from 'react-hook-form';
 import { Wrapper } from '../../components/Wrapper/Wrapper';
-import { useChangePasswordMutation } from '../../services/query/practicumApi';
+import { useResetPasswordMutation } from '../../services/query/practicumApi';
+import { changePassShema } from '../../validates/yup';
 
 export interface IChangePassword {
   email: string;
 }
 
 export const ChangePassword: FC = () => {
-  const schema = yup
-    .object({
-      email: yup.string().email().required(),
-    })
-    .required();
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<IChangePassword>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(changePassShema),
+    mode: 'onChange',
   });
-  const [changePassword, { isLoading }] = useChangePasswordMutation();
+  const [resetPassword, { isLoading, isSuccess }] = useResetPasswordMutation();
 
-  const onChangePassword: SubmitHandler<IChangePassword> = async (data) => {
-    await changePassword(data);
-  };
+  const onChangePassword: SubmitHandler<IChangePassword> = useCallback(
+    async (data) => {
+      await resetPassword(data.email);
+    },
+    [resetPassword],
+  );
+
+  useEffect(() => {
+    if (isSuccess) navigate('/confirm-password');
+  }, [isSuccess, navigate]);
 
   return (
-    <Wrapper heading="Восстановление пароля">
+    <Wrapper>
+      <Typography component="h1" color={'#fff'} fontSize={'32px'} sx={{ mb: '20px', textAlign: 'center' }}>
+        Восстановление пароля
+      </Typography>
       <Box component="form" className={styles.form} onSubmit={handleSubmit(onChangePassword)}>
         <Controller
           control={control}
@@ -66,7 +73,7 @@ export const ChangePassword: FC = () => {
           fullWidth
           className={styles.button}
         >
-          Войти
+          Подтвердить
         </Button>
       </Box>
       <Container className={styles.info}>

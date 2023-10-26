@@ -1,39 +1,47 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { FC } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import styles from './login.module.css';
-import * as yup from 'yup';
 import Container from '@mui/material/Container/Container';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Box, Button, Link, TextField, Typography } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Controller } from 'react-hook-form';
 import { useAuthUserMutation } from '../../services/query/practicumApi';
 import { Wrapper } from '../../components/Wrapper/Wrapper';
 import { IAuthForm } from '../../services/types/types';
+import { defaultShema } from '../../validates/yup';
 
 export const Login: FC = () => {
-  const schema = yup
-    .object({
-      email: yup.string().email().required(),
-      password: yup.string().min(8).max(32).required(),
-    })
-    .required();
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<IAuthForm>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(defaultShema),
+    mode: 'onChange',
   });
-  const [authUser, { isLoading }] = useAuthUserMutation();
+  const [authUser, { isLoading, isSuccess }] = useAuthUserMutation();
 
-  const onAuth: SubmitHandler<IAuthForm> = async (data) => {
-    await authUser(data);
-  };
+  const onAuth: SubmitHandler<IAuthForm> = useCallback(
+    async (data) => {
+      await authUser(data);
+    },
+    [authUser],
+  );
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate('/candidates');
+    }
+  }, [isSuccess, navigate]);
 
   return (
-    <Wrapper heading="Войти в аккаунт">
+    <Wrapper>
+      <Typography component="h1" color={'#fff'} fontSize={'32px'} sx={{ mb: '20px', textAlign: 'center' }}>
+        Войти в аккаунт
+      </Typography>
       <Box component="form" className={styles.form} onSubmit={handleSubmit(onAuth)}>
         <Controller
           control={control}
@@ -64,6 +72,7 @@ export const Login: FC = () => {
               error={errors.password && true}
               disabled={isLoading}
               label="Пароль"
+              type="password"
               variant="filled"
               color="primary"
               helperText={errors.password?.message}

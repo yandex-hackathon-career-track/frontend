@@ -1,9 +1,20 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { AppBar, Toolbar, Button, IconButton } from '@mui/material';
 import HeaderLinkElement from '../HeaderLinkElement.tsx/HeaderLinkElement';
 import icon from '../../media/personal-info.svg';
+import { useDispatch } from '../../services/hooks';
+import { logOut } from '../../services/features/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 const SideNavBar: FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogOut = useCallback(() => {
+    dispatch(logOut());
+    navigate('/');
+  }, [dispatch, navigate]);
+
   return (
     <AppBar
       position="static"
@@ -54,6 +65,7 @@ const SideNavBar: FC = () => {
               />{' '}
             </HeaderLinkElement>
           </>
+          <Button onClick={handleLogOut}>Выйти</Button>
           <HeaderLinkElement text="Выйти" />
         </div>
       </Toolbar>
