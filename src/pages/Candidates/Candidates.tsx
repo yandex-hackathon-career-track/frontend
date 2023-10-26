@@ -25,9 +25,7 @@ export const Candidates: FC = () => {
             <CandidatePreviewCard key={index} {...item} handlePreview={handleCardPreview} />
           ))}
         </ul>
-        <div className={styles.preview}>
-          <CandidateCard {...cardToPreview} />
-        </div>
+        <CandidateCard {...cardToPreview} />
       </div>
     </main>
   );
