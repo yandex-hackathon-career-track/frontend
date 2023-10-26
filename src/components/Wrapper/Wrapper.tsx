@@ -12,7 +12,7 @@ export const Wrapper: FC<PropsWithChildren<IWrapper>> = ({ children, heading }) 
   return (
     <Container maxWidth={false} className={styles.container} sx={{ backgroundImage: `url(${bg})` }}>
       <Container maxWidth={false} className={styles.wrapper} style={{ padding: 0 }}>
-        <Typography component="h1" color={'#fff'} fontSize={'32px'} sx={{ mb: '20px' }}>
+        <Typography component="h1" color={'#fff'} fontSize={'32px'} sx={{ mb: '20px', textAlign: 'center' }}>
           {heading}
         </Typography>
         {children}
