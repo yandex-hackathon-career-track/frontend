@@ -1,0 +1,18 @@
+.font {
+  font-feature-settings:
+    'clig' off,
+    'liga' off;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+
+  color: #fff;
+}
+
+.button {
+  background-color: #5a9bff;
+  text-transform: none;
+  min-width: 200px;
+  min-height: 56px;
+}

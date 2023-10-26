@@ -9,6 +9,7 @@ interface IHeaderLinkElement {
   iconActive?: string;
   path?: string;
   grey?: boolean;
+  onClick?: () => void;
 }
 
 const HeaderLinkElement: React.FC<IHeaderLinkElement> = ({
@@ -17,6 +18,7 @@ const HeaderLinkElement: React.FC<IHeaderLinkElement> = ({
   iconDef,
   iconActive = iconDef,
   grey = false,
+  onClick = () => null,
 }) => {
   const location = useLocation();
   const isPath = location.pathname === path;
@@ -29,11 +31,10 @@ const HeaderLinkElement: React.FC<IHeaderLinkElement> = ({
       underline="none"
       style={{ display: 'flex', columnGap: '13px', alignItems: 'center' }}
       sx={{ p: '0 12px' }}
+      onClick={onClick}
     >
       <IconButton className={styles.icon} style={{ backgroundImage: `url(${isPath ? iconActive : iconDef})` }} />
-      <Typography variant="subtitle2" fontSize={16} lineHeight={'normal'}>
-        {text}
-      </Typography>
+      <Typography className={styles.typography}>{text}</Typography>
     </Link>
   );
 };

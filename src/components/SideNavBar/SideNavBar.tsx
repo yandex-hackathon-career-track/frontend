@@ -63,7 +63,7 @@ const SideNavBar: FC = () => {
             grey
           />
           <HeaderLinkElement text="Поддержка" path="#" iconDef={icons.tg} iconActive={icons.tgActive} grey />
-          <HeaderLinkElement text="Выйти" iconDef={icons.exit} grey />
+          <HeaderLinkElement text="Выйти" iconDef={icons.exit} grey onClick={() => console.log('test')} />
         </div>
       </Toolbar>
     </AppBar>
