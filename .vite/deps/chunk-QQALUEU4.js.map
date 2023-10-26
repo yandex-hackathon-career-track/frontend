@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../node_modules/@mui/material/Container/containerClasses.js"],
+  "sourcesContent": ["import { unstable_generateUtilityClasses as generateUtilityClasses } from '@mui/utils';\nimport generateUtilityClass from '../generateUtilityClass';\nexport function getContainerUtilityClass(slot) {\n  return generateUtilityClass('MuiContainer', slot);\n}\nconst containerClasses = generateUtilityClasses('MuiContainer', ['root', 'disableGutters', 'fixed', 'maxWidthXs', 'maxWidthSm', 'maxWidthMd', 'maxWidthLg', 'maxWidthXl']);\nexport default containerClasses;"],
+  "mappings": ";;;;;;;;AAAA;AACA;AACO,SAAS,yBAAyB,MAAM;AAC7C,SAAO,qBAAqB,gBAAgB,IAAI;AAClD;AACA,IAAM,mBAAmB,uBAAuB,gBAAgB,CAAC,QAAQ,kBAAkB,SAAS,cAAc,cAAc,cAAc,cAAc,YAAY,CAAC;AACzK,IAAO,2BAAQ;",
+  "names": []
+}
