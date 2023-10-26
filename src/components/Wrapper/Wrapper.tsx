@@ -1,10 +1,14 @@
 import styles from './wrapper.module.css';
 import { FC, PropsWithChildren } from 'react';
 
-export const Wrapper: FC<PropsWithChildren> = ({ children }) => {
+interface IWrapper {
+  isAuth?: boolean;
+}
+
+export const Wrapper: FC<PropsWithChildren<IWrapper>> = ({ children, isAuth = false }) => {
   return (
-    <main className={styles.container}>
-      <section className={styles.wrapper}>{children}</section>
+    <main className={isAuth ? styles.authContainer : styles.container}>
+      <section className={isAuth ? styles.authWrapper : styles.wrapper}>{children}</section>
     </main>
   );
 };

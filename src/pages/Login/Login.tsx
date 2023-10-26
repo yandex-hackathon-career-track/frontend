@@ -48,12 +48,12 @@ export const Login: FC = () => {
           name="email"
           render={({ field }) => (
             <TextField
-              error={errors.email && true}
+              error={!!errors.email}
               disabled={isLoading}
               label="E-mail"
               variant="filled"
               color="primary"
-              helperText={errors.email?.message}
+              helperText={errors.email && errors.email.message}
               autoFocus={true}
               fullWidth
               inputProps={{ style: { padding: '25px 12px 8px', minHeight: '50px', boxSizing: 'border-box' } }}
@@ -69,13 +69,13 @@ export const Login: FC = () => {
           name="password"
           render={({ field }) => (
             <TextField
-              error={errors.password && true}
+              error={!!errors.password}
               disabled={isLoading}
               label="Пароль"
               type="password"
               variant="filled"
               color="primary"
-              helperText={errors.password?.message}
+              helperText={errors.password && errors.password.message}
               fullWidth
               inputProps={{ style: { padding: '25px 12px 8px', minHeight: '50px', boxSizing: 'border-box' } }}
               InputProps={{

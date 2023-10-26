@@ -66,7 +66,7 @@ export const ConfirmPassword: FC = () => {
           name="new_password"
           render={({ field }) => (
             <TextField
-              error={!!errors.uid}
+              error={!!errors.new_password}
               disabled={isLoading}
               label="Роль"
               variant="filled"
