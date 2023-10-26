@@ -1,4 +1,4 @@
-import { IAuthSettings, IInputsSettings } from './types/Interfaces';
+import { IAuthSettings, IInputsSettings } from '../services/types/Interfaces';
 
 export const loginInputsSettings: IInputsSettings = {
   email: true,
