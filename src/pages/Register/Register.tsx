@@ -1,52 +1,59 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import Container from '@mui/material/Container/Container';
 import styles from './register.module.css';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FC } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Button, TextField, Typography, Link, Box } from '@mui/material';
 import { Controller } from 'react-hook-form';
 import { useRegisterUserMutation } from '../../services/query/practicumApi';
 import { Wrapper } from '../../components/Wrapper/Wrapper';
 import { IAuthForm } from '../../services/types/types';
+import { defaultShema } from '../../validates/yup';
 
 export const Register: FC = () => {
-  const schema = yup
-    .object({
-      email: yup.string().email().required(),
-      password: yup.string().min(8).max(32).required(),
-    })
-    .required();
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<IAuthForm>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(defaultShema),
+    mode: 'onChange',
   });
-  const [registerUser, { isLoading }] = useRegisterUserMutation();
+  const [registerUser, { isLoading, isSuccess }] = useRegisterUserMutation();
 
-  const onRegister: SubmitHandler<IAuthForm> = async (data) => {
-    await registerUser(data);
-  };
+  const onRegister: SubmitHandler<IAuthForm> = useCallback(
+    async (data) => {
+      await registerUser(data);
+    },
+    [registerUser],
+  );
+
+  useEffect(() => {
+    if (isSuccess) navigate('/login');
+  }, [isSuccess, navigate]);
 
   return (
-    <Wrapper heading="Регистрация">
+    <Wrapper>
+      <Typography component="h1" color={'#fff'} fontSize={'32px'} sx={{ mb: '20px', textAlign: 'center' }}>
+        Регистрация
+      </Typography>
       <Box component="form" className={styles.form} onSubmit={handleSubmit(onRegister)}>
         <Controller
           control={control}
           name="email"
           render={({ field }) => (
             <TextField
-              error={errors.email && true}
+              error={!!errors.email}
               label="E-mail"
+              type="text"
               disabled={isLoading}
               variant="filled"
               color="primary"
               autoFocus={true}
-              helperText={errors.email?.message}
+              helperText={errors.email && errors.email.message}
               fullWidth
               inputProps={{ style: { padding: '25px 12px 8px', minHeight: '50px', boxSizing: 'border-box' } }}
               InputProps={{
@@ -61,12 +68,13 @@ export const Register: FC = () => {
           name="password"
           render={({ field }) => (
             <TextField
-              error={errors.password && true}
+              error={!!errors.password}
               label="Пароль"
+              type="password"
               disabled={isLoading}
               variant="filled"
               color="primary"
-              helperText={errors.password?.message}
+              helperText={errors.password && errors.password.message}
               fullWidth
               inputProps={{ style: { padding: '25px 12px 8px', minHeight: '50px', boxSizing: 'border-box' } }}
               InputProps={{

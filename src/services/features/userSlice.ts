@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { deleteCookie } from '../../utils/cookie';
 
-interface ISetUserAction {
+interface IUserAction {
   id: string;
   name: string;
   email: string;
@@ -9,7 +10,6 @@ interface ISetUserAction {
 
 interface IUserState {
   id: string;
-  name: string;
   email: string;
   password: string;
   isAuthorised: boolean;
@@ -17,7 +17,6 @@ interface IUserState {
 
 const initialState: IUserState = {
   id: '',
-  name: 'Пользователь',
   email: '',
   password: '',
   isAuthorised: false,
@@ -27,15 +26,22 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserData: (state, action: PayloadAction<ISetUserAction>) => {
+    setUserData: (state, action: PayloadAction<IUserAction>) => {
       state.id = action.payload.id;
-      state.name = action.payload.name;
       state.email = action.payload.email;
       state.password = action.payload.password;
       state.isAuthorised = true;
     },
+    logOut: (state) => {
+      deleteCookie('refresh');
+      deleteCookie('access');
+      state.id = '';
+      state.email = '';
+      state.password = '';
+      state.isAuthorised = false;
+    },
   },
 });
 
-export const { setUserData } = userSlice.actions;
+export const { setUserData, logOut } = userSlice.actions;
 export default userSlice.reducer;

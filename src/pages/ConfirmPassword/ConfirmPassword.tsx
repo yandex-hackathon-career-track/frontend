@@ -1,61 +1,77 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { FC, useCallback, useEffect } from 'react';
-import styles from './changePassword.module.css';
+import { FC, useCallback } from 'react';
+import styles from './confirmPassword.module.css';
 import Container from '@mui/material/Container/Container';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Box, Button, Link, TextField, Typography } from '@mui/material';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { Controller } from 'react-hook-form';
 import { Wrapper } from '../../components/Wrapper/Wrapper';
-import { useResetPasswordMutation } from '../../services/query/practicumApi';
-import { changePassShema } from '../../validates/yup';
+import { useResetPasswordConfirmMutation } from '../../services/query/practicumApi';
+import { confirmPassShema } from '../../validates/yup';
 
-export interface IChangePassword {
-  email: string;
+export interface IConfirmPassword {
+  uid: string;
+  new_password: string;
 }
 
-export const ChangePassword: FC = () => {
-  const navigate = useNavigate();
+export const ConfirmPassword: FC = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<IChangePassword>({
-    resolver: yupResolver(changePassShema),
+  } = useForm<IConfirmPassword>({
+    resolver: yupResolver(confirmPassShema),
     mode: 'onChange',
   });
-  const [resetPassword, { isLoading, isSuccess }] = useResetPasswordMutation();
+  const [resetPasswordConfirm, { isLoading }] = useResetPasswordConfirmMutation();
 
-  const onChangePassword: SubmitHandler<IChangePassword> = useCallback(
+  const onChangePassword: SubmitHandler<IConfirmPassword> = useCallback(
     async (data) => {
-      await resetPassword(data.email);
+      await resetPasswordConfirm(data);
     },
-    [resetPassword],
+    [resetPasswordConfirm],
   );
-
-  useEffect(() => {
-    if (isSuccess) navigate('/confirm-password');
-  }, [isSuccess, navigate]);
 
   return (
     <Wrapper>
       <Typography component="h1" color={'#fff'} fontSize={'32px'} sx={{ mb: '20px', textAlign: 'center' }}>
-        Восстановление пароля
+        Новый пароль
       </Typography>
       <Box component="form" className={styles.form} onSubmit={handleSubmit(onChangePassword)}>
         <Controller
           control={control}
-          name="email"
+          name="uid"
           render={({ field }) => (
             <TextField
-              error={!!errors.email}
+              error={!!errors.uid}
               disabled={isLoading}
-              label="E-mail"
+              label="ID из письма"
               variant="filled"
               color="primary"
-              helperText={errors.email && errors.email.message}
+              helperText={errors.uid && errors.uid.message}
               autoFocus={true}
+              fullWidth
+              inputProps={{ style: { padding: '25px 12px 8px', minHeight: '50px', boxSizing: 'border-box' } }}
+              InputProps={{
+                style: { backgroundColor: '#fff', borderRadius: '4px', outline: '2px solid #000' },
+              }}
+              onChange={(e) => field.onChange(e)}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="new_password"
+          render={({ field }) => (
+            <TextField
+              error={!!errors.new_password}
+              disabled={isLoading}
+              label="Роль"
+              variant="filled"
+              color="primary"
+              helperText={errors.new_password && errors.new_password.message}
               fullWidth
               inputProps={{ style: { padding: '25px 12px 8px', minHeight: '50px', boxSizing: 'border-box' } }}
               InputProps={{
@@ -73,7 +89,7 @@ export const ChangePassword: FC = () => {
           fullWidth
           className={styles.button}
         >
-          Подтвердить
+          Сохранить
         </Button>
       </Box>
       <Container className={styles.info}>
