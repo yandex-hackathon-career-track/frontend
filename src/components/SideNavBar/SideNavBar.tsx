@@ -1,7 +1,7 @@
 import { FC, useCallback } from 'react';
-import { AppBar, Toolbar, Button, IconButton } from '@mui/material';
+import { AppBar, Toolbar, Button, Divider } from '@mui/material';
 import HeaderLinkElement from '../HeaderLinkElement.tsx/HeaderLinkElement';
-import icon from '../../media/personal-info.svg';
+import icons from './iconImports';
 import { useDispatch } from '../../services/hooks';
 import { logOut } from '../../services/features/userSlice';
 import { useNavigate } from 'react-router-dom';
@@ -16,10 +16,7 @@ const SideNavBar: FC = () => {
   }, [dispatch, navigate]);
 
   return (
-    <AppBar
-      position="static"
-      style={{ maxWidth: '256px', minHeight: 'calc(100vh - 60px)', backgroundColor: '#1A1B22' }}
-    >
+    <AppBar position="static" style={{ width: '256px', minHeight: 'calc(100vh - 60px)', backgroundColor: '#1A1B22' }}>
       <Toolbar
         style={{
           display: 'flex',
@@ -29,44 +26,55 @@ const SideNavBar: FC = () => {
           justifyContent: 'space-between',
 
           height: 'calc(100vh - 60px)',
-          padding: '24px 32px 50px',
+          padding: '36px 12px',
         }}
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
-          <HeaderLinkElement text="Мои вакансии" path="/vacancy" />
-          <HeaderLinkElement text="Поиск специалистов" path="/candidates" />
-          <HeaderLinkElement text="Отклики" path="#" />
-          <HeaderLinkElement text="Избранные резюме" path="/favorite-candidates" />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '23px', width: '100%' }}>
+          <HeaderLinkElement
+            text="Мои вакансии"
+            path="/vacancy"
+            iconDef={icons.suitCase}
+            iconActive={icons.suitCaseActive}
+          />
+          <Divider style={{ borderColor: 'rgba(121, 121, 129, 0.5)', borderWidth: '1px' }} />
+          <HeaderLinkElement
+            text="Поиск специалистов"
+            path="/candidates"
+            iconDef={icons.search}
+            iconActive={icons.searchActive}
+          />
+          <Divider style={{ borderColor: 'rgba(121, 121, 129, 0.5)', borderWidth: '1px' }} />
+          <HeaderLinkElement
+            text="Избранные резюме"
+            path="/favorite-candidates"
+            iconDef={icons.bookmark}
+            iconActive={icons.bookmarkActive}
+          />
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
           <Button
             variant="outlined"
-            fullWidth
-            style={{ minHeight: 50, fontSize: 16, textTransform: 'none', borderColor: '#fff', color: '#fff' }}
-            sx={{ mb: 3 }}
+            style={{
+              minHeight: 50,
+              fontSize: 16,
+              textTransform: 'none',
+              borderColor: '#fff',
+              color: '#fff',
+            }}
+            sx={{ m: '0 12px 40px' }}
           >
             Создать вакансию
           </Button>
-          <>
-            <HeaderLinkElement text="Компания" path="/profile">
-              <IconButton
-                style={{
-                  backgroundImage: `url(${icon})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-
-                  width: 24,
-                  height: 24,
-
-                  padding: 0,
-                }}
-              />{' '}
-            </HeaderLinkElement>
-          </>
-          <Button onClick={handleLogOut}>Выйти</Button>
-          <HeaderLinkElement text="Выйти" />
+          <HeaderLinkElement
+            text="Компания"
+            path="/profile"
+            iconDef={icons.profile}
+            iconActive={icons.profileActive}
+            grey
+          />
+          <HeaderLinkElement text="Поддержка" path="#" iconDef={icons.tg} iconActive={icons.tgActive} grey />
+          <HeaderLinkElement text="Выйти" iconDef={icons.exit} grey onClick={() => console.log('test')} />
         </div>
       </Toolbar>
     </AppBar>

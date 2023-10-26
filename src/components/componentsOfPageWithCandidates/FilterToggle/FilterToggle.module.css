@@ -1,0 +1,17 @@
+.filter {
+  color: #797981;
+  font-feature-settings:
+    'clig' off,
+    'liga' off;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+
+  border-color: #797981;
+  flex-grow: 3;
+}
+
+.filter.Mui-selected {
+  border-color: red;
+}

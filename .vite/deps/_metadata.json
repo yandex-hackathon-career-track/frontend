@@ -1,0 +1,185 @@
+{
+  "hash": "8e5b3806",
+  "browserHash": "85448607",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "8fc1830f",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "101bea3b",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "f3ec6156",
+      "needsInterop": false
+    },
+    "react-redux": {
+      "src": "../../node_modules/react-redux/es/index.js",
+      "file": "react-redux.js",
+      "fileHash": "98e2c325",
+      "needsInterop": false
+    },
+    "@mui/material/styles": {
+      "src": "../../node_modules/@mui/material/styles/index.js",
+      "file": "@mui_material_styles.js",
+      "fileHash": "902b662d",
+      "needsInterop": false
+    },
+    "@reduxjs/toolkit": {
+      "src": "../../node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js",
+      "file": "@reduxjs_toolkit.js",
+      "fileHash": "7e9a9111",
+      "needsInterop": false
+    },
+    "@mui/material": {
+      "src": "../../node_modules/@mui/material/index.js",
+      "file": "@mui_material.js",
+      "fileHash": "dfa1e343",
+      "needsInterop": false
+    },
+    "@mui/material/Unstable_Grid2": {
+      "src": "../../node_modules/@mui/material/Unstable_Grid2/index.js",
+      "file": "@mui_material_Unstable_Grid2.js",
+      "fileHash": "237c1b89",
+      "needsInterop": false
+    },
+    "@reduxjs/toolkit/query/react": {
+      "src": "../../node_modules/@reduxjs/toolkit/dist/query/react/rtk-query-react.esm.js",
+      "file": "@reduxjs_toolkit_query_react.js",
+      "fileHash": "3595afd1",
+      "needsInterop": false
+    },
+    "@mui/icons-material/BookmarkBorderOutlined": {
+      "src": "../../node_modules/@mui/icons-material/BookmarkBorderOutlined.js",
+      "file": "@mui_icons-material_BookmarkBorderOutlined.js",
+      "fileHash": "bd1a2741",
+      "needsInterop": true
+    },
+    "@mui/icons-material/SearchOutlined": {
+      "src": "../../node_modules/@mui/icons-material/SearchOutlined.js",
+      "file": "@mui_icons-material_SearchOutlined.js",
+      "fileHash": "252cc362",
+      "needsInterop": true
+    },
+    "@mui/icons-material/WorkOutlineOutlined": {
+      "src": "../../node_modules/@mui/icons-material/WorkOutlineOutlined.js",
+      "file": "@mui_icons-material_WorkOutlineOutlined.js",
+      "fileHash": "4f8c3676",
+      "needsInterop": true
+    },
+    "@mui/icons-material/PersonOutlineOutlined": {
+      "src": "../../node_modules/@mui/icons-material/PersonOutlineOutlined.js",
+      "file": "@mui_icons-material_PersonOutlineOutlined.js",
+      "fileHash": "4c0e381e",
+      "needsInterop": true
+    },
+    "@mui/icons-material/LogoutOutlined": {
+      "src": "../../node_modules/@mui/icons-material/LogoutOutlined.js",
+      "file": "@mui_icons-material_LogoutOutlined.js",
+      "fileHash": "f173d9a9",
+      "needsInterop": true
+    },
+    "@mui/icons-material/SendOutlined": {
+      "src": "../../node_modules/@mui/icons-material/SendOutlined.js",
+      "file": "@mui_icons-material_SendOutlined.js",
+      "fileHash": "234f55b1",
+      "needsInterop": true
+    },
+    "@mui/material/Container/Container": {
+      "src": "../../node_modules/@mui/material/Container/Container.js",
+      "file": "@mui_material_Container_Container.js",
+      "fileHash": "862862c2",
+      "needsInterop": false
+    },
+    "yup": {
+      "src": "../../node_modules/yup/index.esm.js",
+      "file": "yup.js",
+      "fileHash": "cef3284f",
+      "needsInterop": false
+    },
+    "@hookform/resolvers/yup": {
+      "src": "../../node_modules/@hookform/resolvers/yup/dist/yup.mjs",
+      "file": "@hookform_resolvers_yup.js",
+      "fileHash": "0f2c7f9d",
+      "needsInterop": false
+    },
+    "react-hook-form": {
+      "src": "../../node_modules/react-hook-form/dist/index.esm.mjs",
+      "file": "react-hook-form.js",
+      "fileHash": "f9bd648d",
+      "needsInterop": false
+    },
+    "@mui/material/Container": {
+      "src": "../../node_modules/@mui/material/Container/index.js",
+      "file": "@mui_material_Container.js",
+      "fileHash": "5eb7b10d",
+      "needsInterop": false
+    },
+    "@mui/material/Typography": {
+      "src": "../../node_modules/@mui/material/Typography/index.js",
+      "file": "@mui_material_Typography.js",
+      "fileHash": "74689b5d",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-EEZVIXSL": {
+      "file": "chunk-EEZVIXSL.js"
+    },
+    "chunk-42A327WA": {
+      "file": "chunk-42A327WA.js"
+    },
+    "chunk-SO24EEOS": {
+      "file": "chunk-SO24EEOS.js"
+    },
+    "chunk-VHXWWGHD": {
+      "file": "chunk-VHXWWGHD.js"
+    },
+    "chunk-QQALUEU4": {
+      "file": "chunk-QQALUEU4.js"
+    },
+    "chunk-6QFZO5LI": {
+      "file": "chunk-6QFZO5LI.js"
+    },
+    "chunk-IV4WDYL3": {
+      "file": "chunk-IV4WDYL3.js"
+    },
+    "chunk-DWJUSKLH": {
+      "file": "chunk-DWJUSKLH.js"
+    },
+    "chunk-YD6VUEFH": {
+      "file": "chunk-YD6VUEFH.js"
+    },
+    "chunk-XTJWS44H": {
+      "file": "chunk-XTJWS44H.js"
+    },
+    "chunk-OTY6O57J": {
+      "file": "chunk-OTY6O57J.js"
+    },
+    "chunk-5GO6Z4EO": {
+      "file": "chunk-5GO6Z4EO.js"
+    },
+    "chunk-E4S5WNUH": {
+      "file": "chunk-E4S5WNUH.js"
+    },
+    "chunk-EETHHIGL": {
+      "file": "chunk-EETHHIGL.js"
+    },
+    "chunk-6GNJQVVF": {
+      "file": "chunk-6GNJQVVF.js"
+    },
+    "chunk-2PA4WPI3": {
+      "file": "chunk-2PA4WPI3.js"
+    },
+    "chunk-ROME4SDB": {
+      "file": "chunk-ROME4SDB.js"
+    }
+  }
+}

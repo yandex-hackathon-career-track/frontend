@@ -17,7 +17,7 @@ const AddHeader: React.FC = () => (
     <Grid xs={true}>
       <div
         style={{
-          overflowY: 'scroll',
+          overflowY: 'auto',
           height: 'calc(100vh - 60px)',
         }}
       >
