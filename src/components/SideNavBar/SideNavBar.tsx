@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { AppBar, Toolbar, Button, IconButton } from '@mui/material';
-import HeaderLinkElement from '../HeaderLinkElement.tsx/HeaderLinkElement';
+import HeaderLinkElement from '../HeaderLinkElement/HeaderLinkElement';
 import icon from '../../media/personal-info.svg';
 
 const SideNavBar: FC = () => {
