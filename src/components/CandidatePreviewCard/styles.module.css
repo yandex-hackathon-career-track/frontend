@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 534px;
+  padding: 20px 24px;
+  gap: 4px;
+  background-color: #F9FAFB;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 4px;
+}
+
+.text {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.text span {
+  font-weight: 500;
+}

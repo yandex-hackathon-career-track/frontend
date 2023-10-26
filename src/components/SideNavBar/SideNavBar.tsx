@@ -1,6 +1,6 @@
 import { FC, useCallback } from 'react';
 import { AppBar, Toolbar, Button, Divider } from '@mui/material';
-import HeaderLinkElement from '../HeaderLinkElement.tsx/HeaderLinkElement';
+import HeaderLinkElement from '../HeaderLinkElement/HeaderLinkElement';
 import icons from './iconImports';
 import { useDispatch } from '../../services/hooks';
 import { logOut } from '../../services/features/userSlice';

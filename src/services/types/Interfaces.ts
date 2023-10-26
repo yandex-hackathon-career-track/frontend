@@ -11,3 +11,16 @@ export interface IAuthSettings {
   linkText: string;
   path: string;
 }
+
+export interface ICandidate {
+  name?: string;
+  isAvailable?: boolean;
+  isFavorite?: boolean;
+  lastSeen?: string;
+  position?: string;
+  graduated?: string;
+  experience?: string;
+  stack?: string[];
+  city?: string;
+  jobFormat?: string[];
+}
