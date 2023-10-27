@@ -2,21 +2,43 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IAuthForm, ITokensResponce, TCreateUser } from '../types/types';
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
 import { IConfirmPassword } from '../../pages/ConfirmPassword/ConfirmPassword';
+import { ICompanyState } from '../features/companySlice';
 
 export const practicumApi = createApi({
   reducerPath: 'practicumApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://130.193.38.88/api',
   }),
-  tagTypes: ['User'],
+  tagTypes: ['User', 'Employer'],
   endpoints: (builder) => ({
     getUser: builder.query<string, unknown>({
       query: () => ({
-        url: '/v1/users/me/',
+        url: '/v1/users/me',
         method: 'GET',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
       }),
     }),
-    // После проверки делаем запрос на рефреш токена. Вопрос как сделать (???)
+    getEmployer: builder.query<ICompanyState, unknown>({
+      query: () => ({
+        url: '/v1/employers/me',
+        method: 'GET',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+      }),
+    }),
+    getVacancies: builder.query<string, unknown>({
+      query: () => ({
+        url: '/v1/employers/vacancies/',
+        method: 'GET',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+      }),
+    }),
+    // ???
     tokenVerify: builder.mutation({
       query: () => ({
         url: '/v1/auth/jwt/verify/',
@@ -26,7 +48,6 @@ export const practicumApi = createApi({
         },
       }),
     }),
-    // OK
     registerUser: builder.mutation<TCreateUser, IAuthForm>({
       query: (user) => ({
         url: '/v1/users/',
@@ -37,7 +58,7 @@ export const practicumApi = createApi({
         },
       }),
     }),
-    // ?
+    // ???
     refreshToken: builder.mutation<string, unknown>({
       query: () => ({
         url: '/v1/auth/jwt/refresh/',
@@ -52,7 +73,6 @@ export const practicumApi = createApi({
         return data;
       },
     }),
-    // OK
     authUser: builder.mutation<ITokensResponce, IAuthForm>({
       query: (user) => ({
         url: '/v1/auth/jwt/create/',
@@ -68,7 +88,6 @@ export const practicumApi = createApi({
         return data;
       },
     }),
-    // 500
     resetPassword: builder.mutation<string, string>({
       query: (data) => ({
         url: '/v1/users/reset_password/',
@@ -89,10 +108,29 @@ export const practicumApi = createApi({
         },
       }),
     }),
+    changeEmployer: builder.mutation<ICompanyState, ICompanyState>({
+      query: (data) => ({
+        url: '/v1/employers/me/',
+        method: 'PATCH',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+        body: {
+          about: data.about,
+          activity: data.activity,
+          email: data.email,
+          name: data.name,
+          phone: data.phone,
+          website: data.website,
+        },
+      }),
+    }),
   }),
 });
 
 export const {
+  useGetEmployerQuery,
+  useGetVacanciesQuery,
   useGetUserQuery,
   useRefreshTokenMutation,
   useRegisterUserMutation,
@@ -100,4 +138,5 @@ export const {
   useTokenVerifyMutation,
   useResetPasswordMutation,
   useResetPasswordConfirmMutation,
+  useChangeEmployerMutation,
 } = practicumApi;

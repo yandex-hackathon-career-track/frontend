@@ -14,16 +14,8 @@ import { CssBaseline } from '@mui/material';
 import ProtectOfRoute from '../ProtectOfRoute/ProtectOfRoute';
 import AddHeader from '../componentsOfHeader/AddHeader/AddHeader';
 import { ConfirmPassword } from '../../pages/ConfirmPassword/ConfirmPassword';
-import { useEffect } from 'react';
-import { getCookie } from '../../utils/cookie';
 
 function App() {
-  useEffect(() => {
-    if (getCookie('access')) {
-      console.log('have token');
-    }
-  }, []);
-
   return (
     <>
       <CssBaseline />

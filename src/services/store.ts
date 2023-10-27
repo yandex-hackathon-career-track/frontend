@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './features/userSlice';
 import { practicumApi } from './query/practicumApi';
+import companySlice from './features/companySlice';
 
 export const store = configureStore({
   reducer: {
     [practicumApi.reducerPath]: practicumApi.reducer,
-    player: userReducer,
+    user: userReducer,
+    company: companySlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(practicumApi.middleware),
 });

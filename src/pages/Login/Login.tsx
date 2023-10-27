@@ -11,6 +11,7 @@ import { useAuthUserMutation } from '../../services/query/practicumApi';
 import { Wrapper } from '../../components/Wrapper/Wrapper';
 import { IAuthForm } from '../../services/types/types';
 import { defaultShema } from '../../validates/yup';
+import { Popup } from '../../components/Popup/Popup';
 
 export const Login: FC = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export const Login: FC = () => {
     resolver: yupResolver(defaultShema),
     mode: 'onChange',
   });
-  const [authUser, { isLoading, isSuccess }] = useAuthUserMutation();
+  const [authUser, { isLoading, isSuccess, isError, error }] = useAuthUserMutation();
 
   const onAuth: SubmitHandler<IAuthForm> = useCallback(
     async (data) => {
@@ -111,6 +112,8 @@ export const Login: FC = () => {
           Регистрация
         </Link>
       </Container>
+
+      {isError && <Popup type="error" text={error && error.data.detail} />}
     </Wrapper>
   );
 };
