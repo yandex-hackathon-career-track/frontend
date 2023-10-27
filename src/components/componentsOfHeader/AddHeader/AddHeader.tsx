@@ -7,6 +7,7 @@ import { useGetEmployerQuery } from '../../../services/query/practicumApi';
 import { useEffect } from 'react';
 import { useDispatch } from '../../../services/hooks';
 import { setCompanyData } from '../../../services/features/companySlice';
+import { Wrapper } from '../../Wrapper/Wrapper';
 
 const AddHeader: React.FC = () => {
   const dispatch = useDispatch();
@@ -29,14 +30,9 @@ const AddHeader: React.FC = () => {
         <SideNavBar />
       </Grid>
       <Grid xs={true}>
-        <div
-          style={{
-            overflowY: 'auto',
-            height: 'calc(100vh - 60px)',
-          }}
-        >
+        <Wrapper isAuth>
           <Outlet />
-        </div>
+        </Wrapper>
       </Grid>
     </Grid>
   );
