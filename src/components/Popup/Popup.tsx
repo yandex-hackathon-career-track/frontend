@@ -20,6 +20,7 @@ export const Popup: FC<IPopup> = ({ text, type }) => {
     setTimeout(() => {
       setIsShow(!isShow);
     }, 5000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return ReactDOM.createPortal(
