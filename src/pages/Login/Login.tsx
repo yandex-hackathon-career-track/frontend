@@ -113,7 +113,7 @@ export const Login: FC = () => {
         </Link>
       </Container>
 
-      {isError && <Popup type="error" text={error && error.data.detail} />}
+      {isError && <Popup type="error" text={error} />}
     </Wrapper>
   );
 };

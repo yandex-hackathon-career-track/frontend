@@ -1,13 +1,15 @@
 import styles from './popup.module.css';
 import { Typography } from '@mui/material';
-import { FC, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { PopupErrorIcon, PopupSuccessIcon } from '../../media/icons';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
 
 const popup = document.getElementById('popup') as HTMLDivElement;
 
 interface IPopup {
-  text: string;
+  text: FetchBaseQueryError | SerializedError | undefined;
   type: 'error' | 'done';
 }
 
@@ -27,7 +29,7 @@ export const Popup: FC<IPopup> = ({ text, type }) => {
         className={`${styles.wrapper} ${type === 'error' ? styles.wrapper__error : styles.wrapper__done}`}
       >
         {type === 'error' ? <PopupErrorIcon /> : <PopupSuccessIcon />}
-        <Typography>{text}</Typography>
+        <Typography>{text as ReactNode}</Typography>
       </div>
     ),
     popup,

@@ -6,7 +6,7 @@ interface IButtonPanel {
 }
 
 const ButtonPanel: React.FC<IButtonPanel> = ({ state, setState }: IButtonPanel) => {
-  const handleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: string) => {
+  const handleChange = (_event: React.MouseEvent<HTMLElement>, newAlignment: string) => {
     setState(newAlignment);
   };
   return (

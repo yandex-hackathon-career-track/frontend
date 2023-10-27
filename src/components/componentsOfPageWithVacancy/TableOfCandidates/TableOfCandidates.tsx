@@ -19,16 +19,12 @@ import styles from './TableOfCandidates.module.css';
 import { left } from '@popperjs/core';
 
 interface Data {
-  student: string;
-  contacts: string;
-  status: string;
-
   name: string;
-  resume: boolean | string;
+  resume?: boolean | string;
 }
 
 interface ColumnData {
-  dataKey: keyof Data;
+  dataKey: string;
   label: string;
   width: number;
 }
