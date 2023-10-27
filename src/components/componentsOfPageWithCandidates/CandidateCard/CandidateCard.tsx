@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Card, CardActions, Typography, Button, IconButton } from '@mui/material';
-import { ProfileHeader } from '../ProfileHeader/ProfileHeader';
-import { ICandidate } from '../../services/types/Interfaces';
-import { ProfileStackField } from '../ProfileStackField/ProfileStackField';
+import { ProfileHeader } from '../../ProfileHeader/ProfileHeader';
+import { ICandidate } from '../../../services/types/Interfaces';
+import { ProfileStackField } from '../../ProfileStackField/ProfileStackField';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import styles from './styles.module.css';

@@ -9,7 +9,7 @@ const FiltersList: React.FC = () => {
   const data = ['var1', 'var2', 'var3', 'var4', 'var5', 'var6'];
   return (
     // TODO через styles нужно переписать MUI в кастомные фильтры, для соответствия дизайну
-    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: 32 }}>
+    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: 8 }}>
       <FilterDropper data={data} label="Дизайн" />
       <FilterDropper data={data} label="Дизайнер интерфейсов" />
       <FilterDropper data={data} label="Опыт работы" />
