@@ -22,8 +22,8 @@ const FiltersList: React.FC = () => {
         <FilterToggle label="Гибрид" />
         <FilterToggle label="Релокация" />
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <CustomButton text={'Сбросить фильтры'} />
-          <CustomButton text={'Применить фильтры'} />
+          <CustomButton text={'Сбросить фильтры'} variant={'filled'} />
+          <CustomButton text={'Применить фильтры'} variant={'filled'} />
         </div>
       </div>
     </div>
