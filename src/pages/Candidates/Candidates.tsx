@@ -3,9 +3,9 @@ import { Typography } from '@mui/material';
 import styles from './Candidates.module.css';
 import FiltersList from '../../components/componentsOfPageWithCandidates/FiltersList/FiltersList';
 import { profiles } from '../../utils/mockData';
-import { CandidateCard } from '../../components/CandidateCard/CandidateCard';
+import { CandidateCard } from '../../components/componentsOfPageWithCandidates/CandidateCard/CandidateCard';
 import { ICandidate } from '../../services/types/Interfaces';
-import CandidatePreviewCard from '../../components/CandidatePreviewCard/CandidatePreviewCard';
+import CandidatePreviewCard from '../../components/componentsOfPageWithCandidates/CandidatePreviewCard/CandidatePreviewCard';
 
 export const Candidates: FC = () => {
   const [cardToPreview, setCardToPreview] = useState(profiles[0] as ICandidate);
@@ -14,8 +14,8 @@ export const Candidates: FC = () => {
     console.log(card);
   };
   return (
-    <main style={{ padding: '32px 50px' }}>
-      <Typography component={'h1'} className={styles.title}>
+    <>
+      <Typography component={'h1'} className={'page-title'}>
         Поиск специалистов
       </Typography>
       <FiltersList />
@@ -27,6 +27,6 @@ export const Candidates: FC = () => {
         </ul>
         <CandidateCard {...cardToPreview} />
       </div>
-    </main>
+    </>
   );
 };

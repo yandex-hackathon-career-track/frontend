@@ -12,7 +12,7 @@ import {
 import { Route, Routes } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import ProtectOfRoute from '../ProtectOfRoute/ProtectOfRoute';
-import AddHeader from '../AddHeader/AddHeader';
+import AddHeader from '../componentsOfHeader/AddHeader/AddHeader';
 import { ConfirmPassword } from '../../pages/ConfirmPassword/ConfirmPassword';
 
 function App() {

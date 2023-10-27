@@ -9,7 +9,23 @@ export const profiles = [
     experience: '3 года',
     stack: ['Figma', 'Adobe', 'Illustrator', 'CSS'],
     city: 'Москва',
-    jobFormat: ['офис', 'удаленка', 'релокейт', 'полный день'],
+    jobFormat: ['офис', 'удаленка', 'гибрид'],
+    schedule: ['полный день', 'проектная', 'неполный день'],
+    email: 'ghbdtn@ghbdtn.com',
+    tg: '@ghbdtn',
+    portfolio: [
+      { name: 'Behance', link: 'https://www.behance.net/' },
+      { name: 'LinkedIn', link: 'https://www.linkedin.com/' },
+    ],
+    certificates: [
+      {
+        name: 'UI Designer',
+        link: 'https://www.behance.net/',
+        thumbnail:
+          'https://img.mp3-banana.pro/img/25ccbd0e82301440e1b76193b6d0de5e0662629c34c4c5df89d4169a6b040b888a4f2f89d349bee10c632b1602e371a87a1328b68f8651136a66516995207bfdcb2163c259948ee9a350eb405951f8f816fc72a06f95037e00a36e34777a4e7906d140becd9de4c813258d51d7d4a50e2c07ad4d82a8f5ac10d9726ca92b9fc6e79f79207753ca2ffe7ddaace0b423a009d6479487b0d9f7bd2ece7571de0af03f.jpg',
+      },
+      { name: 'Taxi driver', link: 'https://www.linkedin.com/', thumbnail: '' },
+    ],
   },
   {
     name: 'Александр Александров',
@@ -21,7 +37,15 @@ export const profiles = [
     experience: '3 года',
     stack: ['Figma', 'Adobe', 'Illustrator', 'CSS'],
     city: 'Москва',
-    jobFormat: ['офис', 'удаленка', 'полный день'],
+    jobFormat: ['офис', 'гибрид'],
+    schedule: ['проектная', 'неполный день'],
+    email: 'ghbdtn@ghbdtn.com',
+    tg: '@ghbdtn',
+    portfolio: [
+      { name: 'Behance', link: 'https://www.behance.net/' },
+      { name: 'LinkedIn', link: 'https://www.linkedin.com/' },
+      { name: 'My Web Site', link: 'https://www.linkedin.com/' },
+    ],
   },
   {
     name: 'Александр Александров',
@@ -33,7 +57,19 @@ export const profiles = [
     experience: '3 года',
     stack: ['Figma', 'Adobe', 'Illustrator', 'CSS'],
     city: 'Вильнюс',
-    jobFormat: ['удаленка', 'релокейт'],
+    jobFormat: ['удаленка', 'гибрид'],
+    schedule: ['неполный день'],
+    email: 'ghbdtn@ghbdtn.com',
+    tg: '@ghbdtn',
+    portfolio: [
+      { name: 'Behance', link: 'https://www.behance.net/' },
+      { name: 'LinkedIn', link: 'https://www.linkedin.com/' },
+      { name: 'My Another Web Site', link: 'https://www.linkedin.com/' },
+    ],
+    certificates: [
+      { name: 'UI Designer', link: 'https://www.behance.net/' },
+      { name: 'Taxi driver', link: 'https://www.linkedin.com/' },
+    ],
   },
   {
     name: 'Александр Александров',
@@ -45,7 +81,18 @@ export const profiles = [
     experience: '3 года',
     stack: ['Figma', 'Adobe', 'Illustrator', 'CSS'],
     city: 'Прага',
-    jobFormat: ['удаленка', 'релокейт', 'полный день'],
+    jobFormat: ['офис', 'удаленка', 'гибрид'],
+    schedule: ['полный день', 'проектная', 'неполный день'],
+    email: 'ghbdtn@ghbdtn.com',
+    tg: '@ghbdtn',
+    portfolio: [
+      { name: 'Behance', link: 'https://www.behance.net/' },
+      { name: 'LinkedIn', link: 'https://www.linkedin.com/' },
+    ],
+    certificates: [
+      { name: 'UI Designer', link: 'https://www.behance.net/' },
+      { name: 'Taxi driver', link: 'https://www.linkedin.com/' },
+    ],
   },
   {
     name: 'Александр Александров',
@@ -57,7 +104,18 @@ export const profiles = [
     experience: '3 года',
     stack: ['Figma', 'Adobe', 'Illustrator', 'CSS'],
     city: 'Минск',
-    jobFormat: ['офис', 'удаленка', 'релокейт', 'полный день'],
+    jobFormat: ['офис', 'удаленка', 'гибрид'],
+    schedule: ['полный день', 'проектная', 'неполный день'],
+    email: 'ghbdtn@ghbdtn.com',
+    tg: '@ghbdtn',
+    portfolio: [
+      { name: 'Behance', link: 'https://www.behance.net/' },
+      { name: 'LinkedIn', link: 'https://www.linkedin.com/' },
+    ],
+    certificates: [
+      { name: 'UI Designer', link: 'https://www.behance.net/' },
+      { name: 'Taxi driver', link: 'https://www.linkedin.com/' },
+    ],
   },
   {
     name: 'Александр Александров',
@@ -69,6 +127,17 @@ export const profiles = [
     experience: '3 года',
     stack: ['Figma', 'Adobe', 'Illustrator', 'CSS'],
     city: 'Саратов',
-    jobFormat: ['офис', 'полный день'],
+    jobFormat: ['офис', 'удаленка', 'гибрид'],
+    schedule: ['полный день', 'проектная', 'неполный день'],
+    email: 'ghbdtn@ghbdtn.com',
+    tg: '@ghbdtn',
+    portfolio: [
+      { name: 'Behance', link: 'https://www.behance.net/' },
+      { name: 'LinkedIn', link: 'https://www.linkedin.com/' },
+    ],
+    certificates: [
+      { name: 'UI Designer', link: 'https://www.behance.net/' },
+      { name: 'Taxi driver', link: 'https://www.linkedin.com/' },
+    ],
   },
 ];

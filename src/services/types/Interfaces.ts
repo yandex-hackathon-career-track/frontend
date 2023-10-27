@@ -12,6 +12,12 @@ export interface IAuthSettings {
   path: string;
 }
 
+interface IPortfolio {
+  name: string;
+  link: string;
+  thumbnail?: string;
+}
+
 export interface ICandidate {
   name?: string;
   isAvailable?: boolean;
@@ -23,4 +29,21 @@ export interface ICandidate {
   stack?: string[];
   city?: string;
   jobFormat?: string[];
+  schedule?: string[];
+  portfolio?: IPortfolio[];
+  certificates?: IPortfolio[];
+  tg?: string;
+  email?: string;
 }
+
+export interface IdataCardVacancy {
+  id: string;
+  title: string;
+  createDate: string;
+  cntViews: string;
+  cntFiltered: string;
+  cntFeedback: string;
+  cntResume: string;
+}
+
+export interface IdataDetailsCardVacancy extends IdataCardVacancy {}

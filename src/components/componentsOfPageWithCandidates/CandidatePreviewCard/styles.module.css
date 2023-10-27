@@ -2,10 +2,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 534px;
+  width: 100%;
   padding: 20px 24px;
   gap: 4px;
-  background-color: #F9FAFB;
 }
 
 .container {

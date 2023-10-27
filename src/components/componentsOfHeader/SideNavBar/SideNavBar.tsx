@@ -2,8 +2,14 @@ import { FC, useCallback } from 'react';
 import { AppBar, Toolbar, Button, Divider } from '@mui/material';
 import HeaderLinkElement from '../HeaderLinkElement/HeaderLinkElement';
 import icons from './iconImports';
+<<<<<<< HEAD:src/components/SideNavBar/SideNavBar.tsx
 import { useDispatch } from '../../services/hooks';
 import { logOut } from '../../services/features/userSlice';
+=======
+import { useDispatch } from '../../../services/hooks';
+import { logOut } from '../../../services/features/userSlice';
+import { useNavigate } from 'react-router-dom';
+>>>>>>> develop:src/components/componentsOfHeader/SideNavBar/SideNavBar.tsx
 
 const SideNavBar: FC = () => {
   const dispatch = useDispatch();
