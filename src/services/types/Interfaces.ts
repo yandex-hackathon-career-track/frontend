@@ -24,3 +24,15 @@ export interface ICandidate {
   city?: string;
   jobFormat?: string[];
 }
+
+export interface IdataCardVacancy {
+  id: string;
+  title: string;
+  createDate: string;
+  cntViews: string;
+  cntFiltered: string;
+  cntFeedback: string;
+  cntResume: string;
+}
+
+export interface IdataDetailsCardVacancy extends IdataCardVacancy {}

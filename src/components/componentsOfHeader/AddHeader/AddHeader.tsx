@@ -3,6 +3,7 @@ import SideNavBar from '../SideNavBar/SideNavBar';
 import { IconButton } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import styles from './styles.module.css';
+import { Wrapper } from '../../Wrapper/Wrapper';
 
 const AddHeader: React.FC = () => (
   <Grid container>
@@ -15,14 +16,9 @@ const AddHeader: React.FC = () => (
       <SideNavBar />
     </Grid>
     <Grid xs={true}>
-      <div
-        style={{
-          overflowY: 'auto',
-          height: 'calc(100vh - 60px)',
-        }}
-      >
+      <Wrapper isAuth>
         <Outlet />
-      </div>
+      </Wrapper>
     </Grid>
   </Grid>
 );

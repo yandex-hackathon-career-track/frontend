@@ -3,10 +3,11 @@ import ToggleButton from '@mui/material/ToggleButton';
 import styles from './FilterToggle.module.css';
 
 interface FilterToggle {
-  label: string;
+  label?: string;
+  children?: React.ReactNode;
 }
 
-export default function FilterToggle({ label }: FilterToggle) {
+export default function FilterToggle({ label = '', children = null }: FilterToggle) {
   const [selected, setSelected] = React.useState(false);
 
   return (
@@ -26,6 +27,7 @@ export default function FilterToggle({ label }: FilterToggle) {
       }}
     >
       {label}
+      {children}
     </ToggleButton>
   );
 }
