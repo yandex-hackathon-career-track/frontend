@@ -4,7 +4,6 @@ import VacancyCardField from '../VacancyCardField/VacancyCardField';
 import styles from './VacancyCard.module.css';
 import ButtonMenu from './ButtonMenu';
 import { IdataCardVacancy } from '../../../services/types/Interfaces';
-import { Box } from '@mui/system';
 
 interface IVacancyCard {
   data: IdataCardVacancy;

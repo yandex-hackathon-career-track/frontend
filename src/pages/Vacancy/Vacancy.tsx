@@ -11,10 +11,10 @@ const data1 = {
   id: '1',
   title: 'Направление',
   createDate: '24 октября 2023',
-  cntViews: '235',
-  cntFiltered: '12',
-  cntFeedback: '123',
-  cntResume: '574',
+  cntViews: '22',
+  cntFiltered: '44',
+  cntFeedback: '33',
+  cntResume: '11',
 };
 
 const data2 = {
@@ -62,7 +62,7 @@ export const Vacancy: FC = () => {
     <>
       <Typography className="page-title">Мои вакансии</Typography>
       <ButtonPanel state={vacancyPage} setState={setVacancyPage} />
-      <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+      <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexWrap: 'wrap', gap: '16px', margin: 0 }}>
         {dataCards.map((data, i) => {
           return (
             <li

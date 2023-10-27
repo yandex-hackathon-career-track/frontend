@@ -1,0 +1,11 @@
+.table-title {
+  color: #1a1b22;
+  font-feature-settings:
+    'clig' off,
+    'liga' off;
+  /* WEB/Body 2 - Medium */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+}
