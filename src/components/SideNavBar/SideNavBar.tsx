@@ -4,16 +4,13 @@ import HeaderLinkElement from '../HeaderLinkElement/HeaderLinkElement';
 import icons from './iconImports';
 import { useDispatch } from '../../services/hooks';
 import { logOut } from '../../services/features/userSlice';
-import { useNavigate } from 'react-router-dom';
 
 const SideNavBar: FC = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogOut = useCallback(() => {
     dispatch(logOut());
-    navigate('/');
-  }, [dispatch, navigate]);
+  }, [dispatch]);
 
   return (
     <AppBar position="static" style={{ width: '256px', minHeight: 'calc(100vh - 60px)', backgroundColor: '#1A1B22' }}>
@@ -73,8 +70,8 @@ const SideNavBar: FC = () => {
             iconActive={icons.profileActive}
             grey
           />
-          <HeaderLinkElement text="Поддержка" path="#" iconDef={icons.tg} iconActive={icons.tgActive} grey />
-          <HeaderLinkElement text="Выйти" iconDef={icons.exit} grey onClick={handleLogOut} />
+          <HeaderLinkElement text="Поддержка" iconDef={icons.tg} iconActive={icons.tgActive} grey />
+          <HeaderLinkElement text="Выйти" path="/login" iconDef={icons.exit} grey onClick={handleLogOut} />
         </div>
       </Toolbar>
     </AppBar>
