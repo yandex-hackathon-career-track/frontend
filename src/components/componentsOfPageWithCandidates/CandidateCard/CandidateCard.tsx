@@ -8,8 +8,13 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import styles from './styles.module.css';
 import porfolioIcon from '../../../media/portfolio-icon.svg';
 import { CustomButton } from '../../../UI/CustomButton/CustomButton';
+import { Location } from 'react-router-dom';
 
-export const CandidateCard: FC<ICandidate> = (props) => {
+interface ICandidateCard extends ICandidate {
+  location: Location<unknown>;
+}
+
+export const CandidateCard: FC<ICandidateCard> = (props) => {
   const { experience, schedule, stack, jobFormat, city, portfolio, certificates, tg, email } = props;
   return (
     <Card className={styles.container}>
@@ -57,7 +62,11 @@ export const CandidateCard: FC<ICandidate> = (props) => {
           {certificates?.map((item, index) => (
             <li key={index}>
               <Link className={styles.link} href={item.link} target="_blanc">
-                <img src={item.thumbnail ? item.thumbnail : porfolioIcon} alt="превью страницы портфолио" />
+                <img
+                  src={item.thumbnail ? item.thumbnail : porfolioIcon}
+                  alt="превью страницы портфолио"
+                  style={{ borderRadius: '8px' }}
+                />
               </Link>
             </li>
           ))}
@@ -85,10 +94,14 @@ export const CandidateCard: FC<ICandidate> = (props) => {
         </List>
       </div>
       <CardActions className={styles.cardActions}>
-        <CustomButton text={'Скачать резюме'} />
-        <IconButton aria-label="add to favorites" sx={{ padding: 0, color: '#1D6BF3' }}>
-          {props.isFavorite ? <BookmarkIcon /> : <BookmarkBorderIcon />}
-        </IconButton>
+        <CustomButton text={'Скачать резюме'} variant={'filled'} />
+        {location.pathname === '/candidates' ? (
+          <IconButton aria-label="add to favorites" sx={{ padding: 0, color: '#1D6BF3' }}>
+            {props.isFavorite ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+          </IconButton>
+        ) : (
+          <CustomButton text={'Добавить к сравнению'} variant={'outlined'} />
+        )}
       </CardActions>
     </Card>
   );

@@ -4,11 +4,12 @@ import styles from './CustomButton.module.css';
 
 interface ICustomButton {
   text: string;
+  variant: string;
 }
 
-export const CustomButton: FC<ICustomButton> = ({ text }) => {
+export const CustomButton: FC<ICustomButton> = ({ text, variant }) => {
   return (
-    <Button variant="contained" className={`${styles.font} ${styles.button}`}>
+    <Button variant="contained" className={`${styles.button} ${styles[variant]}`}>
       {text}
     </Button>
   );

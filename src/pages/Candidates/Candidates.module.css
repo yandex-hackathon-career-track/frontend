@@ -27,10 +27,6 @@
   list-style: none;
 }
 
-.cards::-webkit-scrollbar {
-  width: 0;
-}
-
 .preview {
   padding: 20px 24px;
 }
