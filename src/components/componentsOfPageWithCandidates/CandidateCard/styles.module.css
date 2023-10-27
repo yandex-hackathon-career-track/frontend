@@ -1,10 +1,9 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 486px;
-  height: 680px;
+  width: 50%;
   padding: 20px 24px;
-  background-color: #F9FAFB;
+  gap: 16px;
 }
 
 .list {
@@ -32,4 +31,51 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+
+.jobInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px
+}
+
+.portfolio {
+  display: flex;
+  gap: 5px;
+}
+
+.link {
+  text-decoration: none;
+  display: flex;
+}
+
+.contacts {
+  padding: 0;
+}
+
+.contacts li {
+  margin-top: 16px;
+}
+
+.tg {
+  background-image: url(../../../media/telegram-blue.svg);
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.email {
+  background-image: url(../../../media/email.svg);
+  width: 24px;
+  height: 20px;
+  margin-right: 8px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cardActions {
+  justify-content: space-between;
+  padding: 24px 0 0;
 }
