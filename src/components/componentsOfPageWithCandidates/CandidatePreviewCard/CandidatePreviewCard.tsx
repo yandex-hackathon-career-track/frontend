@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { Card, CardActions, Box, Typography, IconButton } from '@mui/material';
-import { ProfileHeader } from '../../ProfileHeader/ProfileHeader';
+import { ProfileHeader } from '../ProfileHeader/ProfileHeader';
 import { ICandidate } from '../../../services/types/Interfaces';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import styles from './styles.module.css';
-import { ProfileStackField } from '../../ProfileStackField/ProfileStackField';
+import { ProfileStackField } from '../ProfileStackField/ProfileStackField';
 
 const CandidatePreviewCard: FC<ICandidate> = (data) => {
   const { name, position, isAvailable, graduated, experience, stack, isFavorite, lastSeen } = data;

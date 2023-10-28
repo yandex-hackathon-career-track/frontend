@@ -19,7 +19,7 @@ interface IPortfolio {
 }
 
 export interface ICandidate {
-  name: string;
+  name?: string;
   isAvailable?: boolean;
   isFavorite?: boolean;
   lastSeen?: string;
