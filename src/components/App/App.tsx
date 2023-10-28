@@ -1,14 +1,4 @@
-import {
-  Login,
-  Register,
-  Vacancy,
-  Profile,
-  Candidates,
-  Favorite,
-  NotFound,
-  Main,
-  ChangePassword,
-} from '../../pages/index';
+import { Login, Register, Vacancy, Profile, Candidates, Favorite, NotFound, ChangePassword } from '../../pages/index';
 import { Route, Routes } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import ProtectOfRoute from '../ProtectOfRoute/ProtectOfRoute';
@@ -30,7 +20,7 @@ function App() {
           <Route path="/favorite-candidates" element={<Favorite />} />
           <Route path="/candidates" element={<Candidates />} />
         </Route>
-        <Route index element={<ProtectOfRoute Element={Main} onlyLoggedIn />} />
+        <Route index element={<ProtectOfRoute Element={Candidates} onlyLoggedIn />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

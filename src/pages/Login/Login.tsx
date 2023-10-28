@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC, useCallback, useEffect } from 'react';
 import styles from './login.module.css';
@@ -112,8 +113,9 @@ export const Login: FC = () => {
           Регистрация
         </Link>
       </Container>
-
-      {isError && <Popup type="error" text={error} />}
+      {isError && (
+        <Popup type="error" text={(error as { data: { detail: string } })?.data?.detail || 'Что-то пошло не так :('} />
+      )}
     </Wrapper>
   );
 };
