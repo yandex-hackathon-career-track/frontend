@@ -10,11 +10,12 @@ import { companyShema } from '../../validates/yup';
 import { useChangeEmployerMutation } from '../../services/query/practicumApi';
 import { ICompanyState, setCompanyData } from '../../services/features/companySlice';
 import { useDispatch, useSelector } from '../../services/hooks';
+import { Popup } from '../../components/Popup/Popup';
 
 export const Profile: FC = () => {
   const dispatch = useDispatch();
   const form = useSelector((store) => store.company);
-  const [hangeEmployer, { isSuccess, data }] = useChangeEmployerMutation();
+  const [hangeEmployer, { isSuccess, data, isError, error }] = useChangeEmployerMutation();
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const {
     control,
@@ -168,6 +169,9 @@ export const Profile: FC = () => {
           Обновить
         </Button>
       </Box>
+      {isError && (
+        <Popup type="error" text={(error as { data: { detail: string } })?.data?.detail || 'Что-то пошло не так :('} />
+      )}
     </Wrapper>
   );
 };

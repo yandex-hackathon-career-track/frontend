@@ -11,6 +11,7 @@ import { useRegisterUserMutation } from '../../services/query/practicumApi';
 import { Wrapper } from '../../components/Wrapper/Wrapper';
 import { IAuthForm } from '../../services/types/types';
 import { defaultShema } from '../../validates/yup';
+import { Popup } from '../../components/Popup/Popup';
 
 export const Register: FC = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export const Register: FC = () => {
     resolver: yupResolver(defaultShema),
     mode: 'onChange',
   });
-  const [registerUser, { isLoading, isSuccess }] = useRegisterUserMutation();
+  const [registerUser, { isLoading, isSuccess, isError, error }] = useRegisterUserMutation();
 
   const onRegister: SubmitHandler<IAuthForm> = useCallback(
     async (data) => {
@@ -94,6 +95,9 @@ export const Register: FC = () => {
           Войти
         </Link>
       </Container>
+      {isError && (
+        <Popup type="error" text={(error as { data: { detail: string } })?.data?.detail || 'Что-то пошло не так :('} />
+      )}
     </Wrapper>
   );
 };
