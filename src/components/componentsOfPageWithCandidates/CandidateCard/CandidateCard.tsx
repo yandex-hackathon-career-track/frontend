@@ -11,13 +11,29 @@ import { CustomButton } from '../../../UI/CustomButton/CustomButton';
 import { Location } from 'react-router-dom';
 
 interface ICandidateCard extends ICandidate {
-  location: Location<unknown>;
+  location?: Location<unknown>;
+  isPopup?: boolean;
+  handleAddToCompareClick?: () => void;
+  btnAddToCompareText?: string;
 }
 
 export const CandidateCard: FC<ICandidateCard> = (props) => {
-  const { experience, schedule, stack, jobFormat, city, portfolio, certificates, tg, email } = props;
+  const {
+    experience,
+    schedule,
+    stack,
+    jobFormat,
+    city,
+    portfolio,
+    certificates,
+    tg,
+    email,
+    isPopup = false,
+    handleAddToCompareClick = () => null,
+    btnAddToCompareText = 'Добавить к сравнению',
+  } = props;
   return (
-    <Card className={styles.container}>
+    <Card className={isPopup ? styles['container-in-popup'] : styles.container}>
       <ProfileHeader {...props} />
       <Typography className={styles.heading}>Стаж и образование</Typography>
       <div>
@@ -95,12 +111,12 @@ export const CandidateCard: FC<ICandidateCard> = (props) => {
       </div>
       <CardActions className={styles.cardActions}>
         <CustomButton text={'Скачать резюме'} variant={'filled'} />
-        {location.pathname === '/candidates' ? (
+        {location.pathname === '/candidates' || location.pathname === '/vacancy' ? (
           <IconButton aria-label="add to favorites" sx={{ padding: 0, color: '#1D6BF3' }}>
             {props.isFavorite ? <BookmarkIcon /> : <BookmarkBorderIcon />}
           </IconButton>
         ) : (
-          <CustomButton text={'Добавить к сравнению'} variant={'outlined'} />
+          <CustomButton text={btnAddToCompareText} variant={'outlined'} onClick={handleAddToCompareClick} />
         )}
       </CardActions>
     </Card>

@@ -1,5 +1,5 @@
 import { Login, Register, Vacancy, Profile, Candidates, Favorite, NotFound, ChangePassword } from '../../pages/index';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { CssBaseline } from '@mui/material';
 import ProtectOfRoute from '../ProtectOfRoute/ProtectOfRoute';
 import AddHeader from '../componentsOfHeader/AddHeader/AddHeader';
@@ -19,8 +19,8 @@ function App() {
           <Route path="/vacancy" element={<Vacancy />} />
           <Route path="/favorite-candidates" element={<Favorite />} />
           <Route path="/candidates" element={<Candidates />} />
+          <Route index element={<Navigate to={'/candidates'} />} />
         </Route>
-        <Route index element={<ProtectOfRoute Element={Candidates} onlyLoggedIn />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

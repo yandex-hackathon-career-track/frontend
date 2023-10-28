@@ -69,7 +69,6 @@ export const Vacancy: FC = () => {
               key={i}
               onClick={() => handleClickVacancy(data)}
               style={{ cursor: 'pointer' }}
-              // совпадение по айди и это не архив
               className={`${i + 1}` === selectedVacancy?.id && !isArchive ? 'active-card-vacancy' : ''}
             >
               <VacancyCard data={data} isArchive={isArchive} />

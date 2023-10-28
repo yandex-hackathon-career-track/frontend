@@ -5,6 +5,7 @@
   width: 100%;
   padding: 20px 24px;
   gap: 4px;
+  background-color: inherit;
 }
 
 .container {
@@ -22,4 +23,12 @@
 
 .text span {
   font-weight: 500;
+}
+
+.favorite {
+  transition: opacity linear 0.2s;
+}
+
+.favorite:hover {
+  opacity: 0.7;
 }
