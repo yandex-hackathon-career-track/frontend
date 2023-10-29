@@ -1,8 +1,9 @@
 import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import Popover from '@mui/material/Popover';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import Box from '@mui/material/Box';
+import MenuItem from '@mui/material/MenuItem';
 
 export default function ButtonMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -21,10 +22,28 @@ export default function ButtonMenu() {
       <IconButton onClick={handleClick}>
         <MoreHorizIcon />
       </IconButton>
-      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        <MenuItem onClick={handleClose}>{'Редактировать'}</MenuItem>
-        <MenuItem onClick={handleClose}>{'В архив'}</MenuItem>
-      </Menu>
+      <Popover
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        <Box sx={{ p: 0 }}>
+          <MenuItem onClick={handleClose} sx={{ '&:hover': { bgcolor: '#F1F6FF' } }}>
+            {'Редактировать'}
+          </MenuItem>
+          <MenuItem onClick={handleClose} sx={{ '&:hover': { bgcolor: '#F1F6FF' } }}>
+            {'В архив'}
+          </MenuItem>
+        </Box>
+      </Popover>
     </div>
   );
 }

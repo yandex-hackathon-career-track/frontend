@@ -36,7 +36,7 @@
 .jobInfo {
   display: flex;
   flex-direction: column;
-  gap: 12px
+  gap: 12px;
 }
 
 .portfolio {
@@ -78,4 +78,13 @@
 .cardActions {
   justify-content: space-between;
   padding: 24px 0 0;
+}
+
+.container-in-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: none;
+  box-shadow: none;
+  min-width: 440px;
 }

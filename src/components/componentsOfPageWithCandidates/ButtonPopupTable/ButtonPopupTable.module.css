@@ -1,0 +1,65 @@
+.title {
+  color: #000;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.header-cell {
+  color: #000;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 120% */
+}
+
+.other-cell {
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.modal-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  max-width: 90%;
+  max-height: 90%;
+  padding: 32px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 37px;
+
+  background-color: #fff;
+  transform: translate(-50%, -50%);
+  border-radius: 6px;
+}
+
+.link {
+  display: block;
+  text-decoration: none;
+  color: #1d6bf3;
+  transition: opacity 0.2s linear;
+}
+
+.link:hover {
+  opacity: 0.7;
+}
+
+.btn-cell {
+  border: none;
+}
+
+.portfolio-cell {
+  border-bottom: none;
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

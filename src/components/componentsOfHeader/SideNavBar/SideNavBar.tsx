@@ -1,9 +1,10 @@
 import { FC, useCallback } from 'react';
 import { AppBar, Toolbar, Button, Divider } from '@mui/material';
 import HeaderLinkElement from '../HeaderLinkElement/HeaderLinkElement';
-import icons from './iconImports';
 import { useDispatch } from '../../../services/hooks';
 import { logOut } from '../../../services/features/userSlice';
+import { BookmarkIcon, ExitIcon, PersonalInfoIcon, SearchIcon, SuitCaseIcon, TgIcon } from '../../../media/icons/index';
+import styles from './SideNavBar.module.css';
 
 const SideNavBar: FC = () => {
   const dispatch = useDispatch();
@@ -27,51 +28,20 @@ const SideNavBar: FC = () => {
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '23px', width: '100%' }}>
-          <HeaderLinkElement
-            text="Мои вакансии"
-            path="/vacancy"
-            iconDef={icons.suitCase}
-            iconActive={icons.suitCaseActive}
-          />
+          <HeaderLinkElement text="Мои вакансии" path="/vacancy" Icon={SuitCaseIcon} />
           <Divider style={{ borderColor: 'rgba(121, 121, 129, 0.5)', borderWidth: '1px' }} />
-          <HeaderLinkElement
-            text="Поиск специалистов"
-            path="/candidates"
-            iconDef={icons.search}
-            iconActive={icons.searchActive}
-          />
+          <HeaderLinkElement text="Поиск специалистов" path="/candidates" Icon={SearchIcon} />
           <Divider style={{ borderColor: 'rgba(121, 121, 129, 0.5)', borderWidth: '1px' }} />
-          <HeaderLinkElement
-            text="Избранные резюме"
-            path="/favorite-candidates"
-            iconDef={icons.bookmark}
-            iconActive={icons.bookmarkActive}
-          />
+          <HeaderLinkElement text="Избранные резюме" path="/favorite-candidates" Icon={BookmarkIcon} />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
-          <Button
-            variant="outlined"
-            style={{
-              minHeight: 50,
-              fontSize: 16,
-              textTransform: 'none',
-              borderColor: '#fff',
-              color: '#fff',
-            }}
-            sx={{ m: '0 12px 40px' }}
-          >
+          <Button variant="outlined" className={styles['button-vacancy-create']}>
             Создать вакансию
           </Button>
-          <HeaderLinkElement
-            text="Компания"
-            path="/profile"
-            iconDef={icons.profile}
-            iconActive={icons.profileActive}
-            grey
-          />
-          <HeaderLinkElement text="Поддержка" iconDef={icons.tg} iconActive={icons.tgActive} grey />
-          <HeaderLinkElement text="Выйти" path="/login" iconDef={icons.exit} grey onClick={handleLogOut} />
+          <HeaderLinkElement text="Компания" path="/profile" Icon={PersonalInfoIcon} grey />
+          <HeaderLinkElement text="Поддержка" Icon={TgIcon} grey />
+          <HeaderLinkElement text="Выйти" Icon={ExitIcon} path="/login" grey onClick={handleLogOut} />
         </div>
       </Toolbar>
     </AppBar>

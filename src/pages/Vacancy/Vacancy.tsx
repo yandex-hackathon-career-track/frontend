@@ -62,14 +62,22 @@ export const Vacancy: FC = () => {
     <>
       <Typography className="page-title">Мои вакансии</Typography>
       <ButtonPanel state={vacancyPage} setState={setVacancyPage} />
-      <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexWrap: 'wrap', gap: '16px', margin: 0 }}>
+      <ul
+        style={{
+          listStyle: 'none',
+          padding: 0,
+          margin: 0,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '16px',
+        }}
+      >
         {dataCards.map((data, i) => {
           return (
             <li
               key={i}
               onClick={() => handleClickVacancy(data)}
-              style={{ cursor: 'pointer' }}
-              // совпадение по айди и это не архив
+              style={isArchive ? {} : { cursor: 'pointer' }}
               className={`${i + 1}` === selectedVacancy?.id && !isArchive ? 'active-card-vacancy' : ''}
             >
               <VacancyCard data={data} isArchive={isArchive} />

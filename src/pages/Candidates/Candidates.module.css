@@ -1,4 +1,8 @@
-.title {
+.active-card {
+  background: #f1f6ff;
+}
+
+/* .title {
   margin-bottom: 24px;
 
   color: #000;
@@ -29,4 +33,4 @@
 
 .preview {
   padding: 20px 24px;
-}
+} */

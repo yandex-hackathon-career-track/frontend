@@ -1,0 +1,21 @@
+.button-vacancy-create {
+  min-height: 50px;
+  margin: '0 12px 40px';
+
+  text-transform: none;
+  border-color: #fff;
+  background-color: #fff;
+  color: '#5A9BFF';
+
+  color: #5a9bff;
+  text-align: center;
+  font-feature-settings:
+    'clig' off,
+    'liga' off;
+
+  /* Body 1 - Medium */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 125% */
+}
