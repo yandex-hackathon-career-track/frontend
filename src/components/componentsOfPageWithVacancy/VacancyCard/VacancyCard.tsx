@@ -1,4 +1,4 @@
-import { Button, Box, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import VacancyCardField from '../VacancyCardField/VacancyCardField';
 import ButtonMenu from './ButtonMenu';

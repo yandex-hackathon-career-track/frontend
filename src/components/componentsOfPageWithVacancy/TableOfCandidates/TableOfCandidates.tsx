@@ -35,7 +35,7 @@ const VirtuosoTableComponents: VirtuosoTableComponentsType = {
 VirtuosoTableComponents.Scroller.displayName = 'VirtuosoTableScroller';
 VirtuosoTableComponents.TableBody.displayName = 'VirtuosoTableBody';
 
-export default function VirtTableOfCandidates() {
+export default function TableOfCandidates() {
   return (
     <Paper style={{ height: 800, width: '100%' }}>
       <TableVirtuoso

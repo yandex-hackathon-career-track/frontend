@@ -1,10 +1,10 @@
 export const profiles = [
   {
-    name: 'Александр Александров',
+    name: 'Александр Александров Александр Александров Александр АлександровАлександр АлександровАлександр Александров',
     isAvailable: true,
     isFavorite: false,
     lastSeen: 'Сегодня',
-    position: 'Дизайнер интерфейсов',
+    position: 'Дизайнер интерфейсов Дизайнер интерфейсов Дизайнер интерфейсовДизайнер интерфейсовДизайнер интерфейсов',
     graduated: 'октябрь 2020',
     experience: '3 года',
     stack: ['Figma', 'Adobe', 'Illustrator', 'CSS'],
@@ -14,7 +14,10 @@ export const profiles = [
     email: 'ghbdtn@ghbdtn.com',
     tg: '@ghbdtn',
     portfolio: [
-      { name: 'Behance', link: 'https://www.behance.net/' },
+      {
+        name: 'Behancesdfasdfa  sdfsdfs sdfsdf s sdfsd s sdfsdfs sdfsdf s sdfsd s sdfsdfs sdfsdf s sdfsd s sdfsdfs sdfsdf s sdfsd sdfsf sdfs',
+        link: 'https://www.behance.net/',
+      },
       { name: 'LinkedIn', link: 'https://www.linkedin.com/' },
     ],
     certificates: [
@@ -357,7 +360,7 @@ export const favorites = [
     ],
   },
   {
-    name: 'Александр Александров3',
+    name: 'Александр Александров3 Александр Александров3Александр Александров3Александр Александров3Александр Александров3Александр Александров3Александр Александров3',
     isAvailable: true,
     isFavorite: true,
     lastSeen: 'Сегодня',

@@ -5,17 +5,17 @@ import tgBlue from '../../../media/telegram-blue.svg';
 import ButtonCheckResume from './ButtonCheckResume';
 import { ICandidate } from '../../../services/types/Interfaces';
 
-const inputOptions = [
-  { label: 'Не выбрано' },
-  { label: 'Назначено собеседование' },
-  { label: 'На рассмотрении' },
-  { label: 'Отправлено тестовое' },
-  { label: 'Отказ' },
-];
-
 // IMPORTANT
 // нельзя использовать хуки. Библиотека которая рендерит табличку их не поддерживает (цикличная работа => некор. использование хуков)
 function RowTableContent(_index: number, row: ICandidate) {
+  const inputOptions = [
+    { label: 'Не выбрано' },
+    { label: 'Назначено собеседование' },
+    { label: 'На рассмотрении' },
+    { label: 'Отправлено тестовое' },
+    { label: 'Отказ' },
+  ];
+
   // TODO парсить сюда приходящее значение + check defVal
   const defVal = inputOptions.find((item: { label: string }) => item.label === 'Не выбрано') || inputOptions[0];
   const getInputBgColor = (val: string) => {
