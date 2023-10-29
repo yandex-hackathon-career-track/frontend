@@ -1,16 +1,10 @@
 import * as React from 'react';
-import Modal from '@mui/material/Modal';
 import { ICandidate } from '../../../services/types/Interfaces';
-import { CustomButton } from '../../../UI/CustomButton/CustomButton';
-
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableRow from '@mui/material/TableRow';
-import { Typography } from '@mui/material';
-import styles from './ButtonPopupTable.module.css';
 import { getCellClass, getCellContent, parametrs } from './utils';
+import { CustomButton } from '../../../UI/CustomButton/CustomButton';
+import { Table, TableBody, IconButton, TableCell, TableContainer, TableRow, Typography, Modal } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import styles from './ButtonPopupTable.module.css';
 
 interface IButtonPopupTable {
   data: ICandidate[];
@@ -36,7 +30,12 @@ export default function ButtonPopupTable({ data, handleAddToCompareClick }: IBut
       />
       <Modal open={open} onClose={handleClose} sx={{ bgcolor: 'rgba(0, 0, 0, 0.4)' }}>
         <div className={styles['modal-box']}>
-          <Typography className={styles.title}>Сравнение кандидатов</Typography>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
+            <Typography className={styles.title}>Сравнение кандидатов</Typography>
+            <IconButton sx={{ p: 0 }} onClick={() => setOpen(false)}>
+              <CloseIcon />
+            </IconButton>
+          </div>
           <TableContainer>
             <Table>
               <TableBody>

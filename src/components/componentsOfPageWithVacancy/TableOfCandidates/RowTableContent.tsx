@@ -2,20 +2,50 @@ import TableCell from '@mui/material/TableCell';
 import { Autocomplete, Avatar, IconButton, TextField, Typography } from '@mui/material';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import tgBlue from '../../../media/telegram-blue.svg';
-import { left } from '@popperjs/core';
 import ButtonCheckResume from './ButtonCheckResume';
 import { ICandidate } from '../../../services/types/Interfaces';
 
 const inputOptions = [
+  { label: 'Не выбрано' },
   { label: 'Назначено собеседование' },
   { label: 'На рассмотрении' },
-  { label: 'Не выбрано' },
   { label: 'Отправлено тестовое' },
   { label: 'Отказ' },
-  { label: 'На рассмотрении' },
 ];
 
+// IMPORTANT
+// нельзя использовать хуки. Библиотека которая рендерит табличку их не поддерживает (цикличная работа => некор. использование хуков)
 function RowTableContent(_index: number, row: ICandidate) {
+  // TODO парсить сюда приходящее значение + check defVal
+  const defVal = inputOptions.find((item: { label: string }) => item.label === 'Не выбрано') || inputOptions[0];
+  const getInputBgColor = (val: string) => {
+    /* TODO row.portfolio - не тот ключ, чтобы по нему проверять */
+    let color = row.portfolio ? '#DDE0E4' : '#ACCCFF';
+    switch (val) {
+      case 'Назначено собеседование':
+        color = ' #FFF9D3';
+        break;
+      case 'На рассмотрении':
+        color = '#C2E5CE';
+        break;
+      case 'Отправлено тестовое':
+        color = '#FFE1BD';
+        break;
+      case 'Отказ':
+        color = 'rgba(255, 191, 253, 0.87)';
+        break;
+    }
+
+    return {
+      textAlign: 'left',
+      borderRadius: '4px',
+      backgroundColor: color,
+    };
+  };
+
+  const inputValue = defVal;
+  // const inputValue = inputOptions[0];
+
   return (
     <>
       <TableCell align="center">
@@ -36,14 +66,19 @@ function RowTableContent(_index: number, row: ICandidate) {
         </div>
       </TableCell>
       <TableCell align="center">
+        {/* // TODO изменить на приходящие данные */}
         <Autocomplete
           disablePortal
           options={inputOptions}
-          renderInput={(str) => <TextField {...str} sx={{ textAlign: left }} placeholder={'Не выбрано'} />}
-          sx={{ width: 250 }}
+          defaultValue={defVal}
+          renderInput={(str) => <TextField {...str} sx={getInputBgColor(inputValue.label)} />}
+          onChange={(_, newValue) => {
+            inputValue.label = newValue?.label || 'Изменился формат данных. Поправьте код';
+          }}
         />
       </TableCell>
       <TableCell align="left">
+        {/* TODO row.portfolio - не тот ключ, чтобы по нему проверять */}
         {row.portfolio ? <ButtonCheckResume data={row} /> : <Typography>Отсутствует</Typography>}
       </TableCell>
     </>

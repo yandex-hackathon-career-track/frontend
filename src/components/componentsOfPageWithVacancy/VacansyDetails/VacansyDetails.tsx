@@ -14,6 +14,7 @@ const VacancyDetails: React.FC<IVacancyDetails> = ({ data }: IVacancyDetails) =>
     <section>
       <Typography className={styles.title} sx={{ mb: '24px' }}>{`Отклики на вакансию ${title}`}</Typography>
       <FiltersList data={data} />
+      {/* TODO нужно прокидывать данные к конкретной вакансии */}
       <VirtTableOfCandidates />
     </section>
   );

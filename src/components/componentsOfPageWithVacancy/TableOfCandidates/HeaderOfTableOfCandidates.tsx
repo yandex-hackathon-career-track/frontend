@@ -20,7 +20,7 @@ const columns: ColumnData[] = [
     dataKey: 'contacts',
   },
   {
-    width: 250,
+    width: 320,
     label: 'Статус отклика',
     dataKey: 'status',
   },

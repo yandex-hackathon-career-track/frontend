@@ -4,6 +4,7 @@ import HeaderLinkElement from '../HeaderLinkElement/HeaderLinkElement';
 import icons from './iconImports';
 import { useDispatch } from '../../../services/hooks';
 import { logOut } from '../../../services/features/userSlice';
+import styles from './SideNavBar.module.css';
 
 const SideNavBar: FC = () => {
   const dispatch = useDispatch();
@@ -50,17 +51,7 @@ const SideNavBar: FC = () => {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
-          <Button
-            variant="outlined"
-            style={{
-              minHeight: 50,
-              fontSize: 16,
-              textTransform: 'none',
-              borderColor: '#fff',
-              color: '#fff',
-            }}
-            sx={{ m: '0 12px 40px' }}
-          >
+          <Button variant="outlined" className={styles['button-vacancy-create']}>
             Создать вакансию
           </Button>
           <HeaderLinkElement

@@ -1,9 +1,8 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
+import { Box, Button, Modal, IconButton } from '@mui/material';
 import { CandidateCard } from '../../componentsOfPageWithCandidates/CandidateCard/CandidateCard';
 import { ICandidate } from '../../../services/types/Interfaces';
+import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
   position: 'absolute' as const,
@@ -12,9 +11,13 @@ const style = {
   transform: 'translate(-50%, -50%)',
   maxWidth: '534px',
   bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
+  borderRadius: '4px',
+  boxShadow: '0px 4px 6px 0px rgba(176, 190, 197, 0.20), 0px 8px 24px 0px rgba(176, 190, 197, 0.20)',
   p: '20px 24px',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '16px',
+  alignItems: 'end',
 };
 
 export default function ButtonCheckResume({ data }: { data: ICandidate }) {
@@ -29,6 +32,9 @@ export default function ButtonCheckResume({ data }: { data: ICandidate }) {
       </Button>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
+          <IconButton sx={{ p: 0 }} onClick={() => setOpen(false)}>
+            <CloseIcon />
+          </IconButton>
           <CandidateCard isPopup {...data} />
         </Box>
       </Modal>

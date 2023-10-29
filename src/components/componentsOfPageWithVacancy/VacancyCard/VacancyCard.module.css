@@ -5,3 +5,14 @@
   font-weight: 500;
   line-height: normal;
 }
+
+.btn-to-return-active {
+  color: #1d6bf3;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: none;
+
+  padding: 0;
+}
