@@ -1,18 +1,33 @@
 import { FC } from 'react';
 import { Card, CardActions, Box, Typography, IconButton } from '@mui/material';
 import { ProfileHeader } from '../ProfileHeader/ProfileHeader';
-import { ICandidate } from '../../../services/types/Interfaces';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import styles from './styles.module.css';
 import { ProfileStackField } from '../ProfileStackField/ProfileStackField';
+import { IApplicantMainInfo } from '../../../services/types/types';
 
-const CandidatePreviewCard: FC<ICandidate> = (data) => {
-  const { name, position, isAvailable, graduated, experience, stack, isFavorite, lastSeen } = data;
+const CandidatePreviewCard: FC<IApplicantMainInfo> = (data) => {
+  const {
+    first_name: name,
+    last_name,
+    direction: position,
+    status: isAvailable,
+    latest_graduation_date: graduated,
+    total_experience: experience,
+    stack,
+    is_selected: isFavorite,
+    updated_at: lastSeen,
+  } = data;
   return (
     <Card className={styles.card}>
-      <ProfileHeader name={name} position={position} lastSeen={lastSeen} isAvailable={isAvailable} />
+      <ProfileHeader
+        name={`${name} ${last_name}`}
+        position={position?.name || '-'}
+        lastSeen={lastSeen}
+        isAvailable={isAvailable.name}
+      />
       <Box className={styles.container}>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1 }}>

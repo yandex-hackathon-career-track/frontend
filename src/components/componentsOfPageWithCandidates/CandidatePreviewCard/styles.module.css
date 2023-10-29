@@ -6,6 +6,7 @@
   padding: 20px 24px;
   gap: 4px;
   background-color: inherit;
+  border-radius: 6px;
 }
 
 .container {
