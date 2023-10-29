@@ -8,6 +8,11 @@ import { ICandidate } from '../../../services/types/Interfaces';
 // IMPORTANT
 // нельзя использовать хуки. Библиотека которая рендерит табличку их не поддерживает (цикличная работа => некор. использование хуков)
 function RowTableContent(_index: number, row: ICandidate) {
+  // const inputOptions = attributes.activity_statuses.map((item) => {
+  //   return {
+  //     label: item.name,
+  //   };
+  // });
   const inputOptions = [
     { label: 'Не выбрано' },
     { label: 'Назначено собеседование' },
@@ -19,6 +24,7 @@ function RowTableContent(_index: number, row: ICandidate) {
   // TODO парсить сюда приходящее значение + check defVal
   const defVal = inputOptions.find((item: { label: string }) => item.label === 'Не выбрано') || inputOptions[0];
   const getInputBgColor = (val: string) => {
+    // TODO надо бы это вынести на бэк - цвета к статусам
     /* TODO row.portfolio - не тот ключ, чтобы по нему проверять */
     let color = row.portfolio ? '#DDE0E4' : '#ACCCFF';
     switch (val) {
@@ -43,8 +49,7 @@ function RowTableContent(_index: number, row: ICandidate) {
     };
   };
 
-  const inputValue = defVal;
-  // const inputValue = inputOptions[0];
+  const inputValue = { ...defVal };
 
   return (
     <>
@@ -70,10 +75,10 @@ function RowTableContent(_index: number, row: ICandidate) {
         <Autocomplete
           disablePortal
           options={inputOptions}
-          defaultValue={defVal}
+          value={inputValue}
           renderInput={(str) => <TextField {...str} sx={getInputBgColor(inputValue.label)} />}
           onChange={(_, newValue) => {
-            inputValue.label = newValue?.label || 'Изменился формат данных. Поправьте код';
+            inputValue.label = newValue?.label || 'Не выбрано';
           }}
         />
       </TableCell>

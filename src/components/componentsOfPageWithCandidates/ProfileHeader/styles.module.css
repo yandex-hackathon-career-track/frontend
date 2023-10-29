@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: top;
-  gap: 10px;
+  gap: 16px;
 }
 
 .name {
