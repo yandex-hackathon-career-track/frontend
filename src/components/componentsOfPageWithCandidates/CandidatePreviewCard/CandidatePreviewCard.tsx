@@ -8,7 +8,11 @@ import { IApplicantMainInfo } from '../../../services/types/types';
 
 import BtnChangeIsSelected from '../BtnChangeIsSelected/BtnChangeIsSelected';
 
-const CandidatePreviewCard: FC<IApplicantMainInfo> = (data) => {
+interface ICandidatePreviewCard extends IApplicantMainInfo {
+  handleChangeIsFavorite?: (status: boolean, id: string) => void;
+}
+
+const CandidatePreviewCard: FC<ICandidatePreviewCard> = (data) => {
   const {
     first_name: name,
     last_name,
@@ -19,6 +23,7 @@ const CandidatePreviewCard: FC<IApplicantMainInfo> = (data) => {
     stack,
     is_selected,
     updated_at: lastSeen,
+    handleChangeIsFavorite = () => null,
   } = data;
 
   return (
@@ -33,7 +38,7 @@ const CandidatePreviewCard: FC<IApplicantMainInfo> = (data) => {
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1 }}>
             <Typography className={styles.text}>
-              Опыт:<span>&nbsp;{experience}</span>
+              Опыт (мес):<span>&nbsp;{experience}</span>
             </Typography>
             <FiberManualRecordIcon fontSize="small" sx={{ width: 4 }} />
             <Typography className={styles.text}>
@@ -43,7 +48,7 @@ const CandidatePreviewCard: FC<IApplicantMainInfo> = (data) => {
           <ProfileStackField stack={stack} />
         </Box>
         <CardActions disableSpacing sx={{ alignItems: 'flex-end', padding: 0 }}>
-          <BtnChangeIsSelected is_selected={is_selected} id={data.id} />
+          <BtnChangeIsSelected is_selected={is_selected} id={data.id} handleChangeIsFavorite={handleChangeIsFavorite} />
         </CardActions>
       </Box>
     </Card>

@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import styles from './CustomButton.module.css';
 
 interface ICustomButton {
@@ -7,9 +7,16 @@ interface ICustomButton {
   variant: string;
   onClick?: () => void;
   isDisable?: boolean;
+  children?: ReactNode;
 }
 
-export const CustomButton: FC<ICustomButton> = ({ text, variant, onClick = () => null, isDisable = false }) => {
+export const CustomButton: FC<ICustomButton> = ({
+  text,
+  variant,
+  onClick = () => null,
+  isDisable = false,
+  children = null,
+}) => {
   return (
     <Button
       variant="contained"
@@ -17,6 +24,7 @@ export const CustomButton: FC<ICustomButton> = ({ text, variant, onClick = () =>
       onClick={onClick}
       disabled={isDisable}
     >
+      {children}
       {text}
     </Button>
   );

@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Card, CardActions, Typography, Link, List } from '@mui/material';
 import { ProfileHeader } from '../ProfileHeader/ProfileHeader';
 import { ProfileStackField } from '../ProfileStackField/ProfileStackField';
@@ -19,6 +19,7 @@ interface ICandidateCard extends IApplicantsToDetail {
 }
 
 export const CandidateCard: FC<ICandidateCard> = (props) => {
+  const [downloadResume] = useDownloadResumeMutation();
   const {
     total_experience: experience,
     occupation: schedule,
@@ -35,8 +36,13 @@ export const CandidateCard: FC<ICandidateCard> = (props) => {
     id,
   } = props;
 
+  // костыль
   const [isFavorite, setIsFavorite] = useState(is_selected);
-  const [downloadResume] = useDownloadResumeMutation();
+
+  // костыль
+  useEffect(() => {
+    setIsFavorite(is_selected);
+  }, [is_selected]);
   return (
     <Card className={isPopup ? styles['container-in-popup'] : styles.container}>
       <ProfileHeader
@@ -48,7 +54,7 @@ export const CandidateCard: FC<ICandidateCard> = (props) => {
       <Typography className={styles.heading}>Стаж и образование</Typography>
       <div>
         <label className={styles.text}>
-          Опыт:<span>{` ${experience}`}</span>
+          Опыт (мес):<span>{` ${experience}`}</span>
         </label>
         <ul className={styles.list}>
           {/* TODO допарсить! */}

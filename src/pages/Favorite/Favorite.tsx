@@ -8,17 +8,26 @@ import FilterDropper from '../../components/componentsOfPageWithCandidates/Filte
 import { useLocation } from 'react-router-dom';
 import ButtonPopupTable from '../../components/componentsOfPageWithCandidates/ButtonPopupTable/ButtonPopupTable';
 import { CustomButton } from '../../UI/CustomButton/CustomButton';
-import { useSelector } from '../../services/hooks';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { IApplicantMainInfo, IApplicantsToDetail } from '../../services/types/types';
-import { getObjData } from '../../utils/utils';
-import { useDownloadAllResumeMutation, useGetApplicantToIdMutation } from '../../services/query/practicumApi';
+import { getObjData, parseObjToStringForUrl as parse } from '../../utils/utils';
+import {
+  useDownloadAllResumeMutation,
+  useGetApplicantToIdMutation,
+  useGetApplicantsMutation,
+} from '../../services/query/practicumApi';
+import { setApplicants } from '../../services/features/applicantsSlice';
 import styles from './Favorite.module.css';
+import ExcelIcon from '../../media/icons/Excel';
 
 export const Favorite: FC = () => {
   const attributes = useSelector((store) => store.attributes);
-  const applicants = useSelector((store) => store.applicants);
+  const applicantsStore = useSelector((store) => store.applicants);
+
   const [getApplicantToId, { isLoading, data, isError }] = useGetApplicantToIdMutation();
+  const [getApplicants, { data: applicants, isLoading: isLoadingApplicants }] = useGetApplicantsMutation();
   const [downloadAllResume] = useDownloadAllResumeMutation();
+  const dispatch = useDispatch();
 
   const [cardToPreview, setCardToPreview] = useState<IApplicantsToDetail | null>(null);
   const [toCompareCards, setToCompareCards] = useState<IApplicantsToDetail[]>([]);
@@ -31,6 +40,10 @@ export const Favorite: FC = () => {
   };
 
   useEffect(() => {
+    void getApplicants(null);
+  }, [getApplicants]);
+
+  useEffect(() => {
     if (!isLoading && data) {
       setCardToPreview(data);
     } else if (!isLoading && isError) {
@@ -38,6 +51,18 @@ export const Favorite: FC = () => {
       console.log('Ошибка получения данных');
     }
   }, [data, isLoading, isError]);
+
+  useEffect(() => {
+    if (!isLoadingApplicants && applicants) {
+      dispatch(setApplicants(applicants as unknown as IApplicantMainInfo[]));
+    }
+  }, [applicants, dispatch, isLoadingApplicants]);
+
+  useEffect(() => {
+    void getApplicants(
+      [parse('course', cources), parse('direction', directions)].filter((item) => item !== '').join('&'),
+    );
+  }, [cources, directions, getApplicants]);
 
   const handleAddToCompare = (data: IApplicantsToDetail) => {
     const index = toCompareCards.findIndex((card) => card.id === data.id);
@@ -50,6 +75,8 @@ export const Favorite: FC = () => {
 
   const handleDownloadResume = async () => {
     const res = await downloadAllResume(null);
+    const blob = new Blob([res], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    console.log(blob);
     console.log(res);
   };
 
@@ -66,22 +93,31 @@ export const Favorite: FC = () => {
           setState={setDirections}
         />
         <FilterDropper data={getObjData(attributes.cources)} label="Курс" state={cources} setState={setCources} />
-        <CustomButton text="Выгрузить все резюме" variant="outlined" onClick={handleDownloadResume} />
+        <CustomButton text="Выгрузить все резюме" variant="contained" onClick={handleDownloadResume}>
+          <ExcelIcon />
+        </CustomButton>
         <ButtonPopupTable data={toCompareCards} handleAddToCompareClick={handleAddToCompare} />
       </div>
       <CandidatesCardsWrapper>
-        <CandidatesList>
-          {applicants.map((item, i) => (
-            <li
-              key={i}
-              onClick={() => handleCardPreview(item)}
-              style={{ cursor: 'pointer', borderRadius: '6px' }}
-              className={cardToPreview?.id === item.id ? styles['active-card'] : ''}
-            >
-              <CandidatePreviewCard {...item} />
-            </li>
-          ))}
-        </CandidatesList>
+        {!applicants ? (
+          <div>Загрузка...</div>
+        ) : (
+          <CandidatesList>
+            {[...applicantsStore].map((item, i) =>
+              item.is_selected ? (
+                <li
+                  key={i}
+                  onClick={() => handleCardPreview(item)}
+                  style={{ cursor: 'pointer', borderRadius: '6px' }}
+                  className={cardToPreview?.id === item.id ? styles['active-card'] : ''}
+                >
+                  <CandidatePreviewCard {...item} />
+                </li>
+              ) : null,
+            )}
+          </CandidatesList>
+        )}
+
         {cardToPreview ? (
           <CandidateCard
             {...cardToPreview}

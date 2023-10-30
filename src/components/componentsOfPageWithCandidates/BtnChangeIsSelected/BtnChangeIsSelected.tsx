@@ -14,9 +14,15 @@ interface IBtnChangeIsSelected {
   is_selected: boolean;
   id: string;
   setState?: (newVal: boolean) => void;
+  handleChangeIsFavorite?: (status: boolean, id: string) => void;
 }
 
-const BtnChangeIsSelected = ({ is_selected, id, setState = () => null }: IBtnChangeIsSelected) => {
+const BtnChangeIsSelected = ({
+  is_selected,
+  id,
+  setState = () => null,
+  handleChangeIsFavorite = () => null,
+}: IBtnChangeIsSelected) => {
   const [addApplicantToFavorite, { isLoading: isLoadingAdd, isSuccess: isSuccessAdd, isError: isErrorAdd }] =
     useAddApplicantToFavoriteMutation();
   const [delApplicantFromFavorite, { isLoading: isLoadingDel, isSuccess: isSuccessDel, isError: isErrorDel }] =
@@ -29,7 +35,8 @@ const BtnChangeIsSelected = ({ is_selected, id, setState = () => null }: IBtnCha
 
   useEffect(() => {
     if (!isLoadingAdd && isSuccessAdd) {
-      setState(true);
+      setState(true); //костыль сложности связи объектов
+      handleChangeIsFavorite(true, id); //костыль сложности связи объектов
       dispatch(changeFavoriteStatus({ id: id, value: true }));
     } else if (!isLoadingAdd && isErrorAdd) {
       // TODO поправить на попап
@@ -40,7 +47,8 @@ const BtnChangeIsSelected = ({ is_selected, id, setState = () => null }: IBtnCha
 
   useEffect(() => {
     if (!isLoadingDel && isSuccessDel) {
-      setState(false);
+      setState(false); //костыль сложности связи объектов
+      handleChangeIsFavorite(false, id); //костыль сложности связи объектов
       dispatch(changeFavoriteStatus({ id: id, value: false }));
     } else if (!isLoadingDel && isErrorDel) {
       // TODO поправить на попап
@@ -54,7 +62,10 @@ const BtnChangeIsSelected = ({ is_selected, id, setState = () => null }: IBtnCha
       aria-label="add to favorites"
       sx={{ padding: 0, color: '#1D6BF3' }}
       className={styles.favorite}
-      onClick={handleCardClick}
+      onClick={(e) => {
+        e.stopPropagation();
+        handleCardClick();
+      }}
     >
       {is_selected ? <BookmarkIcon /> : <BookmarkBorderIcon />}
     </IconButton>

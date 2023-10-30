@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import FilterToggle from '../FilterToggle/FilterToggle';
+// import FilterToggle from '../FilterToggle/FilterToggle';
 import FilterDropper from '../FilterDropped/FilterDropped';
 import { CustomButton } from '../../../UI/CustomButton/CustomButton';
 import { useDispatch, useSelector } from '../../../services/hooks';
@@ -15,12 +15,14 @@ const FiltersList = () => {
   const [cources, setCources] = useState<string[]>([]);
   const [cities, setCities] = useState<string[]>([]);
   const [stack, setStack] = useState<string[]>([]);
+  const [workFormat, setWorkFormat] = useState<string[]>([]);
   const attributes = useSelector((store) => store.attributes);
   const reseAllFilters = () => {
     setDirections([]);
     setCources([]);
     setCities([]);
     setStack([]);
+    setWorkFormat([]);
   };
 
   const handleSubmitClick = () => {
@@ -28,8 +30,9 @@ const FiltersList = () => {
       [
         parse('stack', stack),
         parse('city', cities),
-        parse('applicant_courses', cources),
+        parse('course', cources),
         parse('direction', directions),
+        parse('work_format', workFormat),
       ]
         .filter((item) => item !== '')
         .join('&'),
@@ -58,6 +61,27 @@ const FiltersList = () => {
       <FilterDropper data={data} label="Сортировать по умолчанию" />
       <FilterDropper data={getObjData(attributes.cities)} label="Город" state={cities} setState={setCities} />
       <FilterDropper data={getObjData(attributes.stack)} label="Стэк" state={stack} setState={setStack} />
+      <FilterDropper
+        data={getObjData(attributes.work_formats)}
+        label="Формат работы"
+        state={workFormat}
+        setState={setWorkFormat}
+      />
+      <div
+        style={{
+          display: 'flex',
+          gap: '20px',
+          flexWrap: 'wrap',
+          width: '100%',
+          justifyContent: 'end',
+        }}
+      >
+        <CustomButton text={'Сбросить фильтры'} variant={'filled'} onClick={reseAllFilters} />
+        <CustomButton text={'Применить фильтры'} variant={'filled'} onClick={handleSubmitClick} />
+      </div>
+
+      {/* трудно парсить в таком формате. */}
+      {/*
       <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', width: '100%' }}>
         {attributes.work_formats.map((item) => (
           <FilterToggle label={item.name} key={item.id} />
@@ -66,7 +90,7 @@ const FiltersList = () => {
           <CustomButton text={'Сбросить фильтры'} variant={'filled'} onClick={reseAllFilters} />
           <CustomButton text={'Применить фильтры'} variant={'filled'} onClick={handleSubmitClick} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
