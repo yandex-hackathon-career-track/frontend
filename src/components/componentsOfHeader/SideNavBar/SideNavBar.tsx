@@ -5,6 +5,7 @@ import { useDispatch } from '../../../services/hooks';
 import { logOut } from '../../../services/features/userSlice';
 import { BookmarkIcon, ExitIcon, PersonalInfoIcon, SearchIcon, SuitCaseIcon, TgIcon } from '../../../media/icons/index';
 import styles from './SideNavBar.module.css';
+import { Link } from 'react-router-dom';
 
 const SideNavBar: FC = () => {
   const dispatch = useDispatch();
@@ -36,9 +37,11 @@ const SideNavBar: FC = () => {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
-          <Button variant="outlined" className={styles['button-vacancy-create']}>
-            Создать вакансию
-          </Button>
+          <Link to={'/create-vacancy'}>
+            <Button variant="outlined" className={styles['button-vacancy-create']}>
+              Создать вакансию
+            </Button>
+          </Link>
           <HeaderLinkElement text="Компания" path="/profile" Icon={PersonalInfoIcon} grey />
           <HeaderLinkElement text="Поддержка" Icon={TgIcon} grey />
           <HeaderLinkElement text="Выйти" Icon={ExitIcon} path="/login" grey onClick={handleLogOut} />

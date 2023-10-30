@@ -4,6 +4,7 @@ import { CssBaseline } from '@mui/material';
 import ProtectOfRoute from '../ProtectOfRoute/ProtectOfRoute';
 import AddHeader from '../componentsOfHeader/AddHeader/AddHeader';
 import { ConfirmPassword } from '../../pages/ConfirmPassword/ConfirmPassword';
+import { CreateVacancy } from '../../pages/CreateVacancy/CreateVacancy';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<ProtectOfRoute Element={AddHeader} onlyLoggedIn />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/vacancy" element={<Vacancy />} />
+          <Route path="/create-vacancy" element={<CreateVacancy />} />
           <Route path="/favorite-candidates" element={<Favorite />} />
           <Route path="/candidates" element={<Candidates />} />
           <Route index element={<Navigate to={'/candidates'} />} />
