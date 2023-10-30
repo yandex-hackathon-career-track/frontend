@@ -1,4 +1,5 @@
 import { TextField } from '@mui/material';
+import styles from './VacancyDescriptionForm.module.css';
 
 type VacancyDescriptionForm = {
   description: string;
@@ -13,6 +14,7 @@ export function VacancyDescriptionForm({ description, updateFields }: VacancyDes
     <>
       <label>О вакансии</label>
       <TextField
+        className={styles.textfield}
         id="description"
         multiline
         required

@@ -33,6 +33,7 @@ export function VacancyForm({
     <>
       <label>Должность</label>
       <TextField
+        className={styles.textfield}
         value={title}
         required
         placeholder="Напишите название вашей вакансии"
@@ -67,6 +68,7 @@ export function VacancyForm({
       <label>Зарплата</label>
       <div className={styles.salaryContainer}>
         <TextField
+          className={styles.textfield}
           value={min_salary}
           required
           placeholder="От"
@@ -75,6 +77,7 @@ export function VacancyForm({
           onChange={(e) => updateFields({ min_salary: +e.target.value })}
         />
         <TextField
+          className={styles.textfield}
           value={max_salary}
           required
           placeholder="До"
