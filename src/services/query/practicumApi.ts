@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IAuthForm, ITokensResponce, TCreateUser } from '../types/types';
+import { IAllAttributes, IAuthForm, ITokensResponce, TCreateUser } from '../types/types';
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
 import { IConfirmPassword } from '../../pages/ConfirmPassword/ConfirmPassword';
 import { ICompanyState } from '../features/companySlice';
@@ -20,6 +20,7 @@ export const practicumApi = createApi({
         },
       }),
     }),
+
     getEmployer: builder.query<ICompanyState, unknown>({
       query: () => ({
         url: '/v1/employers/me',
@@ -29,6 +30,7 @@ export const practicumApi = createApi({
         },
       }),
     }),
+
     getVacancies: builder.query<string, unknown>({
       query: () => ({
         url: '/v1/employers/vacancies/',
@@ -38,6 +40,7 @@ export const practicumApi = createApi({
         },
       }),
     }),
+
     // ???
     tokenVerify: builder.mutation({
       query: () => ({
@@ -48,6 +51,7 @@ export const practicumApi = createApi({
         },
       }),
     }),
+
     registerUser: builder.mutation<TCreateUser, IAuthForm>({
       query: (user) => ({
         url: '/v1/users/',
@@ -59,6 +63,7 @@ export const practicumApi = createApi({
       }),
     }),
     // ???
+
     refreshToken: builder.mutation<string, unknown>({
       query: () => ({
         url: '/v1/auth/jwt/refresh/',
@@ -73,6 +78,7 @@ export const practicumApi = createApi({
         return data;
       },
     }),
+
     authUser: builder.mutation<ITokensResponce, IAuthForm>({
       query: (user) => ({
         url: '/v1/auth/jwt/create/',
@@ -88,6 +94,7 @@ export const practicumApi = createApi({
         return data;
       },
     }),
+
     resetPassword: builder.mutation<string, string>({
       query: (data) => ({
         url: '/v1/users/reset_password/',
@@ -97,6 +104,7 @@ export const practicumApi = createApi({
         },
       }),
     }),
+
     resetPasswordConfirm: builder.mutation<unknown, IConfirmPassword>({
       query: (data) => ({
         url: '/v1/users/reset_password/',
@@ -108,6 +116,7 @@ export const practicumApi = createApi({
         },
       }),
     }),
+
     changeEmployer: builder.mutation<ICompanyState, ICompanyState>({
       query: (data) => ({
         url: '/v1/employers/me/',
@@ -125,10 +134,44 @@ export const practicumApi = createApi({
         },
       }),
     }),
+
+    // Получить все атрибуты
+    getAllAttributes: builder.query<IAllAttributes, unknown>({
+      query: () => ({
+        url: '/v1/attributes',
+        method: 'GET',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+      }),
+    }),
+
+    // Получить всех соискателей
+    getApplicants: builder.query<IAllAttributes, unknown>({
+      query: () => ({
+        url: '/v1/applicants',
+        method: 'GET',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+      }),
+    }),
   }),
 });
 
+export const getApplicantToId = (id: string) => {
+  return fetch(`http://130.193.38.88/api/v1/applicants/${id}`, {
+    headers: {
+      Authorization: `JWT ${getCookie('access')}`,
+    },
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log('Ошибка ' + err));
+};
+
 export const {
+  useGetApplicantsQuery,
+  useGetAllAttributesQuery,
   useGetEmployerQuery,
   useGetVacanciesQuery,
   useGetUserQuery,

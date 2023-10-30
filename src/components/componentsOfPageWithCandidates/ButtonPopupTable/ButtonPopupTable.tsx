@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { ICandidate } from '../../../services/types/Interfaces';
 import { getCellClass, getCellContent, parametrs } from './utils';
 import { CustomButton } from '../../../UI/CustomButton/CustomButton';
 import { Table, TableBody, IconButton, TableCell, TableContainer, TableRow, Typography, Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './ButtonPopupTable.module.css';
+import { IApplicantsToDetail } from '../../../services/types/types';
 
 interface IButtonPopupTable {
-  data: ICandidate[];
-  handleAddToCompareClick: (dataCard: ICandidate) => void;
+  data: IApplicantsToDetail[];
+  handleAddToCompareClick: (dataCard: IApplicantsToDetail) => void;
 }
 
 export default function ButtonPopupTable({ data, handleAddToCompareClick }: IButtonPopupTable) {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, Button, Modal, IconButton } from '@mui/material';
-import { CandidateCard } from '../../componentsOfPageWithCandidates/CandidateCard/CandidateCard';
+// import { CandidateCard } from '../../componentsOfPageWithCandidates/CandidateCard/CandidateCard';
 import { ICandidate } from '../../../services/types/Interfaces';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -25,6 +25,8 @@ export default function ButtonCheckResume({ data }: { data: ICandidate }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  console.log(data);
+
   return (
     <div>
       <Button variant="text" sx={{ p: 0, textTransform: 'none' }} onClick={handleOpen}>
@@ -35,7 +37,7 @@ export default function ButtonCheckResume({ data }: { data: ICandidate }) {
           <IconButton sx={{ p: 0 }} onClick={() => setOpen(false)}>
             <CloseIcon />
           </IconButton>
-          <CandidateCard isPopup {...data} />
+          {/* <CandidateCard isPopup {...data} /> */}
         </Box>
       </Modal>
     </div>

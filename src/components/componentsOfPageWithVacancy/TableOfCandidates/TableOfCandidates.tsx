@@ -11,6 +11,8 @@ import RowTableContent from './RowTableContent';
 import HeaderOfTableOfCandidates from './HeaderOfTableOfCandidates';
 import { profiles } from '../../../utils/mockData';
 
+// import { useSelector } from '../../../services/hooks';
+
 export interface Data {
   name: string;
   resume?: boolean | string;
@@ -35,7 +37,10 @@ const VirtuosoTableComponents: VirtuosoTableComponentsType = {
 VirtuosoTableComponents.Scroller.displayName = 'VirtuosoTableScroller';
 VirtuosoTableComponents.TableBody.displayName = 'VirtuosoTableBody';
 
+// TODO не могу прокинуть статусы фильтров, подкапотный запрет на хуки. Нужно покопаться в доке
+// ! Попробовать хукать здесь, экспортировать статичные данные: список и функцию обработки, а в строке импортировать
 export default function TableOfCandidates() {
+  // const attributes = useSelector((store) => store.attributes);
   return (
     <Paper style={{ height: 800, width: '100%' }}>
       <TableVirtuoso
