@@ -25,10 +25,15 @@ export const applicantsSlice = createSlice({
       state = action.payload;
       return state;
     },
+    changeFavoriteStatus: (state, action: PayloadAction<{ id: string; value: boolean }>) => {
+      return state.map((item) =>
+        item.id === action.payload.id ? { ...item, is_selected: action.payload.value } : item,
+      );
+    },
   },
 });
 
-export const { setApplicants } = applicantsSlice.actions;
+export const { setApplicants, changeFavoriteStatus } = applicantsSlice.actions;
 export default applicantsSlice.reducer;
 
 // state.id = action.payload.id;

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IAllAttributes, IAuthForm, ITokensResponce, TCreateUser } from '../types/types';
+import { IAllAttributes, IApplicantsToDetail, IAuthForm, ITokensResponce, TCreateUser } from '../types/types';
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
 import { IConfirmPassword } from '../../pages/ConfirmPassword/ConfirmPassword';
 import { ICompanyState } from '../features/companySlice';
@@ -167,9 +167,64 @@ export const practicumApi = createApi({
     }),
 
     // Получить всех соискателей
-    getApplicants: builder.query<IAllAttributes, unknown>({
+    getApplicants: builder.mutation<IAllAttributes, string | null>({
+      query: (data) => ({
+        url: `/v1/applicants/?${data}`,
+        method: 'GET',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+      }),
+    }),
+
+    // Получить избранных соискателей
+    getFavoriteApplicants: builder.query<IAllAttributes, unknown>({
       query: () => ({
         url: '/v1/applicants',
+        method: 'GET',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+      }),
+    }),
+
+    // Получить детально кандидата по id
+    getApplicantToId: builder.mutation<IApplicantsToDetail, string>({
+      query: (id) => ({
+        url: `/v1/applicants/${id}`,
+        method: 'GET',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+      }),
+    }),
+
+    // Добавить в избранное
+    addApplicantToFavorite: builder.mutation<unknown, string>({
+      query: (id) => ({
+        url: `/v1/applicants/${id}/selected/`,
+        method: 'POST',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+      }),
+    }),
+
+    // Удалить из избранного
+    delApplicantFromFavorite: builder.mutation<unknown, string>({
+      query: (id) => ({
+        url: `/v1/applicants/${id}/selected/`,
+        method: 'DELETE',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+      }),
+    }),
+
+    // скачать резюме
+    downloadResume: builder.mutation<unknown, string>({
+      query: (id) => ({
+        url: `/v1/applicants/${id}/generate_pdf/`,
         method: 'GET',
         headers: {
           Authorization: `JWT ${getCookie('access')}`,
@@ -179,18 +234,12 @@ export const practicumApi = createApi({
   }),
 });
 
-export const getApplicantToId = (id: string) => {
-  return fetch(`http://130.193.38.88/api/v1/applicants/${id}`, {
-    headers: {
-      Authorization: `JWT ${getCookie('access')}`,
-    },
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log('Ошибка ' + err));
-};
-
 export const {
-  useGetApplicantsQuery,
+  useDownloadResumeMutation,
+  useAddApplicantToFavoriteMutation,
+  useDelApplicantFromFavoriteMutation,
+  useGetApplicantToIdMutation,
+  useGetApplicantsMutation,
   useGetAllAttributesQuery,
   useGetEmployerQuery,
   useGetVacanciesQuery,
