@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { Card, CardActions, Box, Typography, IconButton } from '@mui/material';
+import { Card, CardActions, Box, Typography } from '@mui/material';
 import { ProfileHeader } from '../ProfileHeader/ProfileHeader';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import styles from './styles.module.css';
 import { ProfileStackField } from '../ProfileStackField/ProfileStackField';
 import { IApplicantMainInfo } from '../../../services/types/types';
+
+import BtnChangeIsSelected from '../BtnChangeIsSelected/BtnChangeIsSelected';
 
 const CandidatePreviewCard: FC<IApplicantMainInfo> = (data) => {
   const {
@@ -17,9 +17,10 @@ const CandidatePreviewCard: FC<IApplicantMainInfo> = (data) => {
     latest_graduation_date: graduated,
     total_experience: experience,
     stack,
-    is_selected: isFavorite,
+    is_selected,
     updated_at: lastSeen,
   } = data;
+
   return (
     <Card className={styles.card}>
       <ProfileHeader
@@ -42,9 +43,7 @@ const CandidatePreviewCard: FC<IApplicantMainInfo> = (data) => {
           <ProfileStackField stack={stack} />
         </Box>
         <CardActions disableSpacing sx={{ alignItems: 'flex-end', padding: 0 }}>
-          <IconButton aria-label="add to favorites" sx={{ padding: 0, color: '#1D6BF3' }} className={styles.favorite}>
-            {isFavorite ? <BookmarkIcon /> : <BookmarkBorderIcon />}
-          </IconButton>
+          <BtnChangeIsSelected is_selected={is_selected} id={data.id} />
         </CardActions>
       </Box>
     </Card>

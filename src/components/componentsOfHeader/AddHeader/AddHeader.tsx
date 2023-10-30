@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import {
   useGetAllAttributesQuery,
-  useGetApplicantsQuery,
+  useGetApplicantsMutation,
   useGetEmployerQuery,
 } from '../../../services/query/practicumApi';
 import { useEffect } from 'react';
@@ -20,7 +20,11 @@ const AddHeader: React.FC = () => {
   const dispatch = useDispatch();
   const { isFetching, data } = useGetEmployerQuery('');
   const { data: allAttributes, isLoading: isLoadingAllAttributes } = useGetAllAttributesQuery(null);
-  const { data: applicants, isLoading: isLoadingApplicants } = useGetApplicantsQuery(null);
+  const [getApplicants, { data: applicants, isLoading: isLoadingApplicants }] = useGetApplicantsMutation();
+
+  useEffect(() => {
+    void getApplicants(null);
+  }, [getApplicants]);
 
   useEffect(() => {
     if (!isFetching && data) {

@@ -1,16 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FilterToggle from '../FilterToggle/FilterToggle';
 import FilterDropper from '../FilterDropped/FilterDropped';
 import { CustomButton } from '../../../UI/CustomButton/CustomButton';
-import { useSelector } from '../../../services/hooks';
+import { useDispatch, useSelector } from '../../../services/hooks';
+import { getObjData, parseObjToStringForUrl as parse } from '../../../utils/utils';
+import { useGetApplicantsMutation } from '../../../services/query/practicumApi';
+import { setApplicants } from '../../../services/features/applicantsSlice';
+import { IApplicantMainInfo } from '../../../services/types/types';
 
-const FiltersList: React.FC = () => {
-  const attributes = useSelector((store) => store.attributes);
+const FiltersList = () => {
+  const dispatch = useDispatch();
+  const [getApplicants, { data: applicantsNew, isLoading: isLoadingApplicants }] = useGetApplicantsMutation();
   const [directions, setDirections] = useState<string[]>([]);
   const [cources, setCources] = useState<string[]>([]);
   const [cities, setCities] = useState<string[]>([]);
   const [stack, setStack] = useState<string[]>([]);
-
+  const attributes = useSelector((store) => store.attributes);
   const reseAllFilters = () => {
     setDirections([]);
     setCources([]);
@@ -18,9 +23,24 @@ const FiltersList: React.FC = () => {
     setStack([]);
   };
 
-  const getObjData = (ar: { id: number; name: string }[]) => {
-    return ar.map((item) => item.name);
+  const handleSubmitClick = () => {
+    void getApplicants(
+      [
+        parse('stack', stack),
+        parse('city', cities),
+        parse('applicant_courses', cources),
+        parse('direction', directions),
+      ]
+        .filter((item) => item !== '')
+        .join('&'),
+    );
   };
+
+  useEffect(() => {
+    if (!isLoadingApplicants && applicantsNew) {
+      dispatch(setApplicants(applicantsNew as unknown as IApplicantMainInfo[]));
+    }
+  }, [applicantsNew, dispatch, isLoadingApplicants]);
 
   const data = ['var1', 'var2', 'var3', 'var4', 'var5', 'var6'];
   return (
@@ -44,7 +64,7 @@ const FiltersList: React.FC = () => {
         ))}
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
           <CustomButton text={'Сбросить фильтры'} variant={'filled'} onClick={reseAllFilters} />
-          <CustomButton text={'Применить фильтры'} variant={'filled'} />
+          <CustomButton text={'Применить фильтры'} variant={'filled'} onClick={handleSubmitClick} />
         </div>
       </div>
     </div>

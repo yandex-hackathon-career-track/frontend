@@ -1,14 +1,14 @@
-import { FC } from 'react';
-import { Card, CardActions, Typography, IconButton, Link, List } from '@mui/material';
+import { FC, useState } from 'react';
+import { Card, CardActions, Typography, Link, List } from '@mui/material';
 import { ProfileHeader } from '../ProfileHeader/ProfileHeader';
 import { ProfileStackField } from '../ProfileStackField/ProfileStackField';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import styles from './styles.module.css';
 import porfolioIcon from '../../../media/portfolio-icon.svg';
 import { CustomButton } from '../../../UI/CustomButton/CustomButton';
 import { Location } from 'react-router-dom';
 import { IApplicantsToDetail } from '../../../services/types/types';
+import BtnChangeIsSelected from '../BtnChangeIsSelected/BtnChangeIsSelected';
+import { useDownloadResumeMutation } from '../../../services/query/practicumApi';
 
 interface ICandidateCard extends IApplicantsToDetail {
   location?: Location<unknown>;
@@ -31,7 +31,12 @@ export const CandidateCard: FC<ICandidateCard> = (props) => {
     certificates = [],
     handleAddToCompareClick = () => null,
     btnAddToCompareText = 'Добавить к сравнению',
+    is_selected,
+    id,
   } = props;
+
+  const [isFavorite, setIsFavorite] = useState(is_selected);
+  const [downloadResume] = useDownloadResumeMutation();
   return (
     <Card className={isPopup ? styles['container-in-popup'] : styles.container}>
       <ProfileHeader
@@ -116,11 +121,9 @@ export const CandidateCard: FC<ICandidateCard> = (props) => {
         </List>
       </div>
       <CardActions className={styles.cardActions}>
-        <CustomButton text={'Скачать резюме'} variant={'filled'} />
+        <CustomButton text={'Скачать резюме'} variant={'filled'} onClick={() => void downloadResume(id)} />
         {location.pathname === '/candidates' || location.pathname === '/vacancy' ? (
-          <IconButton aria-label="add to favorites" sx={{ padding: 0, color: '#1D6BF3' }}>
-            {props.is_selected ? <BookmarkIcon /> : <BookmarkBorderIcon />}
-          </IconButton>
+          <BtnChangeIsSelected is_selected={isFavorite} id={id} setState={setIsFavorite} />
         ) : (
           <CustomButton text={btnAddToCompareText} variant={'outlined'} onClick={handleAddToCompareClick} />
         )}

@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
 import { CandidateCard } from '../../components/componentsOfPageWithCandidates/CandidateCard/CandidateCard';
 import CandidatePreviewCard from '../../components/componentsOfPageWithCandidates/CandidatePreviewCard/CandidatePreviewCard';
@@ -7,25 +7,37 @@ import { CandidatesList } from '../../components/componentsOfPageWithCandidates/
 import FilterDropper from '../../components/componentsOfPageWithCandidates/FilterDropped/FilterDropped';
 import { useLocation } from 'react-router-dom';
 import ButtonPopupTable from '../../components/componentsOfPageWithCandidates/ButtonPopupTable/ButtonPopupTable';
-import styles from './Favorite.module.css';
 import { CustomButton } from '../../UI/CustomButton/CustomButton';
 import { useSelector } from '../../services/hooks';
 import { IApplicantMainInfo, IApplicantsToDetail } from '../../services/types/types';
-import { getApplicantToId } from '../../services/query/practicumApi';
+import { getObjData } from '../../utils/utils';
+import { useDownloadAllResumeMutation, useGetApplicantToIdMutation } from '../../services/query/practicumApi';
+import styles from './Favorite.module.css';
 
 export const Favorite: FC = () => {
+  const attributes = useSelector((store) => store.attributes);
   const applicants = useSelector((store) => store.applicants);
+  const [getApplicantToId, { isLoading, data, isError }] = useGetApplicantToIdMutation();
+  const [downloadAllResume] = useDownloadAllResumeMutation();
+
   const [cardToPreview, setCardToPreview] = useState<IApplicantsToDetail | null>(null);
   const [toCompareCards, setToCompareCards] = useState<IApplicantsToDetail[]>([]);
+  const [directions, setDirections] = useState<string[]>([]);
+  const [cources, setCources] = useState<string[]>([]);
   const location = useLocation();
 
   const handleCardPreview = (card: IApplicantMainInfo) => {
-    getApplicantToId(card.id)
-      .then((data) => {
-        setCardToPreview(data as IApplicantsToDetail);
-      })
-      .catch((err) => console.log('Ошибка ' + err));
+    void getApplicantToId(card.id);
   };
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      setCardToPreview(data);
+    } else if (!isLoading && isError) {
+      // TODO поправить на попап
+      console.log('Ошибка получения данных');
+    }
+  }, [data, isLoading, isError]);
 
   const handleAddToCompare = (data: IApplicantsToDetail) => {
     const index = toCompareCards.findIndex((card) => card.id === data.id);
@@ -36,20 +48,26 @@ export const Favorite: FC = () => {
     }
   };
 
-  const data = ['var1', 'var2', 'var3', 'var4', 'var5', 'var6'];
+  const handleDownloadResume = async () => {
+    const res = await downloadAllResume(null);
+    console.log(res);
+  };
+
   return (
     <>
       <Typography component={'h1'} className={'page-title'}>
         Избранные резюме
       </Typography>
       <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: 8 }}>
-        <FilterDropper data={data} label="Дизайн" />
-        <FilterDropper data={data} label="Дизайнер интерфейсов" />
+        <FilterDropper
+          data={getObjData(attributes.directions)}
+          label="Направление"
+          state={directions}
+          setState={setDirections}
+        />
+        <FilterDropper data={getObjData(attributes.cources)} label="Курс" state={cources} setState={setCources} />
+        <CustomButton text="Выгрузить все резюме" variant="outlined" onClick={handleDownloadResume} />
         <ButtonPopupTable data={toCompareCards} handleAddToCompareClick={handleAddToCompare} />
-        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-          <CustomButton text="Выгрузить всех избранных кандидатов в MS Excel" variant="outlined" />
-          <CustomButton text="Выгрузить сравниваемых кандидатов в MS Excel" variant="outlined" />
-        </div>
       </div>
       <CandidatesCardsWrapper>
         <CandidatesList>
