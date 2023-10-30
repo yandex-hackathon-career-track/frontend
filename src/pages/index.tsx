@@ -6,5 +6,18 @@ import { Profile } from './Profile/Profile';
 import { Vacancy } from './Vacancy/Vacancy';
 import { Candidates } from './Candidates/Candidates';
 import { ChangePassword } from './ChangePassword/ChangePassword';
+import { CreateVacancy } from './CreateVacancy/CreateVacancy';
+import { ConfirmPassword } from './ConfirmPassword/ConfirmPassword';
 
-export { Register, Login, Favorite, NotFound, Profile, Vacancy, Candidates, ChangePassword };
+export {
+  Register,
+  Login,
+  Favorite,
+  NotFound,
+  Profile,
+  Vacancy,
+  Candidates,
+  ChangePassword,
+  CreateVacancy,
+  ConfirmPassword,
+};
