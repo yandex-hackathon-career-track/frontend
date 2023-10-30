@@ -211,22 +211,10 @@ export const practicumApi = createApi({
         },
       }),
     }),
-
-    // скачать все избранные резюме
-    downloadAllResume: builder.mutation<unknown, unknown>({
-      query: () => ({
-        url: `/v1/applicants/download_report/`,
-        method: 'GET',
-        headers: {
-          Authorization: `JWT ${getCookie('access')}`,
-        },
-      }),
-    }),
   }),
 });
 
 export const {
-  useDownloadAllResumeMutation,
   useDownloadResumeMutation,
   useAddApplicantToFavoriteMutation,
   useDelApplicantFromFavoriteMutation,

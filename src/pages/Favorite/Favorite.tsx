@@ -11,14 +11,12 @@ import { CustomButton } from '../../UI/CustomButton/CustomButton';
 import { useDispatch, useSelector } from '../../services/hooks';
 import { IApplicantMainInfo, IApplicantsToDetail } from '../../services/types/types';
 import { getObjData, parseObjToStringForUrl as parse } from '../../utils/utils';
-import {
-  useDownloadAllResumeMutation,
-  useGetApplicantToIdMutation,
-  useGetApplicantsMutation,
-} from '../../services/query/practicumApi';
+import { useGetApplicantToIdMutation, useGetApplicantsMutation } from '../../services/query/practicumApi';
 import { setApplicants } from '../../services/features/applicantsSlice';
 import styles from './Favorite.module.css';
 import ExcelIcon from '../../media/icons/Excel';
+import { saveAs } from 'file-saver';
+import { getCookie } from '../../utils/cookie';
 
 export const Favorite: FC = () => {
   const attributes = useSelector((store) => store.attributes);
@@ -26,7 +24,6 @@ export const Favorite: FC = () => {
 
   const [getApplicantToId, { isLoading, data, isError }] = useGetApplicantToIdMutation();
   const [getApplicants, { data: applicants, isLoading: isLoadingApplicants }] = useGetApplicantsMutation();
-  const [downloadAllResume] = useDownloadAllResumeMutation();
   const dispatch = useDispatch();
 
   const [cardToPreview, setCardToPreview] = useState<IApplicantsToDetail | null>(null);
@@ -74,10 +71,18 @@ export const Favorite: FC = () => {
   };
 
   const handleDownloadResume = async () => {
-    const res = await downloadAllResume(null);
-    const blob = new Blob([res], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-    console.log(blob);
-    console.log(res);
+    const res = await fetch('http://130.193.38.88/api/v1/applicants/download_report/', {
+      headers: {
+        Authorization: `JWT ${getCookie('access')}`,
+      },
+    }).catch((err) => console.log('Ошибка ' + err));
+
+    const blob = await (res as Response).blob();
+    const blobExcel = new Blob([blob], {
+      type: 'application/vnd.ms-excel',
+    });
+
+    saveAs(blobExcel, 'resums.xlsx');
   };
 
   return (
@@ -93,7 +98,7 @@ export const Favorite: FC = () => {
           setState={setDirections}
         />
         <FilterDropper data={getObjData(attributes.cources)} label="Курс" state={cources} setState={setCources} />
-        <CustomButton text="Выгрузить все резюме" variant="contained" onClick={handleDownloadResume}>
+        <CustomButton text="Выгрузить все резюме" variant="contained" onClick={() => void handleDownloadResume()}>
           <ExcelIcon />
         </CustomButton>
         <ButtonPopupTable data={toCompareCards} handleAddToCompareClick={handleAddToCompare} />
