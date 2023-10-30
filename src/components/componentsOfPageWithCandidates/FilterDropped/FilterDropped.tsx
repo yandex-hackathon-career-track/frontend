@@ -5,6 +5,7 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import styles from './FilterDropped.module.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ChangeEvent } from 'react';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -12,9 +13,13 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 interface IFilterDropper {
   data: string[];
   label: string;
+  isRequired?: boolean;
+  isMultiply?: boolean;
+  value?: string;
+  handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function FilterDropper({ data, label }: IFilterDropper) {
+export default function FilterDropper({ data, label, isMultiply, isRequired, handleChange }: IFilterDropper) {
   const theme = createTheme({
     components: {
       MuiOutlinedInput: {
@@ -35,7 +40,8 @@ export default function FilterDropper({ data, label }: IFilterDropper) {
   return (
     <ThemeProvider theme={theme}>
       <Autocomplete
-        multiple
+        aria-required={isRequired}
+        multiple={isMultiply}
         options={data}
         disableCloseOnSelect
         getOptionLabel={(option) => option}
@@ -47,6 +53,7 @@ export default function FilterDropper({ data, label }: IFilterDropper) {
         )}
         className={styles.filter}
         renderInput={(params) => <TextField {...params} label={label} placeholder="" />}
+        onChange={() => handleChange}
       />
     </ThemeProvider>
   );
