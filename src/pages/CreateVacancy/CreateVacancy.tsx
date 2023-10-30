@@ -1,49 +1,56 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC, FormEvent, useState } from 'react';
 import { Typography } from '@mui/material';
 import { useMultistepForm } from '../../services/hooks/useMultistepForm';
 import { VacancyForm } from '../../components/VacancyForm/VacancyForm';
 import { VacancyDescriptionForm } from '../../components/VacancyDescriptionForm/VacancyDescriptionForm';
+import { useCreateVacancyMutation } from '../../services/query/practicumApi';
+import { Popup } from '../../components/Popup/Popup';
+import { ERROR_TEXT, SUCCESS_TEXT } from '../../utils/constants';
 import styles from './CreateVacancy.module.css';
+import { useSelector } from '../../services/hooks';
+
+export type TFormData = {
+  title: string;
+  attendance: number;
+  occupation: number;
+  description: string;
+  min_salary: number;
+  max_salary: number;
+  city: number;
+};
+
+const INITIAL_DATA: TFormData = {
+  title: '',
+  attendance: 0,
+  occupation: 0,
+  description: '',
+  min_salary: 0,
+  max_salary: 0,
+  city: 0,
+};
 
 export const CreateVacancy: FC = () => {
-  type FormData = {
-    title: string;
-    is_published: boolean;
-    attendance: string;
-    occupation: string;
-    description: string;
-    min_salary: number | string;
-    max_salary: number | string;
-    city: string;
-  };
-
-  const INITIAL_DATA: FormData = {
-    title: '',
-    is_published: true,
-    attendance: '',
-    occupation: '',
-    description: '',
-    min_salary: '',
-    max_salary: '',
-    city: '',
-  };
-
+  const [createVacancy, { isSuccess, isError }] = useCreateVacancyMutation();
   const [data, setData] = useState(INITIAL_DATA);
 
-  function updateFields(fields: Partial<FormData>) {
+  const selectOptions = useSelector((store) => store.attributes);
+
+  function updateFields(fields: Partial<TFormData>) {
     setData((prev) => {
       return { ...prev, ...fields };
     });
   }
   const { step, isFirstStep, isLastStep, back, next } = useMultistepForm([
-    <VacancyForm {...data} updateFields={updateFields} key={1} />,
+    <VacancyForm {...data} options={selectOptions} updateFields={updateFields} key={1} />,
     <VacancyDescriptionForm {...data} updateFields={updateFields} key={2} />,
   ]);
 
-  function onSubmit(e: FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (!isLastStep) return next();
     console.log(data);
+    await createVacancy(data);
   }
   return (
     <>
@@ -77,6 +84,8 @@ export const CreateVacancy: FC = () => {
           </div>
         </div>
       </form>
+      {isError && <Popup type="error" text={ERROR_TEXT.onSaveError} />}
+      {isSuccess && <Popup type="done" text={SUCCESS_TEXT.onSave} />}
     </>
   );
 };

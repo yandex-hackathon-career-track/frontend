@@ -1,34 +1,14 @@
-import { TextField } from '@mui/material';
-import FilterDropper from '../componentsOfPageWithCandidates/FilterDropped/FilterDropped';
+import { Autocomplete, Checkbox, TextField } from '@mui/material';
+import { IAllAttributes } from '../../services/types/types';
 import styles from './VacancyForm.module.css';
+import { TFormData } from '../../pages/CreateVacancy/CreateVacancy';
 
-type VacancyData = {
-  title: string;
-  is_published: boolean;
-  attendance: string;
-  occupation: string;
-  min_salary: number | string;
-  max_salary: number | string;
-  city: string;
+type VacancyFormProps = TFormData & {
+  updateFields: (fields: Partial<TFormData>) => void;
+  options: IAllAttributes;
 };
 
-type VacancyFormProps = VacancyData & {
-  updateFields: (fields: Partial<VacancyData>) => void;
-};
-
-const attendanceData = ['В офисе', 'Удаленно', 'Гидрид'];
-const cityData = ['Москва', 'Токио', 'Берлин'];
-const occupationData = ['Полный день', 'Неполный день', 'Гибрид'];
-
-export function VacancyForm({
-  title,
-  attendance,
-  occupation,
-  min_salary,
-  max_salary,
-  city,
-  updateFields,
-}: VacancyFormProps) {
+export function VacancyForm({ title, min_salary, max_salary, options, updateFields }: VacancyFormProps) {
   return (
     <>
       <label>Должность</label>
@@ -42,28 +22,43 @@ export function VacancyForm({
         onChange={(e) => updateFields({ title: e.target.value })}
       />
       <label>Формат работы</label>
-      <FilterDropper
-        data={attendanceData}
-        value={attendance}
-        isRequired={true}
-        isMultiply={true}
-        label="Выберите формат"
-        handleChange={(e) => updateFields({ attendance: e.target.value })}
+      <Autocomplete
+        options={options.work_formats}
+        getOptionLabel={(option) => option.name}
+        renderOption={(props, option, { selected }) => (
+          <li {...props} key={option.id}>
+            <Checkbox style={{ marginRight: 8 }} checked={selected} />
+            {option.name}
+          </li>
+        )}
+        renderInput={(params) => <TextField {...params} placeholder={`${options.work_formats[0].name}`} />}
+        onChange={(_, newValue) => updateFields({ attendance: newValue?.id })}
       />
       <label>Локация</label>
-      <FilterDropper
-        data={cityData}
-        value={city}
-        label="Выберите город"
-        handleChange={(e) => updateFields({ city: e.target.value })}
+      <Autocomplete
+        options={options.cities}
+        getOptionLabel={(option) => option.name}
+        renderOption={(props, option, { selected }) => (
+          <li {...props} key={option.id}>
+            <Checkbox style={{ marginRight: 8 }} checked={selected} />
+            {option.name}
+          </li>
+        )}
+        renderInput={(params) => <TextField {...params} placeholder={`${options.cities[0].name}`} />}
+        onChange={(_, newValue) => updateFields({ city: newValue?.id })}
       />
       <label>Занятость</label>
-      <FilterDropper
-        data={occupationData}
-        value={occupation}
-        isMultiply={true}
-        label="Выберите тип занятости"
-        handleChange={(e) => updateFields({ occupation: e.target.value })}
+      <Autocomplete
+        options={options.occupations}
+        getOptionLabel={(option) => option.name}
+        renderOption={(props, option, { selected }) => (
+          <li {...props} key={option.id}>
+            <Checkbox style={{ marginRight: 8 }} checked={selected} />
+            {option.name}
+          </li>
+        )}
+        renderInput={(params) => <TextField {...params} placeholder={`${options.occupations[0].name}`} />}
+        onChange={(_, newValue) => updateFields({ occupation: newValue?.id })}
       />
       <label>Зарплата</label>
       <div className={styles.salaryContainer}>

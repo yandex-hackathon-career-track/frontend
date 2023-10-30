@@ -3,6 +3,7 @@ import { IAllAttributes, IAuthForm, ITokensResponce, TCreateUser } from '../type
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
 import { IConfirmPassword } from '../../pages/ConfirmPassword/ConfirmPassword';
 import { ICompanyState } from '../features/companySlice';
+import { ICreateVacancy } from '../types/Interfaces';
 
 export const practicumApi = createApi({
   reducerPath: 'practicumApi',
@@ -37,6 +38,25 @@ export const practicumApi = createApi({
         method: 'GET',
         headers: {
           Authorization: `JWT ${getCookie('access')}`,
+        },
+      }),
+    }),
+
+    createVacancy: builder.mutation<unknown, ICreateVacancy>({
+      query: (vacancy) => ({
+        url: '/v1/employers/vacancies/',
+        method: 'POST',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+        body: {
+          title: vacancy.title,
+          attendance: vacancy.attendance,
+          occupation: vacancy.occupation,
+          description: vacancy.description,
+          min_salary: vacancy.min_salary,
+          max_salary: vacancy.max_salary,
+          city: vacancy.city,
         },
       }),
     }),
@@ -182,4 +202,5 @@ export const {
   useResetPasswordMutation,
   useResetPasswordConfirmMutation,
   useChangeEmployerMutation,
+  useCreateVacancyMutation,
 } = practicumApi;

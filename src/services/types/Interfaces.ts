@@ -47,3 +47,13 @@ export interface IdataCardVacancy {
 }
 
 export interface IdataDetailsCardVacancy extends IdataCardVacancy {}
+
+export interface ICreateVacancy {
+  title: string;
+  attendance: number;
+  occupation: number;
+  description: string;
+  min_salary: number;
+  max_salary: number;
+  city: number;
+}

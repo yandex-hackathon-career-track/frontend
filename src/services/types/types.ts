@@ -12,24 +12,27 @@ export interface ITokensResponce {
   refresh: string;
 }
 
+type TFieldObject = {
+  id: number;
+  name: string;
+};
+
+type TCourses = TFieldObject & {
+  direction: {
+    id: number;
+    name: string;
+  };
+};
+
 export interface IAllAttributes {
-  directions: [{ id: number; name: string }];
-  cources: [
-    {
-      id: number;
-      name: string;
-      direction: {
-        id: number;
-        name: string;
-      };
-    },
-  ];
-  stack: [{ id: number; name: string }];
-  work_formats: [{ id: number; name: string }];
-  occupations: [{ id: number; name: string }];
-  cities: [{ id: number; name: string }];
-  activity_statuses: [{ id: number; name: string }];
-  review_statuses: [{ id: number; name: string }];
+  directions: TFieldObject[];
+  cources: TCourses[];
+  stack: TFieldObject[];
+  work_formats: TFieldObject[];
+  occupations: TFieldObject[];
+  cities: TFieldObject[];
+  activity_statuses: TFieldObject[];
+  review_statuses: TFieldObject[];
 }
 
 interface IApplicant {

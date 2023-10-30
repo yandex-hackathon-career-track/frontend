@@ -1,12 +1,13 @@
 import { TextField } from '@mui/material';
 import styles from './VacancyDescriptionForm.module.css';
+import { TFormData } from '../../pages/CreateVacancy/CreateVacancy';
 
 type VacancyDescriptionForm = {
   description: string;
 };
 
 type VacancyDescriptionFormProps = VacancyDescriptionForm & {
-  updateFields: (fields: Partial<VacancyDescriptionForm>) => void;
+  updateFields: (fields: Partial<TFormData>) => void;
 };
 
 export function VacancyDescriptionForm({ description, updateFields }: VacancyDescriptionFormProps) {
