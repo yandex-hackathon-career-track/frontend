@@ -9,6 +9,7 @@ import { setCompanyData } from '../../../services/features/companySlice';
 import { Wrapper } from '../../Wrapper/Wrapper';
 import styles from './styles.module.css';
 import { setAllAttributes } from '../../../services/features/attributesSlice';
+import Loader from '../../Loader/Loader';
 
 const AddHeader: React.FC = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const AddHeader: React.FC = () => {
       <Grid xs={true}>
         <Wrapper isAuth>
           {isFetching || isLoadingAllAttributes ? (
-            <div>Загрузка...</div>
+            <Loader />
           ) : (
             <>
               <Outlet />

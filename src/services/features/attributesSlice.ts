@@ -17,7 +17,6 @@ export const allAttributesSlice = createSlice({
   initialState,
   reducers: {
     setAllAttributes: (state, action: PayloadAction<IAllAttributes>) => {
-      console.log(action.payload);
       state.directions = action.payload.directions;
       state.cources = action.payload.cources;
       state.stack = action.payload.stack;

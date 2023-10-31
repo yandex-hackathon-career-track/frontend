@@ -7,7 +7,7 @@ import { CandidatesList } from '../../components/componentsOfPageWithCandidates/
 import FilterDropper from '../../components/componentsOfPageWithCandidates/FilterDropped/FilterDropped';
 import { useLocation } from 'react-router-dom';
 import ButtonPopupTable from '../../components/componentsOfPageWithCandidates/ButtonPopupTable/ButtonPopupTable';
-import { CustomButton } from '../../UI/CustomButton/CustomButton';
+import { CustomButton } from '../../components/CustomButton/CustomButton';
 import { useDispatch, useSelector } from '../../services/hooks';
 import { IApplicantMainInfo, IApplicantsToDetail } from '../../services/types/types';
 import { getObjData, parseObjToStringForUrl as parse } from '../../utils/utils';

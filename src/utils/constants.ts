@@ -28,7 +28,16 @@ export const registerSettings: IAuthSettings = {
   path: '/signin',
 };
 
-export const ERROR_TEXT = {
+type TErrorText = {
+  onSaveError: string;
+  onLoginError: string;
+  onSearchError: string;
+  onConnectionError: string;
+  onDownloadError: string;
+  onUploadError: string;
+};
+
+export const ERROR_TEXT: TErrorText = {
   onSaveError: 'Ошибка сохранения Попробуй сохранить ещё раз',
   onLoginError: 'Не удается войти в аккаунт Проверь логин и пароль',
   onSearchError: 'Поиск не дал результатов Попробуй ввести другие данные',
@@ -37,7 +46,15 @@ export const ERROR_TEXT = {
   onUploadError: 'Не удалось загрузить документ Попробуй загрузить ещё раз',
 };
 
-export const SUCCESS_TEXT = {
+type TSuccessText = {
+  onUpload: string;
+  onCompare: string;
+  onBookmark: string;
+  onDownload: string;
+  onSave: string;
+};
+
+export const SUCCESS_TEXT: TSuccessText = {
   onUpload: 'Документ успешно загружен Осталось только дождаться проверки',
   onCompare: 'Кандидат добавлен к сравнению И выбери лучшего',
   onBookmark: 'Резюме добавлено в избранное Теперь оно точно не потеряется',

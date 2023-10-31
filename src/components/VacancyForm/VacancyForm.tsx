@@ -23,7 +23,9 @@ export function VacancyForm({ title, min_salary, max_salary, options, updateFiel
       />
       <label>Формат работы</label>
       <Autocomplete
+        className={styles.textfield}
         options={options.work_formats}
+        noOptionsText={'Ничего не найдено'}
         getOptionLabel={(option) => option.name}
         renderOption={(props, option, { selected }) => (
           <li {...props} key={option.id}>
@@ -36,7 +38,9 @@ export function VacancyForm({ title, min_salary, max_salary, options, updateFiel
       />
       <label>Локация</label>
       <Autocomplete
+        className={styles.textfield}
         options={options.cities}
+        noOptionsText={'Ничего не найдено'}
         getOptionLabel={(option) => option.name}
         renderOption={(props, option, { selected }) => (
           <li {...props} key={option.id}>
@@ -49,6 +53,8 @@ export function VacancyForm({ title, min_salary, max_salary, options, updateFiel
       />
       <label>Занятость</label>
       <Autocomplete
+        className={styles.textfield}
+        noOptionsText={'Ничего не найдено'}
         options={options.occupations}
         getOptionLabel={(option) => option.name}
         renderOption={(props, option, { selected }) => (
@@ -64,7 +70,7 @@ export function VacancyForm({ title, min_salary, max_salary, options, updateFiel
       <div className={styles.salaryContainer}>
         <TextField
           className={styles.textfield}
-          value={min_salary}
+          value={min_salary !== 0 ? min_salary : ''}
           required
           placeholder="От"
           type="number"
@@ -73,7 +79,7 @@ export function VacancyForm({ title, min_salary, max_salary, options, updateFiel
         />
         <TextField
           className={styles.textfield}
-          value={max_salary}
+          value={max_salary !== 0 ? max_salary : ''}
           required
           placeholder="До"
           type="number"

@@ -4,7 +4,7 @@ import { ProfileHeader } from '../ProfileHeader/ProfileHeader';
 import { ProfileStackField } from '../ProfileStackField/ProfileStackField';
 import styles from './styles.module.css';
 import porfolioIcon from '../../../media/portfolio-icon.svg';
-import { CustomButton } from '../../../UI/CustomButton/CustomButton';
+import { CustomButton } from '../../CustomButton/CustomButton';
 import { Location } from 'react-router-dom';
 import { IApplicantsToDetail } from '../../../services/types/types';
 import BtnChangeIsSelected from '../BtnChangeIsSelected/BtnChangeIsSelected';

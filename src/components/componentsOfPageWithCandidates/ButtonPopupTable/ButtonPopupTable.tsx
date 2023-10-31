@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { getCellClass, getCellContent, parametrs } from './utils';
-import { CustomButton } from '../../../UI/CustomButton/CustomButton';
+import { CustomButton } from '../../CustomButton/CustomButton';
 import { Table, TableBody, IconButton, TableCell, TableContainer, TableRow, Typography, Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './ButtonPopupTable.module.css';

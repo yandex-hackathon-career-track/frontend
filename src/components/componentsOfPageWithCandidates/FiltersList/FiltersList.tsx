@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import FilterDropper from '../FilterDropped/FilterDropped';
-import { CustomButton } from '../../../UI/CustomButton/CustomButton';
+import { CustomButton } from '../../CustomButton/CustomButton';
 import { useDispatch, useSelector } from '../../../services/hooks';
 import { getObjData, parseObjToStringForUrl as parse } from '../../../utils/utils';
 import { useGetApplicantsMutation } from '../../../services/query/practicumApi';
