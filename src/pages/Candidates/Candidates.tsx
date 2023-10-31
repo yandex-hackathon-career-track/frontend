@@ -12,12 +12,15 @@ import { useGetApplicantToIdMutation, useGetApplicantsMutation } from '../../ser
 import styles from './Candidates.module.css';
 import { setApplicants } from '../../services/features/applicantsSlice';
 import Loader from '../../components/Loader/Loader';
+import { Popup } from '../../components/Popup/Popup';
+import { ERROR_TEXT } from '../../utils/constants';
 
 export const Candidates: FC = () => {
   const applicantsStore = useSelector((store) => store.applicants);
   const dispatch = useDispatch();
   const [getApplicantToId, { isLoading, data, isError }] = useGetApplicantToIdMutation();
-  const [getApplicants, { data: applicants, isLoading: isLoadingApplicants }] = useGetApplicantsMutation();
+  const [getApplicants, { data: applicants, isLoading: isLoadingApplicants, isError: isErrorApplicants }] =
+    useGetApplicantsMutation();
   const [cardToPreview, setCardToPreview] = useState<IApplicantsToDetail | null>(null);
 
   const location = useLocation();
@@ -77,6 +80,7 @@ export const Candidates: FC = () => {
 
         {cardToPreview ? <CandidateCard {...cardToPreview} location={location} /> : <div>Выберите карточку</div>}
       </CandidatesCardsWrapper>
+      {(isError || isErrorApplicants) && <Popup type="error" text={ERROR_TEXT.onConnectionError} />}
     </>
   );
 };
