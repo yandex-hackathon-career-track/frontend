@@ -17,6 +17,7 @@ import styles from './Favorite.module.css';
 import ExcelIcon from '../../media/icons/Excel';
 import { saveAs } from 'file-saver';
 import { getCookie } from '../../utils/cookie';
+import Loader from '../../components/Loader/Loader';
 
 export const Favorite: FC = () => {
   const attributes = useSelector((store) => store.attributes);
@@ -104,7 +105,7 @@ export const Favorite: FC = () => {
         <ButtonPopupTable data={toCompareCards} handleAddToCompareClick={handleAddToCompare} />
       </div>
       {!applicants ? (
-        <div>Загрузка...</div>
+        <Loader />
       ) : (
         <CandidatesCardsWrapper>
           {applicantsStore.every((item) => item.is_selected === false) ? (

@@ -177,6 +177,7 @@ export const practicumApi = createApi({
       }),
     }),
 
+    // TODO удалить?
     // Получить избранных соискателей
     getFavoriteApplicants: builder.query<IAllAttributes, unknown>({
       query: () => ({

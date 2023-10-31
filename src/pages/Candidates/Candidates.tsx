@@ -11,6 +11,7 @@ import { IApplicantMainInfo, IApplicantsToDetail } from '../../services/types/ty
 import { useGetApplicantToIdMutation, useGetApplicantsMutation } from '../../services/query/practicumApi';
 import styles from './Candidates.module.css';
 import { setApplicants } from '../../services/features/applicantsSlice';
+import Loader from '../../components/Loader/Loader';
 
 export const Candidates: FC = () => {
   const applicantsStore = useSelector((store) => store.applicants);
@@ -58,7 +59,7 @@ export const Candidates: FC = () => {
       <FiltersList />
       <CandidatesCardsWrapper>
         {!applicants ? (
-          <div>Загрузка...</div>
+          <Loader />
         ) : (
           <CandidatesList>
             {applicantsStore.map((item, i) => (
