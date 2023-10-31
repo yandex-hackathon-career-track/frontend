@@ -23,6 +23,10 @@ https://github.com/yandex-hackathon-career-track/backend
 
 http://130.193.38.88/api/schema/swagger/#/
 
+### Screen-shots
+
+https://drive.google.com/file/d/1EPJfcWm_3MrQxPGyE4yqtlHsySjQKaX-/view?usp=sharing
+
 ### Описание возможностей:
 
 Cвёрстаны экраны:
