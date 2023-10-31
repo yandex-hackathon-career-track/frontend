@@ -20,7 +20,6 @@ export function VacancyDescriptionForm({ description, updateFields }: VacancyDes
         multiline
         required
         value={description}
-        defaultValue={description}
         placeholder="Расскажите о вакансии"
         onChange={(e) => updateFields({ description: e.target.value })}
         rows={13}

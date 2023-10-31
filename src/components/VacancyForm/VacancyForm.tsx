@@ -25,6 +25,7 @@ export function VacancyForm({ title, min_salary, max_salary, options, updateFiel
       <Autocomplete
         className={styles.textfield}
         options={options.work_formats}
+        noOptionsText={'Ничего не найдено'}
         getOptionLabel={(option) => option.name}
         renderOption={(props, option, { selected }) => (
           <li {...props} key={option.id}>
@@ -39,6 +40,7 @@ export function VacancyForm({ title, min_salary, max_salary, options, updateFiel
       <Autocomplete
         className={styles.textfield}
         options={options.cities}
+        noOptionsText={'Ничего не найдено'}
         getOptionLabel={(option) => option.name}
         renderOption={(props, option, { selected }) => (
           <li {...props} key={option.id}>
@@ -52,6 +54,7 @@ export function VacancyForm({ title, min_salary, max_salary, options, updateFiel
       <label>Занятость</label>
       <Autocomplete
         className={styles.textfield}
+        noOptionsText={'Ничего не найдено'}
         options={options.occupations}
         getOptionLabel={(option) => option.name}
         renderOption={(props, option, { selected }) => (

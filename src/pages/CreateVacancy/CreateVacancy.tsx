@@ -8,7 +8,6 @@ import { useCreateVacancyMutation } from '../../services/query/practicumApi';
 import { Popup } from '../../components/Popup/Popup';
 import { ERROR_TEXT, SUCCESS_TEXT } from '../../utils/constants';
 import { useSelector } from '../../services/hooks';
-import { useNavigate } from 'react-router-dom';
 import styles from './CreateVacancy.module.css';
 import Loader from '../../components/Loader/Loader';
 
@@ -35,7 +34,6 @@ const INITIAL_DATA: TFormData = {
 export const CreateVacancy: FC = () => {
   const [createVacancy, { isSuccess, isError, isLoading }] = useCreateVacancyMutation();
   const [data, setData] = useState(INITIAL_DATA);
-  const navigate = useNavigate();
   const selectOptions = useSelector((store) => store.attributes);
 
   function updateFields(fields: Partial<TFormData>) {
@@ -43,6 +41,7 @@ export const CreateVacancy: FC = () => {
       return { ...prev, ...fields };
     });
   }
+
   const { step, isFirstStep, isLastStep, back, next } = useMultistepForm([
     <VacancyForm {...data} options={selectOptions} updateFields={updateFields} key={1} />,
     <VacancyDescriptionForm {...data} updateFields={updateFields} key={2} />,
@@ -55,8 +54,11 @@ export const CreateVacancy: FC = () => {
   }
 
   useEffect(() => {
-    isSuccess && setTimeout(() => navigate('/vacancy'), 1000);
-  }, [isSuccess, navigate]);
+    if (isSuccess) {
+      setData(INITIAL_DATA);
+      back();
+    }
+  }, [isSuccess, back]);
 
   return isLoading ? (
     <Loader />
