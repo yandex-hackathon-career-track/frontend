@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { FC, FormEvent, useState } from 'react';
+import { FC, FormEvent, useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import { useMultistepForm } from '../../services/hooks/useMultistepForm';
 import { VacancyForm } from '../../components/VacancyForm/VacancyForm';
@@ -7,8 +7,10 @@ import { VacancyDescriptionForm } from '../../components/VacancyDescriptionForm/
 import { useCreateVacancyMutation } from '../../services/query/practicumApi';
 import { Popup } from '../../components/Popup/Popup';
 import { ERROR_TEXT, SUCCESS_TEXT } from '../../utils/constants';
-import styles from './CreateVacancy.module.css';
 import { useSelector } from '../../services/hooks';
+import { useNavigate } from 'react-router-dom';
+import styles from './CreateVacancy.module.css';
+import Loader from '../../components/Loader/Loader';
 
 export type TFormData = {
   title: string;
@@ -31,9 +33,9 @@ const INITIAL_DATA: TFormData = {
 };
 
 export const CreateVacancy: FC = () => {
-  const [createVacancy, { isSuccess, isError }] = useCreateVacancyMutation();
+  const [createVacancy, { isSuccess, isError, isLoading }] = useCreateVacancyMutation();
   const [data, setData] = useState(INITIAL_DATA);
-
+  const navigate = useNavigate();
   const selectOptions = useSelector((store) => store.attributes);
 
   function updateFields(fields: Partial<TFormData>) {
@@ -49,10 +51,16 @@ export const CreateVacancy: FC = () => {
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (!isLastStep) return next();
-    console.log(data);
     await createVacancy(data);
   }
-  return (
+
+  useEffect(() => {
+    isSuccess && setTimeout(() => navigate('/vacancy'), 1000);
+  }, [isSuccess, navigate]);
+
+  return isLoading ? (
+    <Loader />
+  ) : (
     <>
       <div className={styles.headingCcontainer}>
         <Typography variant="h1" className={styles.heading}>
@@ -84,8 +92,8 @@ export const CreateVacancy: FC = () => {
           </div>
         </div>
       </form>
-      {isError && <Popup type="error" text={ERROR_TEXT.onSaveError} />}
-      {isSuccess && <Popup type="done" text={SUCCESS_TEXT.onSave} />}
+      {isError && <Popup type="error" text={`${ERROR_TEXT.onSaveError}`} />}
+      {isSuccess && <Popup type="done" text={`${SUCCESS_TEXT.onSave}`} />}
     </>
   );
 };
