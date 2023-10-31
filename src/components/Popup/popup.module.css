@@ -9,15 +9,15 @@
   grid-template-columns: auto 1fr;
   column-gap: 8px;
   border-radius: 12px;
-  border-bottom: 10px solid #ACCCFF;
+  border-bottom: 10px solid var(--card-chart-blue-light);
   z-index: 999;
   cursor: pointer;
   align-items: center;
 }
 
 .wrapper__done {
-  color: #fff;
-  background-color: #5A9BFF;
+  color: var(--color-white);
+  background-color: var( --card-chart-blue-major);
 }
 
 .wrapper__error {
