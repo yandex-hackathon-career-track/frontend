@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
 import FiltersList from '../../components/componentsOfPageWithCandidates/FiltersList/FiltersList';
 import { CandidateCard } from '../../components/componentsOfPageWithCandidates/CandidateCard/CandidateCard';
@@ -6,23 +6,50 @@ import CandidatePreviewCard from '../../components/componentsOfPageWithCandidate
 import { CandidatesCardsWrapper } from '../../components/componentsOfPageWithCandidates/CandidatesCardsWrapper/CandidatesCardsWrapper';
 import { CandidatesList } from '../../components/componentsOfPageWithCandidates/CandidatesList/CandidatesList';
 import { useLocation } from 'react-router-dom';
-import styles from './Candidates.module.css';
-import { useSelector } from '../../services/hooks';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { IApplicantMainInfo, IApplicantsToDetail } from '../../services/types/types';
-import { getApplicantToId } from '../../services/query/practicumApi';
+import { useGetApplicantToIdMutation, useGetApplicantsMutation } from '../../services/query/practicumApi';
+import styles from './Candidates.module.css';
+import { setApplicants } from '../../services/features/applicantsSlice';
 
 export const Candidates: FC = () => {
-  const applicants = useSelector((store) => store.applicants);
+  const applicantsStore = useSelector((store) => store.applicants);
+  const dispatch = useDispatch();
+  const [getApplicantToId, { isLoading, data, isError }] = useGetApplicantToIdMutation();
+  const [getApplicants, { data: applicants, isLoading: isLoadingApplicants }] = useGetApplicantsMutation();
   const [cardToPreview, setCardToPreview] = useState<IApplicantsToDetail | null>(null);
+
   const location = useLocation();
   const handleCardPreview = (card: IApplicantMainInfo) => {
-    getApplicantToId(card.id)
-      .then((data) => {
-        setCardToPreview(data as IApplicantsToDetail);
-      })
-      .catch((err) => console.log('Ошибка ' + err));
+    void getApplicantToId(card.id);
   };
 
+  const handleChangeIsFavorite = (status: boolean, id: string) => {
+    if (id === cardToPreview?.id && cardToPreview !== null) {
+      setCardToPreview((prev) => {
+        return { ...(prev as IApplicantsToDetail), is_selected: status };
+      });
+    }
+  };
+
+  useEffect(() => {
+    void getApplicants(null);
+  }, [getApplicants]);
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      setCardToPreview(data);
+    } else if (!isLoading && isError) {
+      // TODO поправить на попап
+      console.log('Ошибка получения данных');
+    }
+  }, [data, isLoading, isError]);
+
+  useEffect(() => {
+    if (!isLoadingApplicants && applicants) {
+      dispatch(setApplicants(applicants as unknown as IApplicantMainInfo[]));
+    }
+  }, [applicants, dispatch, isLoadingApplicants]);
   return (
     <>
       <Typography component={'h1'} className={'page-title'}>
@@ -30,18 +57,23 @@ export const Candidates: FC = () => {
       </Typography>
       <FiltersList />
       <CandidatesCardsWrapper>
-        <CandidatesList>
-          {applicants.map((item, i) => (
-            <li
-              key={i}
-              onClick={() => handleCardPreview(item)}
-              style={{ cursor: 'pointer', borderRadius: '6px' }}
-              className={cardToPreview?.id === item.id ? styles['active-card'] : ''}
-            >
-              <CandidatePreviewCard {...item} />
-            </li>
-          ))}
-        </CandidatesList>
+        {!applicants ? (
+          <div>Загрузка...</div>
+        ) : (
+          <CandidatesList>
+            {applicantsStore.map((item, i) => (
+              <li
+                key={i}
+                onClick={() => handleCardPreview(item)}
+                style={{ cursor: 'pointer', borderRadius: '6px' }}
+                className={cardToPreview?.id === item.id ? styles['active-card'] : ''}
+              >
+                <CandidatePreviewCard {...item} handleChangeIsFavorite={handleChangeIsFavorite} />
+              </li>
+            ))}
+          </CandidatesList>
+        )}
+
         {cardToPreview ? <CandidateCard {...cardToPreview} location={location} /> : <div>Выберите карточку</div>}
       </CandidatesCardsWrapper>
     </>
