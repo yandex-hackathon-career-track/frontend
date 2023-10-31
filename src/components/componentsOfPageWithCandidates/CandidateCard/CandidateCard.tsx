@@ -71,7 +71,7 @@ export const CandidateCard: FC<ICandidateCard> = (props) => {
           {applicant_courses.map((item, i) => {
             return (
               <li key={i}>
-                <p className={styles.text}>{item.course}</p>
+                <p className={styles.text}>{item.course + ' c ' + item.graduation_date}</p>
               </li>
             );
           })}
