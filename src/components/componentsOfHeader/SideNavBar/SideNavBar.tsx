@@ -38,7 +38,7 @@ const SideNavBar: FC = () => {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
           <Link to={'/create-vacancy'} className={styles.link}>
-            <Button variant="outlined" className={styles['button-vacancy-create']}>
+            <Button variant="outlined" className={styles['button-vacancy-create']} fullWidth>
               Создать вакансию
             </Button>
           </Link>

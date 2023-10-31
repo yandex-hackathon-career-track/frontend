@@ -19,5 +19,6 @@
 }
 
 .link {
-  display: contents;
+  display: block;
+  margin-bottom: 46px;
 }

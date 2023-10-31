@@ -16,6 +16,7 @@ const FiltersList = () => {
   const [stack, setStack] = useState<string[]>([]);
   const [workFormat, setWorkFormat] = useState<string[]>([]);
   const [experience, setExperience] = useState<string[]>([]);
+  const [sortedBy, setSortedBy] = useState<string[]>([]);
   const attributes = useSelector((store) => store.attributes);
   const reseAllFilters = () => {
     setDirections([]);
@@ -24,6 +25,7 @@ const FiltersList = () => {
     setStack([]);
     setWorkFormat([]);
     setExperience([]);
+    setSortedBy([]);
   };
 
   const experienceData = [
@@ -31,6 +33,23 @@ const FiltersList = () => {
     { id: 2, name: 'от 2 лет' },
     { id: 3, name: 'от 3 лет' },
   ];
+
+  const sortedByFilters = [
+    { id: 1, name: 'дате окончания курса' },
+    { id: 2, name: 'дате создания резюме' },
+    { id: 3, name: 'дате обновления' },
+  ];
+
+  const getValSortedBy = () => {
+    const val = sortedBy[0];
+    if (val === 'дате окончания курса') {
+      return '-graduation_date';
+    } else if (val === 'дате создания резюме') {
+      return '-created_at';
+    } else {
+      return '-updated_at';
+    }
+  };
 
   const handleSubmitClick = () => {
     void getApplicants(
@@ -44,6 +63,7 @@ const FiltersList = () => {
           'start_date_experience_min',
           experience.map((item) => item.match(/[1-3]/)![0]),
         ),
+        parse('order_by', [getValSortedBy()]),
       ]
         .filter((item) => item !== '')
         .join('&'),
@@ -56,7 +76,6 @@ const FiltersList = () => {
     }
   }, [applicantsNew, dispatch, isLoadingApplicants]);
 
-  const data = ['var1', 'var2', 'var3', 'var4', 'var5', 'var6'];
   return (
     // TODO через styles нужно переписать MUI в кастомные фильтры, для соответствия дизайну
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: 8 }}>
@@ -72,28 +91,25 @@ const FiltersList = () => {
         label="Опыт работы"
         state={experience}
         setState={setExperience}
+        multy={false}
       />
-      <FilterDropper data={data} label="Сортировать по умолчанию" />
       <FilterDropper data={getObjData(attributes.cities)} label="Город" state={cities} setState={setCities} />
-      <FilterDropper data={getObjData(attributes.stack)} label="Стэк" state={stack} setState={setStack} />
       <FilterDropper
         data={getObjData(attributes.work_formats)}
         label="Формат работы"
         state={workFormat}
         setState={setWorkFormat}
       />
-      <div
-        style={{
-          display: 'flex',
-          gap: '20px',
-          flexWrap: 'wrap',
-          width: '100%',
-          justifyContent: 'end',
-        }}
-      >
-        <CustomButton text={'Сбросить фильтры'} variant={'filled'} onClick={reseAllFilters} />
-        <CustomButton text={'Применить фильтры'} variant={'filled'} onClick={handleSubmitClick} />
-      </div>
+      <FilterDropper
+        data={getObjData(sortedByFilters)}
+        label="Сортировать по..."
+        state={sortedBy}
+        setState={setSortedBy}
+        multy={false}
+      />
+      <FilterDropper data={getObjData(attributes.stack)} label="Стэк" state={stack} setState={setStack} />
+      <CustomButton text={'Сбросить фильтры'} variant={'filled'} onClick={reseAllFilters} />
+      <CustomButton text={'Применить фильтры'} variant={'filled'} onClick={handleSubmitClick} />
     </div>
   );
 };

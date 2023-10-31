@@ -19,9 +19,16 @@ interface IFilterDropper {
   isRequired?: boolean;
   isMultiply?: boolean;
   handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  multy?: boolean;
 }
 
-export default function FilterDropper({ data, label, state = [], setState = () => null }: IFilterDropper) {
+export default function FilterDropper({
+  data,
+  label,
+  state = [],
+  setState = () => null,
+  multy = true,
+}: IFilterDropper) {
   const theme = createTheme({
     components: {
       MuiOutlinedInput: {
@@ -42,9 +49,9 @@ export default function FilterDropper({ data, label, state = [], setState = () =
   return (
     <ThemeProvider theme={theme}>
       <Autocomplete
-        multiple
+        multiple={multy}
         options={data}
-        value={state}
+        value={multy ? state : state[0] || null}
         disableCloseOnSelect
         getOptionLabel={(option) => option}
         renderOption={(props, option, { selected }) => (
@@ -55,7 +62,7 @@ export default function FilterDropper({ data, label, state = [], setState = () =
         )}
         className={styles.filter}
         renderInput={(params) => <TextField {...params} label={label} placeholder="" />}
-        onChange={(_, newValue) => setState(newValue)}
+        onChange={(_, newValue) => setState(Array.isArray(newValue) ? newValue : [newValue || ''])}
       />
     </ThemeProvider>
   );
