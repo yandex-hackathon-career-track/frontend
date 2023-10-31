@@ -3,7 +3,7 @@ import { IAllAttributes, IApplicantsToDetail, IAuthForm, ITokensResponce, TCreat
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
 import { IConfirmPassword } from '../../pages/ConfirmPassword/ConfirmPassword';
 import { ICompanyState } from '../features/companySlice';
-import { ICreateVacancy } from '../types/Interfaces';
+import { ICreateVacancy, IGetVacancy } from '../types/Interfaces';
 
 export const practicumApi = createApi({
   reducerPath: 'practicumApi',
@@ -42,7 +42,7 @@ export const practicumApi = createApi({
       }),
     }),
 
-    createVacancy: builder.mutation<unknown, ICreateVacancy>({
+    createVacancy: builder.mutation<IGetVacancy, ICreateVacancy>({
       query: (vacancy) => ({
         url: '/v1/employers/vacancies/',
         method: 'POST',

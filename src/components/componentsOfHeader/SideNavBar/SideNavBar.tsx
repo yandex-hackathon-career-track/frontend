@@ -43,7 +43,7 @@ const SideNavBar: FC = () => {
             </Button>
           </Link>
           <HeaderLinkElement text="Компания" path="/profile" Icon={PersonalInfoIcon} grey />
-          <HeaderLinkElement text="Поддержка" Icon={TgIcon} grey />
+          <HeaderLinkElement text="Поддержка" Icon={TgIcon} path="https://t.me/Frich22" grey blank={'_blank'} />
           <HeaderLinkElement text="Выйти" Icon={ExitIcon} path="/login" grey onClick={handleLogOut} />
         </div>
       </Toolbar>

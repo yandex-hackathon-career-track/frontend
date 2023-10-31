@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import FilterToggle from '../FilterToggle/FilterToggle';
 import FilterDropper from '../FilterDropped/FilterDropped';
 import { CustomButton } from '../../../UI/CustomButton/CustomButton';
 import { useDispatch, useSelector } from '../../../services/hooks';
@@ -16,6 +15,7 @@ const FiltersList = () => {
   const [cities, setCities] = useState<string[]>([]);
   const [stack, setStack] = useState<string[]>([]);
   const [workFormat, setWorkFormat] = useState<string[]>([]);
+  const [experience, setExperience] = useState<string[]>([]);
   const attributes = useSelector((store) => store.attributes);
   const reseAllFilters = () => {
     setDirections([]);
@@ -23,7 +23,14 @@ const FiltersList = () => {
     setCities([]);
     setStack([]);
     setWorkFormat([]);
+    setExperience([]);
   };
+
+  const experienceData = [
+    { id: 1, name: 'от 1 года' },
+    { id: 2, name: 'от 2 лет' },
+    { id: 3, name: 'от 3 лет' },
+  ];
 
   const handleSubmitClick = () => {
     void getApplicants(
@@ -33,6 +40,10 @@ const FiltersList = () => {
         parse('course', cources),
         parse('direction', directions),
         parse('work_format', workFormat),
+        parse(
+          'start_date_experience_min',
+          experience.map((item) => item.match(/[1-3]/)![0]),
+        ),
       ]
         .filter((item) => item !== '')
         .join('&'),
@@ -48,7 +59,6 @@ const FiltersList = () => {
   const data = ['var1', 'var2', 'var3', 'var4', 'var5', 'var6'];
   return (
     // TODO через styles нужно переписать MUI в кастомные фильтры, для соответствия дизайну
-    // Vlad - кнопку унес в папку UI как CustomButton
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: 8 }}>
       <FilterDropper
         data={getObjData(attributes.directions)}
@@ -57,7 +67,12 @@ const FiltersList = () => {
         setState={setDirections}
       />
       <FilterDropper data={getObjData(attributes.cources)} label="Курс" state={cources} setState={setCources} />
-      <FilterDropper data={data} label="Опыт работы" />
+      <FilterDropper
+        data={getObjData(experienceData)}
+        label="Опыт работы"
+        state={experience}
+        setState={setExperience}
+      />
       <FilterDropper data={data} label="Сортировать по умолчанию" />
       <FilterDropper data={getObjData(attributes.cities)} label="Город" state={cities} setState={setCities} />
       <FilterDropper data={getObjData(attributes.stack)} label="Стэк" state={stack} setState={setStack} />
@@ -79,18 +94,6 @@ const FiltersList = () => {
         <CustomButton text={'Сбросить фильтры'} variant={'filled'} onClick={reseAllFilters} />
         <CustomButton text={'Применить фильтры'} variant={'filled'} onClick={handleSubmitClick} />
       </div>
-
-      {/* трудно парсить в таком формате. */}
-      {/*
-      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', width: '100%' }}>
-        {attributes.work_formats.map((item) => (
-          <FilterToggle label={item.name} key={item.id} />
-        ))}
-        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-          <CustomButton text={'Сбросить фильтры'} variant={'filled'} onClick={reseAllFilters} />
-          <CustomButton text={'Применить фильтры'} variant={'filled'} onClick={handleSubmitClick} />
-        </div>
-      </div> */}
     </div>
   );
 };

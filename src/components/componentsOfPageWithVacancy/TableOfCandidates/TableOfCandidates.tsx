@@ -37,14 +37,6 @@ const VirtuosoTableComponents: VirtuosoTableComponentsType = {
 VirtuosoTableComponents.Scroller.displayName = 'VirtuosoTableScroller';
 VirtuosoTableComponents.TableBody.displayName = 'VirtuosoTableBody';
 
-export const inputOptions = [
-  { label: 'Не выбрано' },
-  { label: 'Назначено собеседование' },
-  { label: 'На рассмотрении' },
-  { label: 'Отправлено тестовое' },
-  { label: 'Отказ' },
-];
-
 // TODO не могу прокинуть статусы фильтров, подкапотный запрет на хуки. Нужно покопаться в доке
 // ! Попробовать хукать здесь, экспортировать статичные данные: список и функцию обработки, а в строке импортировать
 export default function TableOfCandidates() {

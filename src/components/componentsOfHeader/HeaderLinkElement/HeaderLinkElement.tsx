@@ -9,6 +9,7 @@ interface IHeaderLinkElement {
   Icon: React.FC;
   grey?: boolean;
   onClick?: () => void;
+  blank?: string;
 }
 
 const HeaderLinkElement: React.FC<IHeaderLinkElement> = ({
@@ -17,6 +18,7 @@ const HeaderLinkElement: React.FC<IHeaderLinkElement> = ({
   Icon,
   grey = false,
   onClick = () => null,
+  blank = '',
 }) => {
   const location = useLocation();
   const isPath = location.pathname === path;
@@ -30,6 +32,7 @@ const HeaderLinkElement: React.FC<IHeaderLinkElement> = ({
       style={{ display: 'flex', columnGap: '13px', alignItems: 'center' }}
       sx={{ p: '0 12px' }}
       onClick={onClick}
+      target={blank}
     >
       <Icon />
       <Typography className={styles.typography}>{text}</Typography>

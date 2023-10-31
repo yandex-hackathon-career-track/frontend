@@ -57,3 +57,10 @@ export interface ICreateVacancy {
   max_salary: number;
   city: number;
 }
+
+export interface IGetVacancy extends ICreateVacancy {
+  id: string;
+  is_published: boolean;
+  created_at: string;
+  updated_at: string;
+}

@@ -103,41 +103,45 @@ export const Favorite: FC = () => {
         </CustomButton>
         <ButtonPopupTable data={toCompareCards} handleAddToCompareClick={handleAddToCompare} />
       </div>
-      <CandidatesCardsWrapper>
-        {!applicants ? (
-          <div>Загрузка...</div>
-        ) : (
-          <CandidatesList>
-            {[...applicantsStore].map((item, i) =>
-              item.is_selected ? (
-                <li
-                  key={i}
-                  onClick={() => handleCardPreview(item)}
-                  style={{ cursor: 'pointer', borderRadius: '6px' }}
-                  className={cardToPreview?.id === item.id ? styles['active-card'] : ''}
-                >
-                  <CandidatePreviewCard {...item} />
-                </li>
-              ) : null,
-            )}
-          </CandidatesList>
-        )}
+      {!applicants ? (
+        <div>Загрузка...</div>
+      ) : (
+        <CandidatesCardsWrapper>
+          {applicantsStore.every((item) => item.is_selected === false) ? (
+            <div>Вы пока ничего не добавили</div>
+          ) : (
+            <CandidatesList>
+              {[...applicantsStore].map((item, i) =>
+                item.is_selected ? (
+                  <li
+                    key={i}
+                    onClick={() => handleCardPreview(item)}
+                    style={{ cursor: 'pointer', borderRadius: '6px' }}
+                    className={cardToPreview?.id === item.id ? styles['active-card'] : ''}
+                  >
+                    <CandidatePreviewCard {...item} />
+                  </li>
+                ) : null,
+              )}
+            </CandidatesList>
+          )}
 
-        {cardToPreview ? (
-          <CandidateCard
-            {...cardToPreview}
-            location={location}
-            handleAddToCompareClick={() => handleAddToCompare(cardToPreview)}
-            btnAddToCompareText={
-              toCompareCards.some((card) => card.id === cardToPreview?.id)
-                ? 'Убрать из сравнений'
-                : 'Добавить к сравнению'
-            }
-          />
-        ) : (
-          <div>Выберите карточку</div>
-        )}
-      </CandidatesCardsWrapper>
+          {cardToPreview ? (
+            <CandidateCard
+              {...cardToPreview}
+              location={location}
+              handleAddToCompareClick={() => handleAddToCompare(cardToPreview)}
+              btnAddToCompareText={
+                toCompareCards.some((card) => card.id === cardToPreview?.id)
+                  ? 'Убрать из сравнений'
+                  : 'Добавить к сравнению'
+              }
+            />
+          ) : (
+            <div>Выберите карточку</div>
+          )}
+        </CandidatesCardsWrapper>
+      )}
     </>
   );
 };
