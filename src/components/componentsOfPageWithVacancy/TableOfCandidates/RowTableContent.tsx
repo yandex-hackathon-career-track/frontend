@@ -84,7 +84,7 @@ function RowTableContent(_index: number, row: ICandidate) {
       </TableCell>
       <TableCell align="left">
         {/* TODO row.portfolio - не тот ключ, чтобы по нему проверять */}
-        {row.portfolio ? <ButtonCheckResume data={row} /> : <Typography>Отсутствует</Typography>}
+        {row.portfolio ? <ButtonCheckResume /> : <Typography>Отсутствует</Typography>}
       </TableCell>
     </>
   );
