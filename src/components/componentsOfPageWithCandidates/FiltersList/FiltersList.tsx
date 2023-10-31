@@ -52,22 +52,21 @@ const FiltersList = () => {
   };
 
   const handleSubmitClick = () => {
-    void getApplicants(
-      [
-        parse('stack', stack),
-        parse('city', cities),
-        parse('course', cources),
-        parse('direction', directions),
-        parse('work_format', workFormat),
-        parse(
-          'start_date_experience_min',
-          experience.map((item) => item.match(/[1-3]/)![0]),
-        ),
-        parse('order_by', [getValSortedBy()]),
-      ]
-        .filter((item) => item !== '')
-        .join('&'),
-    );
+    const data = [
+      parse('stack', stack),
+      parse('city', cities),
+      parse('course', cources),
+      parse('direction', directions),
+      parse('work_format', workFormat),
+      parse(
+        'start_date_experience_min',
+        experience.map((item) => item.match(/[1-3]/)![0]),
+      ),
+      parse('order_by', [getValSortedBy()]),
+    ]
+      .filter((item) => item !== '')
+      .join('&');
+    void getApplicants(data);
   };
 
   useEffect(() => {

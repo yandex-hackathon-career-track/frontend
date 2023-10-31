@@ -43,7 +43,7 @@ export const getCellContent = (
   } else if (prop === 'buttons') {
     return (
       <div style={{ display: 'flex', gap: '12px' }}>
-        <Link to={'https://t.me/' + row.contact.telegram.slice(1)} target='_blank'>
+        <Link to={'https://t.me/' + row.contact?.telegram?.slice(1)} target='_blank'>
           <BtnInTable variant="contained" text="Cвязаться" onClick={() => null} />
         </Link>
         <BtnInTable variant="outlined" text="Удалить" onClick={() => handleClick(row)} />
