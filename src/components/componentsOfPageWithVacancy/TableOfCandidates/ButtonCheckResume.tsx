@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Box, Button, Modal, IconButton } from '@mui/material';
 // import { CandidateCard } from '../../componentsOfPageWithCandidates/CandidateCard/CandidateCard';
-import { ICandidate } from '../../../services/types/Interfaces';
 import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
@@ -20,12 +19,10 @@ const style = {
   alignItems: 'end',
 };
 
-export default function ButtonCheckResume({ data }: { data: ICandidate }) {
+export default function ButtonCheckResume() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  console.log(data);
 
   return (
     <div>

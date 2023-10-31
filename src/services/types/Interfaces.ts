@@ -40,3 +40,27 @@ export interface IGetVacancy extends ICreateVacancy {
   created_at: string;
   updated_at: string;
 }
+
+interface IPortfolio {
+  name: string;
+  link: string;
+  thumbnail?: string;
+}
+
+export interface ICandidate {
+  name?: string;
+  isAvailable?: boolean;
+  isFavorite?: boolean;
+  lastSeen?: string;
+  position?: string;
+  graduated?: string;
+  experience?: string;
+  stack?: string[];
+  city?: string;
+  jobFormat?: string[];
+  schedule?: string[];
+  portfolio?: IPortfolio[];
+  certificates?: IPortfolio[];
+  tg?: string;
+  email?: string;
+}

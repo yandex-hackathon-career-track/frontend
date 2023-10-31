@@ -34,6 +34,7 @@ export const CandidateCard: FC<ICandidateCard> = (props) => {
     btnAddToCompareText = 'Добавить к сравнению',
     is_selected,
     id,
+    applicant_courses,
   } = props;
 
   // костыль
@@ -57,16 +58,23 @@ export const CandidateCard: FC<ICandidateCard> = (props) => {
           Опыт (мес):<span>{` ${experience}`}</span>
         </label>
         <ul className={styles.list}>
-          {/* TODO допарсить! */}
-          <li>
-            <p className={styles.text}>Графический дизайнер(2 года и 5 месяцев)</p>
-          </li>
+          {props.educations.map((item, i) => {
+            return (
+              <li key={i}>
+                <p className={styles.text}>{item.name}</p>
+              </li>
+            );
+          })}
         </ul>
         <label className={styles.text}>Курсы:</label>
         <ul className={styles.list}>
-          <li>
-            <p className={styles.text}>Ускоренный онлайн-бакалавриат «Фронтенд и мобильная разработка» ИТМО</p>
-          </li>
+          {applicant_courses.map((item, i) => {
+            return (
+              <li key={i}>
+                <p className={styles.text}>{item.course}</p>
+              </li>
+            );
+          })}
         </ul>
         <ProfileStackField stack={stack} />
       </div>
