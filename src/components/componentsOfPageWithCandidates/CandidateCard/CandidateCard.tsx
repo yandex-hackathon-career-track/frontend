@@ -6,7 +6,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import styles from './styles.module.css';
 import porfolioIcon from '../../../media/portfolio-icon.svg';
-import { CustomButton } from '../../../UI/CustomButton/CustomButton';
+import { CustomButton } from '../../CustomButton/CustomButton';
 import { Location } from 'react-router-dom';
 import { IApplicantsToDetail } from '../../../services/types/types';
 

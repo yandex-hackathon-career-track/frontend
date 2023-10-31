@@ -8,7 +8,7 @@ import FilterDropper from '../../components/componentsOfPageWithCandidates/Filte
 import { useLocation } from 'react-router-dom';
 import ButtonPopupTable from '../../components/componentsOfPageWithCandidates/ButtonPopupTable/ButtonPopupTable';
 import styles from './Favorite.module.css';
-import { CustomButton } from '../../UI/CustomButton/CustomButton';
+import { CustomButton } from '../../components/CustomButton/CustomButton';
 import { useSelector } from '../../services/hooks';
 import { IApplicantMainInfo, IApplicantsToDetail } from '../../services/types/types';
 import { getApplicantToId } from '../../services/query/practicumApi';

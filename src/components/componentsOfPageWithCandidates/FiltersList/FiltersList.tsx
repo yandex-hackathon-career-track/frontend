@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import FilterToggle from '../FilterToggle/FilterToggle';
 import FilterDropper from '../FilterDropped/FilterDropped';
-import { CustomButton } from '../../../UI/CustomButton/CustomButton';
+import { CustomButton } from '../../CustomButton/CustomButton';
 import { useSelector } from '../../../services/hooks';
 
 const FiltersList: React.FC = () => {
