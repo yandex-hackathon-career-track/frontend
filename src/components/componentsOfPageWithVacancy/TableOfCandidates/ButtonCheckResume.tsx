@@ -25,8 +25,6 @@ export default function ButtonCheckResume({ data }: { data: ICandidate }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  console.log(data);
-
   return (
     <div>
       <Button variant="text" sx={{ p: 0, textTransform: 'none' }} onClick={handleOpen}>
