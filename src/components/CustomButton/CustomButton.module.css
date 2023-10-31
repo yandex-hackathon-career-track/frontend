@@ -6,7 +6,7 @@
   font-feature-settings:
     'clig'off,
     'liga'off;
-  font-size: 16px;
+  font-size: var(--body-1);
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
@@ -14,17 +14,42 @@
 }
 
 .filled {
-  background-color: #5a9bff;
-  color: #fff;
+  background-color: var(--card-chart-blue-major);
+  color: var(--color-white);
+}
+
+.filled:hover {
+  background-color: var(--color-blue-main);
+}
+
+.filled:focus {
+  background-color: var(--color-blue-main);
+}
+
+.filled:disabled {
+  background-color: var(--color-black-300);
 }
 
 .outlined {
   background-color: transparent;
-  outline: 1px solid #1D6BF3;
+  outline: 1px solid var(--color-blue-main);
   color: #1D6BF3;
 }
 
 .outlined:hover {
-  color: #fff;
-  outline: unset;
+  color: var(--color-white);
+  background-color: var(--color-blue-main);
+  border: none;
+}
+
+.outlined:focus {
+  color: var(--color-white);
+  background-color: var(--color-blue-main);
+  border: none;
+}
+
+.outlined:disabled {
+  color: var(--color-black-300);
+  background-color: transparent;
+  border: 1px solid var(--color-black-300);
 }

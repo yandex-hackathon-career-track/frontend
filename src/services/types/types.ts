@@ -40,7 +40,7 @@ interface IApplicant {
   user: string;
   first_name: string;
   last_name: string;
-  stack: [{ id: number; name: string }];
+  stack: { id: number; name: string }[];
   status: { id: number; name: string };
   direction: { id: number; name: string };
   updated_at: string;

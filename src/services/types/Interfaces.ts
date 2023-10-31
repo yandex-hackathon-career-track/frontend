@@ -12,30 +12,6 @@ export interface IAuthSettings {
   path: string;
 }
 
-interface IPortfolio {
-  name: string;
-  link: string;
-  thumbnail?: string;
-}
-
-export interface ICandidate {
-  name?: string;
-  isAvailable?: boolean;
-  isFavorite?: boolean;
-  lastSeen?: string;
-  position?: string;
-  graduated?: string;
-  experience?: string;
-  stack?: string[];
-  city?: string;
-  jobFormat?: string[];
-  schedule?: string[];
-  portfolio?: IPortfolio[];
-  certificates?: IPortfolio[];
-  tg?: string;
-  email?: string;
-}
-
 export interface IdataCardVacancy {
   id: string;
   title: string;

@@ -17,11 +17,18 @@ https://github.com/yandex-hackathon-career-track/backend
 ![image](https://img.shields.io/badge/Docker-100000?style=for-the-badge&logo=docker&logoColor=white)
 ![image](https://img.shields.io/badge/MaterialUI-100000?style=for-the-badge&logo=mui)
 ![image](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
+![image](https://img.shields.io/badge/React_Router-100000?style=for-the-badge&logo=reactrouter)
+![image](https://img.shields.io/badge/CSS_Modules-100000?style=for-the-badge&logo=cssmodules)
 ![image](https://img.shields.io/badge/Yup-100000?style=for-the-badge)
+
 
 ### API-документация:
 
 http://130.193.38.88/api/schema/swagger/#/
+
+### Screen-shots
+
+https://drive.google.com/file/d/1EPJfcWm_3MrQxPGyE4yqtlHsySjQKaX-/view?usp=sharing
 
 ### Описание возможностей:
 
