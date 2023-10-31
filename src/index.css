@@ -1,0 +1,9 @@
+@import url(./vendor/font/stylesheet.css);
+@import url(./utils/constants.css);
+
+:root {
+  padding: 0;
+  height: 100vh;
+  background-color: #fff;
+  font-family: 'Yandex Sans Text';
+}

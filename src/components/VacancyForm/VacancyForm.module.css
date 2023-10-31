@@ -1,0 +1,8 @@
+.salaryContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.textfield fieldset{
+  border-color: #797981
+}

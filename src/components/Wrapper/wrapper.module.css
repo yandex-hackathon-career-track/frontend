@@ -1,0 +1,36 @@
+.container {
+  background-image: url('../../media/BG.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.authContainer {
+  padding: 32px 50px;
+  overflow-y: auto;
+  height: calc(100vh - 60px);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  max-width: 250px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.authWrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}

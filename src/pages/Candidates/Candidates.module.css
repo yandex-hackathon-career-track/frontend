@@ -1,0 +1,36 @@
+.active-card {
+  background: #f1f6ff;
+}
+
+/* .title {
+  margin-bottom: 24px;
+
+  color: #000;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  gap: 16px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  max-height: calc(100vh - 70px);
+  width: 50%;
+  overflow: auto;
+  list-style: none;
+}
+
+.preview {
+  padding: 20px 24px;
+} */

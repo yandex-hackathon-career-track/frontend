@@ -1,0 +1,30 @@
+.button {
+  text-transform: none;
+  min-width: 200px;
+  min-height: 56px;
+
+  font-feature-settings:
+    'clig'off,
+    'liga'off;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+
+}
+
+.filled {
+  background-color: #5a9bff;
+  color: #fff;
+}
+
+.outlined {
+  background-color: transparent;
+  outline: 1px solid #1D6BF3;
+  color: #1D6BF3;
+}
+
+.outlined:hover {
+  color: #fff;
+  outline: unset;
+}
