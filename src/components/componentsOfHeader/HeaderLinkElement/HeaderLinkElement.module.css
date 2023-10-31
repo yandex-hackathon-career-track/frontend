@@ -10,8 +10,8 @@
     'clig' off,
     'liga' off;
 
-  font-size: 16px;
+  font-size: var( --body-1);
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; /* 125% */
+  line-height: 20px;
 }

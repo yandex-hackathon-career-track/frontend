@@ -15,20 +15,9 @@ const SideNavBar: FC = () => {
   }, [dispatch]);
 
   return (
-    <AppBar position="static" style={{ width: '256px', minHeight: 'calc(100vh - 60px)', backgroundColor: '#1A1B22' }}>
-      <Toolbar
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'start',
-          gap: '16px',
-          justifyContent: 'space-between',
-
-          height: 'calc(100vh - 60px)',
-          padding: '36px 12px',
-        }}
-      >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '23px', width: '100%' }}>
+    <AppBar position="static" className={styles.appbar}>
+      <Toolbar className={styles.toolbar}>
+        <div className={styles.container}>
           <HeaderLinkElement text="Мои вакансии" path="/vacancy" Icon={SuitCaseIcon} />
           <Divider style={{ borderColor: 'rgba(121, 121, 129, 0.5)', borderWidth: '1px' }} />
           <HeaderLinkElement text="Поиск специалистов" path="/candidates" Icon={SearchIcon} />
@@ -36,7 +25,7 @@ const SideNavBar: FC = () => {
           <HeaderLinkElement text="Избранные резюме" path="/favorite-candidates" Icon={BookmarkIcon} />
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
+        <div className={styles.container}>
           <Link to={'/create-vacancy'} className={styles.link}>
             <Button variant="outlined" className={styles['button-vacancy-create']}>
               Создать вакансию

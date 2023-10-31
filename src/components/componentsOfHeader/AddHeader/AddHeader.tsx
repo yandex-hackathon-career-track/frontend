@@ -1,5 +1,6 @@
 import Grid from '@mui/material/Unstable_Grid2';
 import SideNavBar from '../SideNavBar/SideNavBar';
+import Loader from '../../Loader/Loader';
 import { IconButton } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import { useGetAllAttributesQuery, useGetEmployerQuery } from '../../../services/query/practicumApi';
@@ -7,13 +8,14 @@ import { useEffect } from 'react';
 import { useDispatch } from '../../../services/hooks';
 import { setCompanyData } from '../../../services/features/companySlice';
 import { Wrapper } from '../../Wrapper/Wrapper';
-import styles from './styles.module.css';
 import { setAllAttributes } from '../../../services/features/attributesSlice';
-import Loader from '../../Loader/Loader';
+import { Popup } from '../../Popup/Popup';
+import { ERROR_TEXT } from '../../../utils/constants';
+import styles from './AddHeader.module.css';
 
 const AddHeader: React.FC = () => {
   const dispatch = useDispatch();
-  const { isFetching, data } = useGetEmployerQuery('');
+  const { isFetching, isError, data } = useGetEmployerQuery('');
   const { data: allAttributes, isLoading: isLoadingAllAttributes } = useGetAllAttributesQuery(null);
 
   useEffect(() => {
@@ -45,6 +47,7 @@ const AddHeader: React.FC = () => {
           ) : (
             <>
               <Outlet />
+              {isError && <Popup type="error" text={`${ERROR_TEXT.onConnectionError}`} />}
             </>
           )}
         </Wrapper>
