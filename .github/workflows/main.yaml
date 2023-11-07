@@ -35,7 +35,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
+          password: ${{ secrets.PASSPHRASE }}
           script: |
             cd career_project/infra/
             sudo docker compose stop
