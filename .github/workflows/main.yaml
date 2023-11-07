@@ -40,6 +40,5 @@ jobs:
             cd career_project/infra/
             sudo docker-compose stop
             sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/career_front
-            sudo rm -r ../frontend
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/career_front:latest
+            sudo rm -r ../frontend/
             sudo docker-compose up -d --build
