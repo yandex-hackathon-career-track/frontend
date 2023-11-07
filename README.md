@@ -1,6 +1,6 @@
 # YANDEX HACKATHON: Внутренний сервис для найма в Карьерном трекере. SEVEN-ELEVEN (команда 11).
 
-http://130.193.38.88/
+https://www.career-tracker.ru/login
 
 ## BACKEND
 
@@ -21,10 +21,9 @@ https://github.com/yandex-hackathon-career-track/backend
 ![image](https://img.shields.io/badge/CSS_Modules-100000?style=for-the-badge&logo=cssmodules)
 ![image](https://img.shields.io/badge/Yup-100000?style=for-the-badge)
 
-
 ### API-документация:
 
-http://130.193.38.88/api/schema/swagger/#/
+https://www.career-tracker.ru/api/schema/swagger/
 
 ### Screen-shots
 
