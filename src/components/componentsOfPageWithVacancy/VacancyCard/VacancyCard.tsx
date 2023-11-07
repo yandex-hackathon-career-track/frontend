@@ -31,9 +31,6 @@ const VacancyCard: React.FC<IVacancyCard> = ({ data, isArchivePage, handleChange
 
   React.useEffect(() => {
     if (newData) {
-      console.log('i work', newData);
-
-      // data = { ...data, is_published: newData?.is_published || data.is_published };
       handleChangeStatus(newData);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -13,9 +13,6 @@ function RowTableContent(_index: number, row: ICandidate) {
   //     label: item.name,
   //   };
   // });
-  type NonZero = Exclude<number, 0>;
-  const num: NonZero = 0;
-  console.log(num);
 
   const inputOptions = [
     { label: 'Не выбрано' },

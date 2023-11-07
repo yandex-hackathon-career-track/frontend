@@ -34,8 +34,6 @@ export const Vacancy: FC = () => {
     }
   }, [dataVacancies, dispatch]);
 
-  console.log(vacansies);
-
   return (
     <>
       <Typography className="page-title">Мои вакансии</Typography>
