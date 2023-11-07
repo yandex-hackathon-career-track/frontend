@@ -28,7 +28,7 @@ http://130.193.38.88/api/schema/swagger/#/
 
 ### Screen-shots
 
-https://drive.google.com/file/d/1EPJfcWm_3MrQxPGyE4yqtlHsySjQKaX-/view?usp=sharing
+[https://drive.google.com/file/d/1EPJfcWm_3MrQxPGyE4yqtlHsySjQKaX-/view?usp=sharing](https://drive.google.com/drive/folders/1rpjuh1Wfi4Nri09m9QbEdcUO6vVnTvTn?usp=sharing)
 
 ### Описание возможностей:
 
