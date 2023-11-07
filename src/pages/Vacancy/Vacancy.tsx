@@ -1,91 +1,87 @@
 import { Typography } from '@mui/material';
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import ButtonPanel from '../../components/componentsOfPageWithVacancy/ButtonsPanel/ButtonsPanel';
 import VacancyCard from '../../components/componentsOfPageWithVacancy/VacancyCard/VacancyCard';
 import VacancyDetails from '../../components/componentsOfPageWithVacancy/VacansyDetails/VacansyDetails';
-import { IdataDetailsCardVacancy } from '../../services/types/Interfaces';
+import { useGetVacanciToIdMutation, useGetVacanciesQuery } from '../../services/query/practicumApi';
+import Loader from '../../components/Loader/Loader';
 import './Vacancy.css';
-
-// TODO id надо будет добавить в типы и key прописывать как id и по id ориентироваться какая карточка выбрана
-const data1 = {
-  id: '1',
-  title: 'Направление',
-  createDate: '24 октября 2023',
-  cntViews: '22',
-  cntFiltered: '44',
-  cntFeedback: '33',
-  cntResume: '11',
-};
-
-const data2 = {
-  id: '2',
-  title: 'Направление',
-  createDate: '24 октября 2023',
-  cntViews: '235',
-  cntFiltered: '12',
-  cntFeedback: '123',
-  cntResume: '574',
-};
-
-const data3 = {
-  id: '3',
-  title: 'Направление',
-  createDate: '24 октября 2023',
-  cntViews: '235',
-  cntFiltered: '12',
-  cntFeedback: '123',
-  cntResume: '574',
-};
-
-const data4 = {
-  id: '4',
-  title: 'Направление',
-  createDate: '24 октября 2023',
-  cntViews: '235',
-  cntFiltered: '12',
-  cntFeedback: '123',
-  cntResume: '574',
-};
-
-const dataCards = [data1, data2, data3, data4];
+import { useDispatch, useSelector } from '../../services/hooks';
+import { setNewStatusToId, setVacancies } from '../../services/features/vacancySlice';
+import { IVacanci } from '../../services/types/Interfaces';
 
 export const Vacancy: FC = () => {
+  const vacansies = useSelector((store) => store.vacancies);
+  const dispatch = useDispatch();
+  const { data: dataVacancies } = useGetVacanciesQuery(null);
+  const [getVacanciesToId, { data: dataVacanciToId }] = useGetVacanciToIdMutation();
   const [vacancyPage, setVacancyPage] = useState('активные');
-  const [selectedVacancy, setSelectedVacancy] = useState<null | IdataDetailsCardVacancy>(null);
-  const isArchive = vacancyPage === 'в архиве';
+  const isArchivePage = vacancyPage === 'в архиве';
 
-  const handleClickVacancy = (value: IdataDetailsCardVacancy) => {
-    if (!isArchive) setSelectedVacancy(value);
+  const handleClickVacancy = (id: string) => {
+    if (!isArchivePage) {
+      void getVacanciesToId(id);
+    }
   };
+
+  const handleChangeStatus = (data: IVacanci) => {
+    dispatch(setNewStatusToId(data));
+  };
+
+  React.useEffect(() => {
+    if (dataVacancies) {
+      dispatch(setVacancies(dataVacancies));
+    }
+  }, [dataVacancies, dispatch]);
+
+  console.log(vacansies);
 
   return (
     <>
       <Typography className="page-title">Мои вакансии</Typography>
       <ButtonPanel state={vacancyPage} setState={setVacancyPage} />
-      <ul
-        style={{
-          listStyle: 'none',
-          padding: 0,
-          margin: 0,
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '16px',
-        }}
-      >
-        {dataCards.map((data, i) => {
-          return (
-            <li
-              key={i}
-              onClick={() => handleClickVacancy(data)}
-              style={isArchive ? {} : { cursor: 'pointer' }}
-              className={`${i + 1}` === selectedVacancy?.id && !isArchive ? 'active-card-vacancy' : ''}
-            >
-              <VacancyCard data={data} isArchive={isArchive} />
-            </li>
-          );
-        })}
-      </ul>
-      {selectedVacancy && !isArchive ? <VacancyDetails data={selectedVacancy} /> : <></>}
+      {vacansies ? (
+        <ul
+          style={{
+            listStyle: 'none',
+            padding: 0,
+            margin: 0,
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))',
+            gap: '16px',
+          }}
+        >
+          {/* TODO: оптимизировать логику */}
+          {vacansies.filter((item) => (isArchivePage ? !item.is_published : item.is_published)).length ? (
+            vacansies
+              .filter((item) => (isArchivePage ? !item.is_published : item.is_published))
+              .map((data) => {
+                return (
+                  <li
+                    key={data.id}
+                    onClick={() => handleClickVacancy(data.id)}
+                    style={isArchivePage ? {} : { cursor: 'pointer' }}
+                    className={
+                      'card-vacancy ' + (data.id === dataVacanciToId?.id && !isArchivePage ? 'active-card-vacancy' : '')
+                    }
+                  >
+                    <VacancyCard data={data} isArchivePage={isArchivePage} handleChangeStatus={handleChangeStatus} />
+                  </li>
+                );
+              })
+          ) : (
+            <li>Здесь пока нет карточек</li>
+          )}
+        </ul>
+      ) : (
+        <Loader />
+      )}
+
+      {dataVacanciToId && !isArchivePage ? (
+        <VacancyDetails data={dataVacanciToId} />
+      ) : (
+        <div>Выберите карточку вакансии</div>
+      )}
     </>
   );
 };

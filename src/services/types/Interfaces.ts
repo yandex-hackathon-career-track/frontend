@@ -22,8 +22,6 @@ export interface IdataCardVacancy {
   cntResume: string;
 }
 
-export interface IdataDetailsCardVacancy extends IdataCardVacancy {}
-
 export interface ICreateVacancy {
   title: string;
   attendance: number;
@@ -63,4 +61,41 @@ export interface ICandidate {
   certificates?: IPortfolio[];
   tg?: string;
   email?: string;
+}
+
+export interface IVacanci {
+  id: string;
+  title: string;
+  is_published: boolean;
+  created_at: string;
+  updated_at: string;
+  views_qty: number;
+  responds_qty: number;
+  total_resume_qty: number;
+  chosen_resume_qty: number;
+}
+
+export interface IRespondsOfVacanci {
+  id: string;
+  new: number;
+  under_review: number;
+  sent_test: number;
+  interview: number;
+  refusal: number;
+  responds: [
+    {
+      id: number;
+      applicant: {
+        id: string;
+        first_name: string;
+        last_name: string;
+        email: string;
+        telegram: string;
+      };
+      status: {
+        id: number;
+        name: string;
+      };
+    },
+  ];
 }

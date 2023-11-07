@@ -9,7 +9,6 @@ import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
 import RowTableContent from './RowTableContent';
 import HeaderOfTableOfCandidates from './HeaderOfTableOfCandidates';
-import { profiles } from '../../../utils/mockData';
 
 // import { useSelector } from '../../../services/hooks';
 
@@ -44,7 +43,7 @@ export default function TableOfCandidates() {
   return (
     <Paper style={{ height: 800, width: '100%' }}>
       <TableVirtuoso
-        data={profiles}
+        data={[]}
         components={VirtuosoTableComponents}
         fixedHeaderContent={HeaderOfTableOfCandidates}
         itemContent={RowTableContent}

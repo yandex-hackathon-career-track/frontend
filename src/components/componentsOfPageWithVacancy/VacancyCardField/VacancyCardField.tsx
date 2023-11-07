@@ -3,7 +3,7 @@ import styles from './VacancyCardField.module.css';
 
 interface IVacancyCardField {
   title: string;
-  value: string;
+  value: string | number;
 }
 
 const VacancyCardField: React.FC<IVacancyCardField> = ({ title, value }: IVacancyCardField) => {

@@ -3,18 +3,18 @@ import { IAllAttributes, IApplicantsToDetail, IAuthForm, ITokensResponce, TCreat
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
 import { IConfirmPassword } from '../../pages/ConfirmPassword/ConfirmPassword';
 import { ICompanyState } from '../features/companySlice';
-import { ICreateVacancy, IGetVacancy } from '../types/Interfaces';
+import { ICreateVacancy, IGetVacancy, IRespondsOfVacanci, IVacanci } from '../types/Interfaces';
 
 export const practicumApi = createApi({
   reducerPath: 'practicumApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://130.193.38.88/api',
+    baseUrl: 'https://www.career-tracker.ru/api/v1',
   }),
   tagTypes: ['User', 'Employer'],
   endpoints: (builder) => ({
     getUser: builder.query<string, unknown>({
       query: () => ({
-        url: '/v1/users/me',
+        url: '/users/me',
         method: 'GET',
         headers: {
           Authorization: `JWT ${getCookie('access')}`,
@@ -24,17 +24,7 @@ export const practicumApi = createApi({
 
     getEmployer: builder.query<ICompanyState, unknown>({
       query: () => ({
-        url: '/v1/employers/me',
-        method: 'GET',
-        headers: {
-          Authorization: `JWT ${getCookie('access')}`,
-        },
-      }),
-    }),
-
-    getVacancies: builder.query<string, unknown>({
-      query: () => ({
-        url: '/v1/employers/vacancies/',
+        url: '/employers/me',
         method: 'GET',
         headers: {
           Authorization: `JWT ${getCookie('access')}`,
@@ -44,7 +34,7 @@ export const practicumApi = createApi({
 
     createVacancy: builder.mutation<IGetVacancy, ICreateVacancy>({
       query: (vacancy) => ({
-        url: '/v1/employers/vacancies/',
+        url: '/employers/vacancies/',
         method: 'POST',
         headers: {
           Authorization: `JWT ${getCookie('access')}`,
@@ -64,7 +54,7 @@ export const practicumApi = createApi({
     // ???
     tokenVerify: builder.mutation({
       query: () => ({
-        url: '/v1/auth/jwt/verify/',
+        url: '/auth/jwt/verify/',
         method: 'POST',
         body: {
           token: getCookie('access'),
@@ -74,7 +64,7 @@ export const practicumApi = createApi({
 
     registerUser: builder.mutation<TCreateUser, IAuthForm>({
       query: (user) => ({
-        url: '/v1/users/',
+        url: '/users/',
         method: 'POST',
         body: {
           email: user.email,
@@ -86,7 +76,7 @@ export const practicumApi = createApi({
 
     refreshToken: builder.mutation<string, unknown>({
       query: () => ({
-        url: '/v1/auth/jwt/refresh/',
+        url: '/auth/jwt/refresh/',
         method: 'POST',
         body: {
           refresh: getCookie('refresh'),
@@ -101,7 +91,7 @@ export const practicumApi = createApi({
 
     authUser: builder.mutation<ITokensResponce, IAuthForm>({
       query: (user) => ({
-        url: '/v1/auth/jwt/create/',
+        url: '/auth/jwt/create/',
         method: 'POST',
         body: {
           email: user.email,
@@ -117,7 +107,7 @@ export const practicumApi = createApi({
 
     resetPassword: builder.mutation<string, string>({
       query: (data) => ({
-        url: '/v1/users/reset_password/',
+        url: '/users/reset_password/',
         method: 'POST',
         body: {
           email: data,
@@ -127,7 +117,7 @@ export const practicumApi = createApi({
 
     resetPasswordConfirm: builder.mutation<unknown, IConfirmPassword>({
       query: (data) => ({
-        url: '/v1/users/reset_password/',
+        url: '/users/reset_password/',
         method: 'POST',
         body: {
           uid: data.uid,
@@ -139,7 +129,7 @@ export const practicumApi = createApi({
 
     changeEmployer: builder.mutation<ICompanyState, ICompanyState>({
       query: (data) => ({
-        url: '/v1/employers/me/',
+        url: '/employers/me/',
         method: 'PATCH',
         headers: {
           Authorization: `JWT ${getCookie('access')}`,
@@ -158,7 +148,7 @@ export const practicumApi = createApi({
     // Получить все атрибуты
     getAllAttributes: builder.query<IAllAttributes, unknown>({
       query: () => ({
-        url: '/v1/attributes',
+        url: '/attributes',
         method: 'GET',
         headers: {
           Authorization: `JWT ${getCookie('access')}`,
@@ -169,7 +159,7 @@ export const practicumApi = createApi({
     // Получить всех соискателей
     getApplicants: builder.mutation<IAllAttributes, string | null>({
       query: (data) => ({
-        url: `/v1/applicants/?${data}`,
+        url: `/applicants/?${data}`,
         method: 'GET',
         headers: {
           Authorization: `JWT ${getCookie('access')}`,
@@ -181,7 +171,7 @@ export const practicumApi = createApi({
     // Получить избранных соискателей
     getFavoriteApplicants: builder.query<IAllAttributes, unknown>({
       query: () => ({
-        url: '/v1/applicants',
+        url: '/applicants',
         method: 'GET',
         headers: {
           Authorization: `JWT ${getCookie('access')}`,
@@ -192,7 +182,7 @@ export const practicumApi = createApi({
     // Получить детально кандидата по id
     getApplicantToId: builder.mutation<IApplicantsToDetail, string>({
       query: (id) => ({
-        url: `/v1/applicants/${id}`,
+        url: `/applicants/${id}`,
         method: 'GET',
         headers: {
           Authorization: `JWT ${getCookie('access')}`,
@@ -203,7 +193,7 @@ export const practicumApi = createApi({
     // Добавить в избранное
     addApplicantToFavorite: builder.mutation<unknown, string>({
       query: (id) => ({
-        url: `/v1/applicants/${id}/selected/`,
+        url: `/applicants/${id}/selected/`,
         method: 'POST',
         headers: {
           Authorization: `JWT ${getCookie('access')}`,
@@ -214,7 +204,7 @@ export const practicumApi = createApi({
     // Удалить из избранного
     delApplicantFromFavorite: builder.mutation<unknown, string>({
       query: (id) => ({
-        url: `/v1/applicants/${id}/selected/`,
+        url: `/applicants/${id}/selected/`,
         method: 'DELETE',
         headers: {
           Authorization: `JWT ${getCookie('access')}`,
@@ -225,7 +215,43 @@ export const practicumApi = createApi({
     // скачать резюме
     downloadResume: builder.mutation<unknown, string>({
       query: (id) => ({
-        url: `/v1/applicants/${id}/generate_pdf/`,
+        url: `/applicants/${id}/generate_pdf/`,
+        method: 'GET',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+      }),
+    }),
+
+    // получить все вакансии
+    getVacancies: builder.query<IVacanci[], unknown>({
+      query: () => ({
+        url: '/employers/vacancies/',
+        method: 'GET',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+      }),
+    }),
+
+    // изменить статус вакансии
+    updVacanciToId: builder.mutation<IVacanci, { id: string; parametrs: { is_published: boolean } }>({
+      query: ({ id, parametrs }) => ({
+        url: `/employers/vacancies/${id}/`,
+        method: 'PATCH',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+        body: {
+          ...parametrs,
+        },
+      }),
+    }),
+
+    // получить отклики на вакансию
+    getVacanciToId: builder.mutation<IRespondsOfVacanci, string>({
+      query: (id) => ({
+        url: `/employers/vacancies/${id}/responds/`,
         method: 'GET',
         headers: {
           Authorization: `JWT ${getCookie('access')}`,
@@ -236,6 +262,7 @@ export const practicumApi = createApi({
 });
 
 export const {
+  useUpdVacanciToIdMutation,
   useDownloadResumeMutation,
   useAddApplicantToFavoriteMutation,
   useDelApplicantFromFavoriteMutation,
@@ -243,6 +270,7 @@ export const {
   useGetApplicantsMutation,
   useGetAllAttributesQuery,
   useGetEmployerQuery,
+  useGetVacanciToIdMutation,
   useGetVacanciesQuery,
   useGetUserQuery,
   useRefreshTokenMutation,

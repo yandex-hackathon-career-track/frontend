@@ -1,18 +1,18 @@
 import { Typography } from '@mui/material';
-import { IdataDetailsCardVacancy } from '../../../services/types/Interfaces';
+import { IRespondsOfVacanci } from '../../../services/types/Interfaces';
 import styles from './VacansyDetails.module.css';
 import FiltersList from './FiltersList';
 import TableOfCandidates from '../TableOfCandidates/TableOfCandidates';
 
 interface IVacancyDetails {
-  data: IdataDetailsCardVacancy;
+  data: IRespondsOfVacanci;
 }
 
 const VacancyDetails: React.FC<IVacancyDetails> = ({ data }: IVacancyDetails) => {
-  const { title } = data;
+  // const { title } = data;
   return (
     <section>
-      <Typography className={styles.title} sx={{ mb: '24px' }}>{`Отклики на вакансию ${title}`}</Typography>
+      <Typography className={styles.title} sx={{ mb: '24px' }}>{`Отклики на вакансию ${'Захардкожено'}`}</Typography>
       <FiltersList data={data} />
       {/* TODO нужно прокидывать данные к конкретной вакансии */}
       <TableOfCandidates />
