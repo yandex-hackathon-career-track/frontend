@@ -2,7 +2,7 @@ name: seven-eleven frontend workflow
 
 on:
   push:
-    branches: [develop]
+    branches: [main]
 
 jobs:
   build_and_push_to_docker_hub:
@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.PASSPHRASE }}
           script: |
             cd career_project/infra/
-            sudo docker compose stop
+            sudo docker-compose down
             sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/career_front
             sudo rm -r ../frontend
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/career_front:latest

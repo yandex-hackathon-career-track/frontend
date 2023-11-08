@@ -1,91 +1,97 @@
 import { Typography } from '@mui/material';
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import ButtonPanel from '../../components/componentsOfPageWithVacancy/ButtonsPanel/ButtonsPanel';
 import VacancyCard from '../../components/componentsOfPageWithVacancy/VacancyCard/VacancyCard';
 import VacancyDetails from '../../components/componentsOfPageWithVacancy/VacansyDetails/VacansyDetails';
-import { IdataDetailsCardVacancy } from '../../services/types/Interfaces';
+import { useGetVacanciToIdMutation, useGetVacanciesQuery } from '../../services/query/practicumApi';
+import Loader from '../../components/Loader/Loader';
 import './Vacancy.css';
-
-// TODO id надо будет добавить в типы и key прописывать как id и по id ориентироваться какая карточка выбрана
-const data1 = {
-  id: '1',
-  title: 'Направление',
-  createDate: '24 октября 2023',
-  cntViews: '22',
-  cntFiltered: '44',
-  cntFeedback: '33',
-  cntResume: '11',
-};
-
-const data2 = {
-  id: '2',
-  title: 'Направление',
-  createDate: '24 октября 2023',
-  cntViews: '235',
-  cntFiltered: '12',
-  cntFeedback: '123',
-  cntResume: '574',
-};
-
-const data3 = {
-  id: '3',
-  title: 'Направление',
-  createDate: '24 октября 2023',
-  cntViews: '235',
-  cntFiltered: '12',
-  cntFeedback: '123',
-  cntResume: '574',
-};
-
-const data4 = {
-  id: '4',
-  title: 'Направление',
-  createDate: '24 октября 2023',
-  cntViews: '235',
-  cntFiltered: '12',
-  cntFeedback: '123',
-  cntResume: '574',
-};
-
-const dataCards = [data1, data2, data3, data4];
+import { useDispatch, useSelector } from '../../services/hooks';
+import { setNewStatusToId, setVacancies } from '../../services/features/vacancySlice';
+import { IVacanci } from '../../services/types/Interfaces';
+import { setSelectedVacancy } from '../../services/features/selectedVacancySlice';
 
 export const Vacancy: FC = () => {
-  const [vacancyPage, setVacancyPage] = useState('активные');
-  const [selectedVacancy, setSelectedVacancy] = useState<null | IdataDetailsCardVacancy>(null);
-  const isArchive = vacancyPage === 'в архиве';
+  const vacansies = useSelector((store) => store.vacancies);
+  const selectedVacancy = useSelector((store) => store.selectedVacancy);
+  const dispatch = useDispatch();
+  const { data: dataVacancies } = useGetVacanciesQuery(null);
+  const [getVacanciesToId, { data: dataVacanciToId }] = useGetVacanciToIdMutation();
 
-  const handleClickVacancy = (value: IdataDetailsCardVacancy) => {
-    if (!isArchive) setSelectedVacancy(value);
+  const [vacancyPage, setVacancyPage] = useState('активные');
+  const [titleVacancy, setTitleVacancy] = useState('');
+  const isArchivePage = vacancyPage === 'в архиве';
+
+  const handleClickVacancy = (id: string, title: string) => {
+    if (!isArchivePage) {
+      void getVacanciesToId(id);
+      // несмотря на то, что мы меняем стейт независимо от ответа сервера, отражаться заголовок будет только когда данные будут получены и при том успешно
+      setTitleVacancy(title);
+    }
   };
+
+  const handleChangeStatus = (data: IVacanci) => {
+    dispatch(setNewStatusToId(data));
+  };
+
+  React.useEffect(() => {
+    if (dataVacancies) {
+      dispatch(setVacancies(dataVacancies));
+    }
+  }, [dataVacancies, dispatch]);
+
+  React.useEffect(() => {
+    if (dataVacanciToId) {
+      dispatch(setSelectedVacancy(dataVacanciToId));
+    }
+  }, [dataVacanciToId, dispatch]);
 
   return (
     <>
       <Typography className="page-title">Мои вакансии</Typography>
       <ButtonPanel state={vacancyPage} setState={setVacancyPage} />
-      <ul
-        style={{
-          listStyle: 'none',
-          padding: 0,
-          margin: 0,
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '16px',
-        }}
-      >
-        {dataCards.map((data, i) => {
-          return (
-            <li
-              key={i}
-              onClick={() => handleClickVacancy(data)}
-              style={isArchive ? {} : { cursor: 'pointer' }}
-              className={`${i + 1}` === selectedVacancy?.id && !isArchive ? 'active-card-vacancy' : ''}
-            >
-              <VacancyCard data={data} isArchive={isArchive} />
-            </li>
-          );
-        })}
-      </ul>
-      {selectedVacancy && !isArchive ? <VacancyDetails data={selectedVacancy} /> : <></>}
+      {vacansies ? (
+        <ul
+          style={{
+            listStyle: 'none',
+            padding: 0,
+            margin: 0,
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))',
+            gap: '16px',
+          }}
+        >
+          {/* TODO: оптимизировать логику */}
+          {vacansies.filter((item) => (isArchivePage ? !item.is_published : item.is_published)).length ? (
+            vacansies
+              .filter((item) => (isArchivePage ? !item.is_published : item.is_published))
+              .map((data) => {
+                return (
+                  <li
+                    key={data.id}
+                    onClick={() => handleClickVacancy(data.id, data.title)}
+                    style={isArchivePage ? {} : { cursor: 'pointer' }}
+                    className={
+                      'card-vacancy ' + (data.id === dataVacanciToId?.id && !isArchivePage ? 'active-card-vacancy' : '')
+                    }
+                  >
+                    <VacancyCard data={data} isArchivePage={isArchivePage} handleChangeStatus={handleChangeStatus} />
+                  </li>
+                );
+              })
+          ) : (
+            <li>Здесь пока нет карточек</li>
+          )}
+        </ul>
+      ) : (
+        <Loader />
+      )}
+
+      {selectedVacancy && !isArchivePage ? (
+        <VacancyDetails data={selectedVacancy} title={titleVacancy} />
+      ) : (
+        <div>Выберите карточку вакансии</div>
+      )}
     </>
   );
 };

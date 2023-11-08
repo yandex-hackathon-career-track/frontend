@@ -9,14 +9,10 @@ import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
 import RowTableContent from './RowTableContent';
 import HeaderOfTableOfCandidates from './HeaderOfTableOfCandidates';
-import { profiles } from '../../../utils/mockData';
-
-// import { useSelector } from '../../../services/hooks';
-
-export interface Data {
-  name: string;
-  resume?: boolean | string;
-}
+import { IDataChangeStatusFunc, IRespondsOfVacanci } from '../../../services/types/Interfaces';
+import { useChangeStatusVacanciToIdMutation } from '../../../services/query/practicumApi';
+import { useDispatch } from '../../../services/hooks';
+import { setNewStatsToId } from '../../../services/features/selectedVacancySlice';
 
 type VirtuosoTableComponentsType = {
   Scroller: React.ForwardRefExoticComponent<React.RefAttributes<HTMLDivElement>>;
@@ -37,14 +33,31 @@ const VirtuosoTableComponents: VirtuosoTableComponentsType = {
 VirtuosoTableComponents.Scroller.displayName = 'VirtuosoTableScroller';
 VirtuosoTableComponents.TableBody.displayName = 'VirtuosoTableBody';
 
-// TODO не могу прокинуть статусы фильтров, подкапотный запрет на хуки. Нужно покопаться в доке
-// ! Попробовать хукать здесь, экспортировать статичные данные: список и функцию обработки, а в строке импортировать
-export default function TableOfCandidates() {
-  // const attributes = useSelector((store) => store.attributes);
+export default function TableOfCandidates({ dataResponds }: { dataResponds: IRespondsOfVacanci }) {
+  const dispatch = useDispatch();
+  const [changeStatusVacanciToId, { data }] = useChangeStatusVacanciToIdMutation();
+
+  const handleChangeStatus = (data: IDataChangeStatusFunc) => {
+    void changeStatusVacanciToId({ ...data, vacanciId: dataResponds.id });
+  };
+
+  React.useEffect(() => {
+    if (data) {
+      dispatch(setNewStatsToId(data));
+    }
+  }, [data, dispatch]);
+
+  // TODO: проверка на портфолио - поправить. Убрать статичное false
+  const modResponds = [...dataResponds.responds].map((item) => ({
+    ...item,
+    handleChange: handleChangeStatus,
+    portfolio: false,
+  }));
+
   return (
     <Paper style={{ height: 800, width: '100%' }}>
       <TableVirtuoso
-        data={profiles}
+        data={modResponds}
         components={VirtuosoTableComponents}
         fixedHeaderContent={HeaderOfTableOfCandidates}
         itemContent={RowTableContent}

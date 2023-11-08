@@ -18,7 +18,7 @@ const initialState: IApplicantMainInfo[] = [
 ];
 
 export const applicantsSlice = createSlice({
-  name: 'attributes',
+  name: 'applicants',
   initialState,
   reducers: {
     setApplicants: (state, action: PayloadAction<IApplicantMainInfo[]>) => {
