@@ -9,18 +9,24 @@ import './Vacancy.css';
 import { useDispatch, useSelector } from '../../services/hooks';
 import { setNewStatusToId, setVacancies } from '../../services/features/vacancySlice';
 import { IVacanci } from '../../services/types/Interfaces';
+import { setSelectedVacancy } from '../../services/features/selectedVacancySlice';
 
 export const Vacancy: FC = () => {
   const vacansies = useSelector((store) => store.vacancies);
+  const selectedVacancy = useSelector((store) => store.selectedVacancy);
   const dispatch = useDispatch();
   const { data: dataVacancies } = useGetVacanciesQuery(null);
   const [getVacanciesToId, { data: dataVacanciToId }] = useGetVacanciToIdMutation();
+
   const [vacancyPage, setVacancyPage] = useState('активные');
+  const [titleVacancy, setTitleVacancy] = useState('');
   const isArchivePage = vacancyPage === 'в архиве';
 
-  const handleClickVacancy = (id: string) => {
+  const handleClickVacancy = (id: string, title: string) => {
     if (!isArchivePage) {
       void getVacanciesToId(id);
+      // несмотря на то, что мы меняем стейт независимо от ответа сервера, отражаться заголовок будет только когда данные будут получены и при том успешно
+      setTitleVacancy(title);
     }
   };
 
@@ -33,6 +39,12 @@ export const Vacancy: FC = () => {
       dispatch(setVacancies(dataVacancies));
     }
   }, [dataVacancies, dispatch]);
+
+  React.useEffect(() => {
+    if (dataVacanciToId) {
+      dispatch(setSelectedVacancy(dataVacanciToId));
+    }
+  }, [dataVacanciToId, dispatch]);
 
   return (
     <>
@@ -57,7 +69,7 @@ export const Vacancy: FC = () => {
                 return (
                   <li
                     key={data.id}
-                    onClick={() => handleClickVacancy(data.id)}
+                    onClick={() => handleClickVacancy(data.id, data.title)}
                     style={isArchivePage ? {} : { cursor: 'pointer' }}
                     className={
                       'card-vacancy ' + (data.id === dataVacanciToId?.id && !isArchivePage ? 'active-card-vacancy' : '')
@@ -75,8 +87,8 @@ export const Vacancy: FC = () => {
         <Loader />
       )}
 
-      {dataVacanciToId && !isArchivePage ? (
-        <VacancyDetails data={dataVacanciToId} />
+      {selectedVacancy && !isArchivePage ? (
+        <VacancyDetails data={selectedVacancy} title={titleVacancy} />
       ) : (
         <div>Выберите карточку вакансии</div>
       )}

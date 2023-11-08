@@ -3,7 +3,14 @@ import { IAllAttributes, IApplicantsToDetail, IAuthForm, ITokensResponce, TCreat
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
 import { IConfirmPassword } from '../../pages/ConfirmPassword/ConfirmPassword';
 import { ICompanyState } from '../features/companySlice';
-import { ICreateVacancy, IGetVacancy, IRespondsOfVacanci, IVacanci } from '../types/Interfaces';
+import {
+  ICreateVacancy,
+  IDataChangeStatus,
+  IDataResponseChangeStatus,
+  IGetVacancy,
+  IRespondsOfVacanci,
+  IVacanci,
+} from '../types/Interfaces';
 
 export const practicumApi = createApi({
   reducerPath: 'practicumApi',
@@ -258,10 +265,25 @@ export const practicumApi = createApi({
         },
       }),
     }),
+
+    // изменить статус отклика на вакансию
+    changeStatusVacanciToId: builder.mutation<IDataResponseChangeStatus, IDataChangeStatus>({
+      query: ({ respondId, status, vacanciId }) => ({
+        url: `/employers/vacancies/${vacanciId}/responds/${respondId}/`,
+        method: 'PATCH',
+        headers: {
+          Authorization: `JWT ${getCookie('access')}`,
+        },
+        body: {
+          status: status,
+        },
+      }),
+    }),
   }),
 });
 
 export const {
+  useChangeStatusVacanciToIdMutation,
   useUpdVacanciToIdMutation,
   useDownloadResumeMutation,
   useAddApplicantToFavoriteMutation,

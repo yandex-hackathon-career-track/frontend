@@ -39,29 +39,29 @@ export interface IGetVacancy extends ICreateVacancy {
   updated_at: string;
 }
 
-interface IPortfolio {
-  name: string;
-  link: string;
-  thumbnail?: string;
-}
+// interface IPortfolio {
+//   name: string;
+//   link: string;
+//   thumbnail?: string;
+// }
 
-export interface ICandidate {
-  name?: string;
-  isAvailable?: boolean;
-  isFavorite?: boolean;
-  lastSeen?: string;
-  position?: string;
-  graduated?: string;
-  experience?: string;
-  stack?: string[];
-  city?: string;
-  jobFormat?: string[];
-  schedule?: string[];
-  portfolio?: IPortfolio[];
-  certificates?: IPortfolio[];
-  tg?: string;
-  email?: string;
-}
+// export interface ICandidate {
+//   name?: string;
+//   isAvailable?: boolean;
+//   isFavorite?: boolean;
+//   lastSeen?: string;
+//   position?: string;
+//   graduated?: string;
+//   experience?: string;
+//   stack?: string[];
+//   city?: string;
+//   jobFormat?: string[];
+//   schedule?: string[];
+//   portfolio?: IPortfolio[];
+//   certificates?: IPortfolio[];
+//   tg?: string;
+//   email?: string;
+// }
 
 export interface IVacanci {
   id: string;
@@ -75,27 +75,45 @@ export interface IVacanci {
   chosen_resume_qty: number;
 }
 
-export interface IRespondsOfVacanci {
-  id: string;
+export interface IRespondDataOfVacanci {
+  id: number;
+  applicant: {
+    id: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    telegram: string;
+  };
+  status: {
+    id: number;
+    name: string;
+  };
+}
+
+export interface IVacancyStats {
   new: number;
   under_review: number;
   sent_test: number;
   interview: number;
   refusal: number;
-  responds: [
-    {
-      id: number;
-      applicant: {
-        id: string;
-        first_name: string;
-        last_name: string;
-        email: string;
-        telegram: string;
-      };
-      status: {
-        id: number;
-        name: string;
-      };
-    },
-  ];
+}
+
+export interface IRespondsOfVacanci extends IVacancyStats {
+  id: string;
+  responds: IRespondDataOfVacanci[];
+}
+
+export interface IDataChangeStatusFunc {
+  respondId: number;
+  status: number;
+}
+export interface IDataChangeStatus extends IDataChangeStatusFunc {
+  vacanciId: string;
+}
+
+export interface IDataResponseChangeStatus {
+  id: number;
+  applicant: string;
+  status: string;
+  vacancy_new_stats: IVacancyStats;
 }

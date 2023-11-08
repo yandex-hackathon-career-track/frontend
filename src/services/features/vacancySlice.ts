@@ -3,20 +3,8 @@ import { IVacanci } from '../types/Interfaces';
 
 const initialState = [] as IVacanci[];
 
-// {
-//   id: '',
-//   title: '',
-//   is_published: true,
-//   created_at: '',
-//   updated_at: '',
-//   views_qty: 0,
-//   responds_qty: 0,
-//   total_resume_qty: 0,
-//   chosen_resume_qty: 0,
-// },
-
 export const vacanciesSlice = createSlice({
-  name: 'attributes',
+  name: 'vacancy',
   initialState,
   reducers: {
     setVacancies: (state, action: PayloadAction<IVacanci[]>) => {

@@ -6,16 +6,16 @@ import TableOfCandidates from '../TableOfCandidates/TableOfCandidates';
 
 interface IVacancyDetails {
   data: IRespondsOfVacanci;
+  title: string;
 }
 
-const VacancyDetails: React.FC<IVacancyDetails> = ({ data }: IVacancyDetails) => {
-  // const { title } = data;
+const VacancyDetails: React.FC<IVacancyDetails> = ({ data, title }: IVacancyDetails) => {
   return (
     <section>
-      <Typography className={styles.title} sx={{ mb: '24px' }}>{`Отклики на вакансию ${'Захардкожено'}`}</Typography>
+      <Typography className={styles.title} sx={{ mb: '24px' }}>{`Отклики на вакансию ${title}`}</Typography>
       <FiltersList data={data} />
       {/* TODO нужно прокидывать данные к конкретной вакансии */}
-      <TableOfCandidates />
+      <TableOfCandidates dataResponds={data} />
     </section>
   );
 };
