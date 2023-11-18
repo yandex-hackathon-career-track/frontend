@@ -8,8 +8,8 @@ import { Box, Button, Link, TextField, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { Controller } from 'react-hook-form';
 import { Wrapper } from '../../components/Wrapper/Wrapper';
-import { useResetPasswordConfirmMutation } from '../../services/query/practicumApi';
-import { confirmPassShema } from '../../validates/yup';
+import { useResetPasswordConfirmMutation } from '../../api/apiOnRTKQ';
+import { confirmPassShema } from '../../validation/yup';
 
 export interface IConfirmPassword {
   uid: string;

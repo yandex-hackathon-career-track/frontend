@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import FilterDropper from '../FilterDropped/FilterDropped';
 import { CustomButton } from '../../CustomButton/CustomButton';
-import { useDispatch, useSelector } from '../../../services/hooks';
-import { getObjData, parseObjToStringForUrl as parse } from '../../../utils/utils';
-import { useGetApplicantsMutation } from '../../../services/query/practicumApi';
-import { setApplicants } from '../../../services/features/applicantsSlice';
-import { IApplicantMainInfo } from '../../../services/types/types';
+import { useDispatch, useSelector } from '../../../redux/reduxHooks';
+import { getObjData, parseObjToStringForUrl as parse } from '../../../helpers/utils';
+import { useGetApplicantsMutation } from '../../../api/apiOnRTKQ';
+import { setApplicants } from '../../../redux/slices/applicantsSlice';
+import { IApplicantMainInfo } from '../../../helpers/tsTypes/types';
 
 const FiltersList = () => {
   const dispatch = useDispatch();

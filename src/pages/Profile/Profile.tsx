@@ -6,10 +6,10 @@ import { Box, Button, TextField } from '@mui/material';
 import { Wrapper } from '../../components/Wrapper/Wrapper';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { companyShema } from '../../validates/yup';
-import { useChangeEmployerMutation } from '../../services/query/practicumApi';
-import { ICompanyState, setCompanyData } from '../../services/features/companySlice';
-import { useDispatch, useSelector } from '../../services/hooks';
+import { companyShema } from '../../validation/yup';
+import { useChangeEmployerMutation } from '../../api/apiOnRTKQ';
+import { ICompanyState, setCompanyData } from '../../redux/slices/companySlice';
+import { useDispatch, useSelector } from '../../redux/reduxHooks';
 import { Popup } from '../../components/Popup/Popup';
 
 export const Profile: FC = () => {

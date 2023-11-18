@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IApplicantMainInfo } from '../types/types';
+import { IApplicantMainInfo } from '../../helpers/tsTypes/types';
 
 const initialState: IApplicantMainInfo[] = [
   {

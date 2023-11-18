@@ -1,5 +1,5 @@
 import { Autocomplete, Checkbox, TextField } from '@mui/material';
-import { IAllAttributes } from '../../services/types/types';
+import { IAllAttributes } from '../../helpers/tsTypes/types';
 import styles from './VacancyForm.module.css';
 import { TFormData } from '../../pages/CreateVacancy/CreateVacancy';
 

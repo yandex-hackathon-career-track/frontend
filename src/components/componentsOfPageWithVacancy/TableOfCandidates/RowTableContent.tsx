@@ -3,7 +3,7 @@ import { Autocomplete, Avatar, TextField, Typography, Link } from '@mui/material
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import tgBlue from '../../../media/telegram-blue.svg';
 import ButtonCheckResume from './ButtonCheckResume';
-import { IDataChangeStatusFunc, IRespondDataOfVacanci } from '../../../services/types/Interfaces';
+import { IDataChangeStatusFunc, IRespondDataOfVacanci } from '../../../helpers/tsTypes/Interfaces';
 
 // IMPORTANT
 // нельзя использовать хуки. Библиотека которая рендерит табличку их не поддерживает (цикличная работа => некор. использование хуков)

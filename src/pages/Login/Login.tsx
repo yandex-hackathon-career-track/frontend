@@ -7,10 +7,10 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Box, Button, Link, TextField, Typography } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Controller } from 'react-hook-form';
-import { useAuthUserMutation } from '../../services/query/practicumApi';
+import { useAuthUserMutation } from '../../api/apiOnRTKQ';
 import { Wrapper } from '../../components/Wrapper/Wrapper';
-import { IAuthForm } from '../../services/types/types';
-import { defaultShema } from '../../validates/yup';
+import { IAuthForm } from '../../helpers/tsTypes/types';
+import { defaultShema } from '../../validation/yup';
 import { Popup } from '../../components/Popup/Popup';
 
 export const Login: FC = () => {

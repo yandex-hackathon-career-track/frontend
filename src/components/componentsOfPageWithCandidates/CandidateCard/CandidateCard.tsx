@@ -6,9 +6,9 @@ import styles from './styles.module.css';
 import porfolioIcon from '../../../media/portfolio-icon.svg';
 import { CustomButton } from '../../CustomButton/CustomButton';
 import { Location } from 'react-router-dom';
-import { IApplicantsToDetail } from '../../../services/types/types';
+import { IApplicantsToDetail } from '../../../helpers/tsTypes/types';
 import BtnChangeIsSelected from '../BtnChangeIsSelected/BtnChangeIsSelected';
-import { useDownloadResumeMutation } from '../../../services/query/practicumApi';
+import { downloadResumeToId } from '../../../api/apiOnFetch';
 
 interface ICandidateCard extends IApplicantsToDetail {
   location?: Location<unknown>;
@@ -19,7 +19,6 @@ interface ICandidateCard extends IApplicantsToDetail {
 }
 
 export const CandidateCard: FC<ICandidateCard> = (props) => {
-  const [downloadResume] = useDownloadResumeMutation();
   const {
     total_experience: experience,
     occupation: schedule,
@@ -37,6 +36,8 @@ export const CandidateCard: FC<ICandidateCard> = (props) => {
     applicant_courses,
   } = props;
 
+  const fullName = `${props.first_name} ${props.last_name}`;
+
   // костыль
   const [isFavorite, setIsFavorite] = useState(is_selected);
 
@@ -44,10 +45,11 @@ export const CandidateCard: FC<ICandidateCard> = (props) => {
   useEffect(() => {
     setIsFavorite(is_selected);
   }, [is_selected]);
+
   return (
     <Card className={isPopup ? styles['container-in-popup'] : styles.container}>
       <ProfileHeader
-        name={`${props.first_name} ${props.last_name}`}
+        name={fullName}
         position={props.direction?.name || '-'}
         lastSeen={props.updated_at}
         isAvailable={props.status.name}
@@ -135,7 +137,11 @@ export const CandidateCard: FC<ICandidateCard> = (props) => {
         </List>
       </div>
       <CardActions className={styles.cardActions}>
-        <CustomButton text={'Скачать резюме'} variant={'filled'} onClick={() => void downloadResume(id)} />
+        <CustomButton
+          text={'Скачать резюме'}
+          variant={'filled'}
+          onClick={() => void downloadResumeToId(id, fullName)}
+        />
         {location.pathname === '/candidates' || location.pathname === '/vacancy' ? (
           <BtnChangeIsSelected is_selected={isFavorite} id={id} setState={setIsFavorite} />
         ) : (

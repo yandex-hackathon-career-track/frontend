@@ -8,8 +8,8 @@ import { Box, Button, Link, TextField, Typography } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Controller } from 'react-hook-form';
 import { Wrapper } from '../../components/Wrapper/Wrapper';
-import { useResetPasswordMutation } from '../../services/query/practicumApi';
-import { changePassShema } from '../../validates/yup';
+import { useResetPasswordMutation } from '../../api/apiOnRTKQ';
+import { changePassShema } from '../../validation/yup';
 
 export interface IChangePassword {
   email: string;

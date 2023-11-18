@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/App/App.tsx';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from './services/store.ts';
+import { store } from './redux/store.ts';
 import { StyledEngineProvider, ThemeProvider, createTheme } from '@mui/material/styles';
 import './index.css';
 import '@fontsource/roboto/300.css';

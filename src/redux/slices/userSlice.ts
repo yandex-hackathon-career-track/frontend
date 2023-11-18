@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { deleteCookie } from '../../utils/cookie';
+import { deleteCookie } from '../../api/cookieApi';
 
 interface IUserAction {
   id: string;

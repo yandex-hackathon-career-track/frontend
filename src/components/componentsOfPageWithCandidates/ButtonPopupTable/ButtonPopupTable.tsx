@@ -4,7 +4,7 @@ import { CustomButton } from '../../CustomButton/CustomButton';
 import { Table, TableBody, IconButton, TableCell, TableContainer, TableRow, Typography, Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './ButtonPopupTable.module.css';
-import { IApplicantsToDetail } from '../../../services/types/types';
+import { IApplicantsToDetail } from '../../../helpers/tsTypes/types';
 
 interface IButtonPopupTable {
   data: IApplicantsToDetail[];

@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IAllAttributes, IApplicantsToDetail, IAuthForm, ITokensResponce, TCreateUser } from '../types/types';
-import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
-import { IConfirmPassword } from '../../pages/ConfirmPassword/ConfirmPassword';
-import { ICompanyState } from '../features/companySlice';
+import { IAllAttributes, IApplicantsToDetail, IAuthForm, ITokensResponse, TCreateUser } from '../helpers/tsTypes/types';
+import { deleteCookie, getCookie, setCookie } from './cookieApi';
+import { IConfirmPassword } from '../pages/ConfirmPassword/ConfirmPassword';
+import { ICompanyState } from '../redux/slices/companySlice';
 import {
   ICreateVacancy,
   IDataChangeStatus,
@@ -10,12 +10,13 @@ import {
   IGetVacancy,
   IRespondsOfVacanci,
   IVacanci,
-} from '../types/Interfaces';
+} from '../helpers/tsTypes/Interfaces';
+import { BASE_URL } from '../helpers/constants';
 
 export const practicumApi = createApi({
   reducerPath: 'practicumApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://www.career-tracker.ru/api/v1',
+    baseUrl: BASE_URL,
   }),
   tagTypes: ['User', 'Employer'],
   endpoints: (builder) => ({
@@ -96,7 +97,7 @@ export const practicumApi = createApi({
       },
     }),
 
-    authUser: builder.mutation<ITokensResponce, IAuthForm>({
+    authUser: builder.mutation<ITokensResponse, IAuthForm>({
       query: (user) => ({
         url: '/auth/jwt/create/',
         method: 'POST',
@@ -105,7 +106,7 @@ export const practicumApi = createApi({
           password: user.password,
         },
       }),
-      transformResponse: (data: ITokensResponce) => {
+      transformResponse: (data: ITokensResponse) => {
         setCookie('access', data.access);
         setCookie('refresh', data.refresh);
         return data;
@@ -219,17 +220,6 @@ export const practicumApi = createApi({
       }),
     }),
 
-    // скачать резюме
-    downloadResume: builder.mutation<unknown, string>({
-      query: (id) => ({
-        url: `/applicants/${id}/generate_pdf/`,
-        method: 'GET',
-        headers: {
-          Authorization: `JWT ${getCookie('access')}`,
-        },
-      }),
-    }),
-
     // получить все вакансии
     getVacancies: builder.query<IVacanci[], unknown>({
       query: () => ({
@@ -285,7 +275,6 @@ export const practicumApi = createApi({
 export const {
   useChangeStatusVacanciToIdMutation,
   useUpdVacanciToIdMutation,
-  useDownloadResumeMutation,
   useAddApplicantToFavoriteMutation,
   useDelApplicantFromFavoriteMutation,
   useGetApplicantToIdMutation,

@@ -7,7 +7,7 @@ export type TCreateUser = {
   id: string;
 } & IAuthForm;
 
-export interface ITokensResponce {
+export interface ITokensResponse {
   access: string;
   refresh: string;
 }
@@ -66,3 +66,20 @@ export interface IApplicantsToDetail extends IApplicant {
   portfolio_links: { id: number; name: string; link: string }[];
   work_format: { id: number; name: string }[];
 }
+
+export type TSuccessText = {
+  onUpload: string;
+  onCompare: string;
+  onBookmark: string;
+  onDownload: string;
+  onSave: string;
+};
+
+export type TErrorText = {
+  onSaveError: string;
+  onLoginError: string;
+  onSearchError: string;
+  onConnectionError: string;
+  onDownloadError: string;
+  onUploadError: string;
+};

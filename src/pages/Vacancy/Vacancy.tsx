@@ -3,13 +3,13 @@ import React, { FC, useState } from 'react';
 import ButtonPanel from '../../components/componentsOfPageWithVacancy/ButtonsPanel/ButtonsPanel';
 import VacancyCard from '../../components/componentsOfPageWithVacancy/VacancyCard/VacancyCard';
 import VacancyDetails from '../../components/componentsOfPageWithVacancy/VacansyDetails/VacansyDetails';
-import { useGetVacanciToIdMutation, useGetVacanciesQuery } from '../../services/query/practicumApi';
+import { useGetVacanciToIdMutation, useGetVacanciesQuery } from '../../api/apiOnRTKQ';
 import Loader from '../../components/Loader/Loader';
 import './Vacancy.css';
-import { useDispatch, useSelector } from '../../services/hooks';
-import { setNewStatusToId, setVacancies } from '../../services/features/vacancySlice';
-import { IVacanci } from '../../services/types/Interfaces';
-import { setSelectedVacancy } from '../../services/features/selectedVacancySlice';
+import { useDispatch, useSelector } from '../../redux/reduxHooks';
+import { setNewStatusToId, setVacancies } from '../../redux/slices/vacancySlice';
+import { IVacanci } from '../../helpers/tsTypes/Interfaces';
+import { setSelectedVacancy } from '../../redux/slices/selectedVacancySlice';
 
 export const Vacancy: FC = () => {
   const vacansies = useSelector((store) => store.vacancies);

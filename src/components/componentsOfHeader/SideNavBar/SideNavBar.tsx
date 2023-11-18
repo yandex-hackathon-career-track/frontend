@@ -1,8 +1,8 @@
 import { FC, useCallback } from 'react';
 import { AppBar, Toolbar, Button, Divider } from '@mui/material';
 import HeaderLinkElement from '../HeaderLinkElement/HeaderLinkElement';
-import { useDispatch } from '../../../services/hooks';
-import { logOut } from '../../../services/features/userSlice';
+import { useDispatch } from '../../../redux/reduxHooks';
+import { logOut } from '../../../redux/slices/userSlice';
 import { BookmarkIcon, ExitIcon, PersonalInfoIcon, SearchIcon, SuitCaseIcon, TgIcon } from '../../../media/icons/index';
 import styles from './SideNavBar.module.css';
 import { Link } from 'react-router-dom';

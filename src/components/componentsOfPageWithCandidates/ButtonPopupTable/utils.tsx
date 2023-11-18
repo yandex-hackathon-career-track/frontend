@@ -2,7 +2,7 @@
 import styles from './ButtonPopupTable.module.css';
 import BtnInTable from './BtnInTable';
 import { Link } from 'react-router-dom';
-import { IApplicantsToDetail } from '../../../services/types/types';
+import { IApplicantsToDetail } from '../../../helpers/tsTypes/types';
 
 export const parametrs = {
   name: 'Параметры',

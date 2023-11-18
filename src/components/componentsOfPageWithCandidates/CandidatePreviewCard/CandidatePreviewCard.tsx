@@ -4,7 +4,7 @@ import { ProfileHeader } from '../ProfileHeader/ProfileHeader';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import styles from './styles.module.css';
 import { ProfileStackField } from '../ProfileStackField/ProfileStackField';
-import { IApplicantMainInfo } from '../../../services/types/types';
+import { IApplicantMainInfo } from '../../../helpers/tsTypes/types';
 
 import BtnChangeIsSelected from '../BtnChangeIsSelected/BtnChangeIsSelected';
 

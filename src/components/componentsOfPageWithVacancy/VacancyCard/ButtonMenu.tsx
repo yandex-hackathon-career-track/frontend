@@ -4,8 +4,8 @@ import Popover from '@mui/material/Popover';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
-import { useUpdVacanciToIdMutation } from '../../../services/query/practicumApi';
-import { IVacanci } from '../../../services/types/Interfaces';
+import { useUpdVacanciToIdMutation } from '../../../api/apiOnRTKQ';
+import { IVacanci } from '../../../helpers/tsTypes/Interfaces';
 
 export default function ButtonMenu({
   data,

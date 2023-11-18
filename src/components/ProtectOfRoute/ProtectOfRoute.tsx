@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Navigate } from 'react-router-dom';
-import { getCookie } from '../../utils/cookie';
+import { getCookie } from '../../api/cookieApi';
 
 interface IProtectOfRoute<T> {
   Element: FC | ((data: T) => JSX.Element);

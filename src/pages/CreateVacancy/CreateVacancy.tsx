@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC, FormEvent, useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
-import { useMultistepForm } from '../../services/hooks/useMultistepForm';
+import { useMultistepForm } from '../../customHooks/useMultistepForm';
 import { VacancyForm } from '../../components/VacancyForm/VacancyForm';
 import { VacancyDescriptionForm } from '../../components/VacancyDescriptionForm/VacancyDescriptionForm';
-import { useCreateVacancyMutation } from '../../services/query/practicumApi';
+import { useCreateVacancyMutation } from '../../api/apiOnRTKQ';
 import { Popup } from '../../components/Popup/Popup';
-import { ERROR_TEXT, SUCCESS_TEXT } from '../../utils/constants';
-import { useSelector } from '../../services/hooks';
+import { ERROR_TEXT, SUCCESS_TEXT } from '../../helpers/constants';
+import { useSelector } from '../../redux/reduxHooks';
 import styles from './CreateVacancy.module.css';
 import Loader from '../../components/Loader/Loader';
 

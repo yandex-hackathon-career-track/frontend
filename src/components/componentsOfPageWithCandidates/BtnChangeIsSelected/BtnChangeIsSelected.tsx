@@ -2,12 +2,9 @@ import { useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import { changeFavoriteStatus } from '../../../services/features/applicantsSlice';
-import {
-  useAddApplicantToFavoriteMutation,
-  useDelApplicantFromFavoriteMutation,
-} from '../../../services/query/practicumApi';
-import { useDispatch } from '../../../services/hooks';
+import { changeFavoriteStatus } from '../../../redux/slices/applicantsSlice';
+import { useAddApplicantToFavoriteMutation, useDelApplicantFromFavoriteMutation } from '../../../api/apiOnRTKQ';
+import { useDispatch } from '../../../redux/reduxHooks';
 import styles from './BtnChangeIsSelected.module.css';
 
 interface IBtnChangeIsSelected {

@@ -1,4 +1,5 @@
-import { IAuthSettings, IInputsSettings } from '../services/types/Interfaces';
+import { IAuthSettings, IInputsSettings } from './tsTypes/Interfaces';
+import { TErrorText, TSuccessText } from './tsTypes/types';
 
 export const loginInputsSettings: IInputsSettings = {
   email: true,
@@ -28,15 +29,6 @@ export const registerSettings: IAuthSettings = {
   path: '/signin',
 };
 
-type TErrorText = {
-  onSaveError: string;
-  onLoginError: string;
-  onSearchError: string;
-  onConnectionError: string;
-  onDownloadError: string;
-  onUploadError: string;
-};
-
 export const ERROR_TEXT: TErrorText = {
   onSaveError: 'Ошибка сохранения Попробуй сохранить ещё раз',
   onLoginError: 'Не удается войти в аккаунт Проверь логин и пароль',
@@ -46,14 +38,6 @@ export const ERROR_TEXT: TErrorText = {
   onUploadError: 'Не удалось загрузить документ Попробуй загрузить ещё раз',
 };
 
-type TSuccessText = {
-  onUpload: string;
-  onCompare: string;
-  onBookmark: string;
-  onDownload: string;
-  onSave: string;
-};
-
 export const SUCCESS_TEXT: TSuccessText = {
   onUpload: 'Документ успешно загружен Осталось только дождаться проверки',
   onCompare: 'Кандидат добавлен к сравнению И выбери лучшего',
@@ -61,3 +45,5 @@ export const SUCCESS_TEXT: TSuccessText = {
   onDownload: 'Загрузка резюме завершена Теперь ты можешь его распечатать',
   onSave: 'Вакансия добавлена Студенты могут откликаться',
 };
+
+export const BASE_URL = 'https://www.career-tracker.ru/api/v1';

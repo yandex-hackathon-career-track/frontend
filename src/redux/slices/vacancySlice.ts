@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IVacanci } from '../types/Interfaces';
+import { IVacanci } from '../../helpers/tsTypes/Interfaces';
 
 const initialState = [] as IVacanci[];
 

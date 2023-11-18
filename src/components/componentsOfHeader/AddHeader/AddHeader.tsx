@@ -3,14 +3,14 @@ import SideNavBar from '../SideNavBar/SideNavBar';
 import Loader from '../../Loader/Loader';
 import { IconButton } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import { useGetAllAttributesQuery, useGetEmployerQuery } from '../../../services/query/practicumApi';
+import { useGetAllAttributesQuery, useGetEmployerQuery } from '../../../api/apiOnRTKQ';
 import { useEffect } from 'react';
-import { useDispatch } from '../../../services/hooks';
-import { setCompanyData } from '../../../services/features/companySlice';
+import { useDispatch } from '../../../redux/reduxHooks';
+import { setCompanyData } from '../../../redux/slices/companySlice';
 import { Wrapper } from '../../Wrapper/Wrapper';
-import { setAllAttributes } from '../../../services/features/attributesSlice';
+import { setAllAttributes } from '../../../redux/slices/attributesSlice';
 import { Popup } from '../../Popup/Popup';
-import { ERROR_TEXT } from '../../../utils/constants';
+import { ERROR_TEXT } from '../../../helpers/constants';
 import styles from './AddHeader.module.css';
 
 const AddHeader: React.FC = () => {

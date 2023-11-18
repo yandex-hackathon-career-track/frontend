@@ -1,7 +1,7 @@
 import VacancyCardField from '../VacancyCardField/VacancyCardField';
 import FilterToggle from '../../componentsOfPageWithCandidates/FilterToggle/FilterToggle';
-import { useSelector } from '../../../services/hooks';
-import { IRespondsOfVacanci } from '../../../services/types/Interfaces';
+import { useSelector } from '../../../redux/reduxHooks';
+import { IRespondsOfVacanci } from '../../../helpers/tsTypes/Interfaces';
 
 interface IFiltersList {
   data: IRespondsOfVacanci;

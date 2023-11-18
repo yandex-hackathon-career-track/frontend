@@ -1,5 +1,5 @@
 @import url(./vendor/font/stylesheet.css);
-@import url(./utils/constants.css);
+@import url(./helpers/constants.css);
 
 :root {
   padding: 0;

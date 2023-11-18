@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IAllAttributes } from '../types/types';
+import { IAllAttributes } from '../../helpers/tsTypes/types';
 
 const initialState = {
   directions: [{ id: 0, name: '' }],

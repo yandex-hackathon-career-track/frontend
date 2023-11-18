@@ -3,9 +3,9 @@ import { Button, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import VacancyCardField from '../VacancyCardField/VacancyCardField';
 import ButtonMenu from './ButtonMenu';
-import { IVacanci } from '../../../services/types/Interfaces';
+import { IVacanci } from '../../../helpers/tsTypes/Interfaces';
 import styles from './VacancyCard.module.css';
-import { useUpdVacanciToIdMutation } from '../../../services/query/practicumApi';
+import { useUpdVacanciToIdMutation } from '../../../api/apiOnRTKQ';
 
 interface IVacancyCard {
   data: IVacanci;

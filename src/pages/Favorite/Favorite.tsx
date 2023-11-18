@@ -8,16 +8,15 @@ import FilterDropper from '../../components/componentsOfPageWithCandidates/Filte
 import { useLocation } from 'react-router-dom';
 import ButtonPopupTable from '../../components/componentsOfPageWithCandidates/ButtonPopupTable/ButtonPopupTable';
 import { CustomButton } from '../../components/CustomButton/CustomButton';
-import { useDispatch, useSelector } from '../../services/hooks';
-import { IApplicantMainInfo, IApplicantsToDetail } from '../../services/types/types';
-import { getObjData, parseObjToStringForUrl as parse } from '../../utils/utils';
-import { useGetApplicantToIdMutation, useGetApplicantsMutation } from '../../services/query/practicumApi';
-import { setApplicants } from '../../services/features/applicantsSlice';
+import { useDispatch, useSelector } from '../../redux/reduxHooks';
+import { IApplicantMainInfo, IApplicantsToDetail } from '../../helpers/tsTypes/types';
+import { getObjData, parseObjToStringForUrl as parse } from '../../helpers/utils';
+import { useGetApplicantToIdMutation, useGetApplicantsMutation } from '../../api/apiOnRTKQ';
+import { setApplicants } from '../../redux/slices/applicantsSlice';
 import styles from './Favorite.module.css';
 import ExcelIcon from '../../media/icons/Excel';
-import { saveAs } from 'file-saver';
-import { getCookie } from '../../utils/cookie';
 import Loader from '../../components/Loader/Loader';
+import { downloadResumeAll } from '../../api/apiOnFetch';
 
 export const Favorite: FC = () => {
   const attributes = useSelector((store) => store.attributes);
@@ -71,21 +70,6 @@ export const Favorite: FC = () => {
     }
   };
 
-  const handleDownloadResume = async () => {
-    const res = await fetch('http://130.193.38.88/api/v1/applicants/download_report/', {
-      headers: {
-        Authorization: `JWT ${getCookie('access')}`,
-      },
-    }).catch((err) => console.log('Ошибка ' + err));
-
-    const blob = await (res as Response).blob();
-    const blobExcel = new Blob([blob], {
-      type: 'application/vnd.ms-excel',
-    });
-
-    saveAs(blobExcel, 'resums.xlsx');
-  };
-
   return (
     <>
       <Typography component={'h1'} className={'page-title'}>
@@ -99,7 +83,7 @@ export const Favorite: FC = () => {
           setState={setDirections}
         />
         <FilterDropper data={getObjData(attributes.cources)} label="Курс" state={cources} setState={setCources} />
-        <CustomButton text="Выгрузить все резюме" variant="contained" onClick={() => void handleDownloadResume()}>
+        <CustomButton text="Выгрузить все резюме" variant="contained" onClick={() => void downloadResumeAll()}>
           <ExcelIcon />
         </CustomButton>
         <ButtonPopupTable data={toCompareCards} handleAddToCompareClick={handleAddToCompare} />

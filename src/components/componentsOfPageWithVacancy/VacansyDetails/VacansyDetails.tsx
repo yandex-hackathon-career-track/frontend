@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { IRespondsOfVacanci } from '../../../services/types/Interfaces';
+import { IRespondsOfVacanci } from '../../../helpers/tsTypes/Interfaces';
 import styles from './VacansyDetails.module.css';
 import FiltersList from './FiltersList';
 import TableOfCandidates from '../TableOfCandidates/TableOfCandidates';

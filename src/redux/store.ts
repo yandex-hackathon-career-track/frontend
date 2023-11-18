@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { practicumApi } from './query/practicumApi';
-import userReducer from './features/userSlice';
-import companySlice from './features/companySlice';
-import allAttributesSlice from './features/attributesSlice';
-import applicantsSlice from './features/applicantsSlice';
-import vacanciesSlice from './features/vacancySlice';
-import selectedVacancySlice from './features/selectedVacancySlice';
+import { practicumApi } from '../api/apiOnRTKQ';
+import userReducer from './slices/userSlice';
+import companySlice from './slices/companySlice';
+import allAttributesSlice from './slices/attributesSlice';
+import applicantsSlice from './slices/applicantsSlice';
+import vacanciesSlice from './slices/vacancySlice';
+import selectedVacancySlice from './slices/selectedVacancySlice';
 
 export const store = configureStore({
   reducer: {

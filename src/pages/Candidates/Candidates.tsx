@@ -6,14 +6,14 @@ import CandidatePreviewCard from '../../components/componentsOfPageWithCandidate
 import { CandidatesCardsWrapper } from '../../components/componentsOfPageWithCandidates/CandidatesCardsWrapper/CandidatesCardsWrapper';
 import { CandidatesList } from '../../components/componentsOfPageWithCandidates/CandidatesList/CandidatesList';
 import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from '../../services/hooks';
-import { IApplicantMainInfo, IApplicantsToDetail } from '../../services/types/types';
-import { useGetApplicantToIdMutation, useGetApplicantsMutation } from '../../services/query/practicumApi';
+import { useDispatch, useSelector } from '../../redux/reduxHooks';
+import { IApplicantMainInfo, IApplicantsToDetail } from '../../helpers/tsTypes/types';
+import { useGetApplicantToIdMutation, useGetApplicantsMutation } from '../../api/apiOnRTKQ';
 import styles from './Candidates.module.css';
-import { setApplicants } from '../../services/features/applicantsSlice';
+import { setApplicants } from '../../redux/slices/applicantsSlice';
 import Loader from '../../components/Loader/Loader';
 import { Popup } from '../../components/Popup/Popup';
-import { ERROR_TEXT } from '../../utils/constants';
+import { ERROR_TEXT } from '../../helpers/constants';
 
 export const Candidates: FC = () => {
   const applicantsStore = useSelector((store) => store.applicants);

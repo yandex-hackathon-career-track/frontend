@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IDataResponseChangeStatus, IRespondsOfVacanci } from '../types/Interfaces';
+import { IDataResponseChangeStatus, IRespondsOfVacanci } from '../../helpers/tsTypes/Interfaces';
 
 const initialState = null as unknown as IRespondsOfVacanci;
 

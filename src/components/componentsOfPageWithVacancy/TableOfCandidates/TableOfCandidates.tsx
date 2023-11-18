@@ -9,10 +9,10 @@ import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
 import RowTableContent from './RowTableContent';
 import HeaderOfTableOfCandidates from './HeaderOfTableOfCandidates';
-import { IDataChangeStatusFunc, IRespondsOfVacanci } from '../../../services/types/Interfaces';
-import { useChangeStatusVacanciToIdMutation } from '../../../services/query/practicumApi';
-import { useDispatch } from '../../../services/hooks';
-import { setNewStatsToId } from '../../../services/features/selectedVacancySlice';
+import { IDataChangeStatusFunc, IRespondsOfVacanci } from '../../../helpers/tsTypes/Interfaces';
+import { useChangeStatusVacanciToIdMutation } from '../../../api/apiOnRTKQ';
+import { useDispatch } from '../../../redux/reduxHooks';
+import { setNewStatsToId } from '../../../redux/slices/selectedVacancySlice';
 
 type VirtuosoTableComponentsType = {
   Scroller: React.ForwardRefExoticComponent<React.RefAttributes<HTMLDivElement>>;
