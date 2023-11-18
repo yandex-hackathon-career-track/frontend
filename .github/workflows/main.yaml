@@ -37,7 +37,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           password: ${{ secrets.PASSPHRASE }}
           script: |
-           script: |
             cd career_project/infra/
             sudo docker-compose down
             sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/career_front
