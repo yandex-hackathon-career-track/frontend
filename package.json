@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint-fix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
     "preview": "vite preview",
-    "commit": "git add -A && git commit -m"
+    "commit": "npm run lint-fix && npm run build && git add -A && git commit -m"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

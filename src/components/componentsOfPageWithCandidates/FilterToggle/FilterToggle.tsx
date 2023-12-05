@@ -5,9 +5,10 @@ import styles from './FilterToggle.module.css';
 interface FilterToggle {
   label?: string;
   children?: React.ReactNode;
+  disable?: boolean;
 }
 
-export default function FilterToggle({ label = '', children = null }: FilterToggle) {
+export default function FilterToggle({ label = '', children = null, disable = false }: FilterToggle) {
   const [selected, setSelected] = React.useState(false);
 
   return (
@@ -25,6 +26,7 @@ export default function FilterToggle({ label = '', children = null }: FilterTogg
           backgroundColor: '#000',
         },
       }}
+      disabled={disable}
     >
       {label}
       {children}

@@ -115,6 +115,15 @@ export const Login: FC = () => {
       {isError && (
         <Popup type="error" text={(error as { data: { detail: string } })?.data?.detail || 'Что-то пошло не так :('} />
       )}
+      <Button
+        variant="contained"
+        size="large"
+        color="success"
+        style={{ position: 'fixed', bottom: '50px', right: '50px' }}
+        onClick={() => authUser({ email: 'test@test.com', password: 'Gfhjkm22' })}
+      >
+        гостевой доступ
+      </Button>
     </Wrapper>
   );
 };

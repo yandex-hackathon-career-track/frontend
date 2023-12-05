@@ -29,7 +29,7 @@ const FiltersList: React.FC<IFiltersList> = ({ data }: IFiltersList) => {
     <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 12px', display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
       {attributes.review_statuses.map((item, i) => (
         <li key={i}>
-          <FilterToggle>
+          <FilterToggle disable>
             <VacancyCardField title={item.name} value={getValue(item.name)} />
           </FilterToggle>
         </li>
