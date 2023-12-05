@@ -22,7 +22,7 @@ export const downloadResumeAll = () => {
       },
     })
       .then((res) => handleResponse(res, 'не удалось скачать все резюме'))
-      .then((blob) => FileSaver.saveAs(blob, 'All Resums.xlsx')),
+      .then((blob) => FileSaver.saveAs(blob, 'All_Resums.xlsx')),
   );
 };
 
